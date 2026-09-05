@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CreatorKit — Poster & Carousel Maker</title>
+  <meta name="description" content="Make stunning posters and carousel slides in seconds. Free, no watermark, nothing leaves your device.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter+Tight:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Press+Start+2P&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<!-- ====== HEADER ====== -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-icon">✦</span>
+      <span class="brand-name">CreatorKit</span>
+    </div>
+    <nav class="mode-tabs" role="tablist" aria-label="App mode">
+      <button class="tab-btn active" id="tabPoster" role="tab" aria-selected="true" data-mode="poster" onclick="switchMode('poster')">
+        <span class="tab-icon">🖼</span> Poster
+      </button>
+      <button class="tab-btn" id="tabCarousel" role="tab" aria-selected="false" data-mode="carousel" onclick="switchMode('carousel')">
+        <span class="tab-icon">📑</span> Carousel
+      </button>
+      <button class="tab-btn" id="tabAppStore" role="tab" aria-selected="false" data-mode="appstore" onclick="switchMode('appstore')">
+        <span class="tab-icon">📱</span> App Store
+      </button>
+      <button class="tab-btn" id="tabBgRemover" role="tab" aria-selected="false" data-mode="bgremover" onclick="switchMode('bgremover')">
+        <span class="tab-icon">✂️</span> BG Remover
+      </button>
+    </nav>
+    <button class="theme-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" title="Toggle theme">
+      <span id="themeIcon">☀️</span>
+    </button>
+  </div>
+</header>
+
+<!-- ====== POSTER MODE ====== -->
+<main id="posterMode" class="mode-panel wrap" role="tabpanel" aria-labelledby="tabPoster">
+  <div class="cols">
+
+    <!-- LEFT: Controls -->
+    <div class="controls-col">
+
+      <!-- Ready-Made Design Templates Card -->
+      <div class="card">
+        <div class="card-hd">
+          Design Templates & Fonts
+          <span class="label-norm" style="font-size:11px; color:var(--acc); font-weight:600">✦ 1-Click Apply</span>
+        </div>
+        <div class="card-bd" style="padding-top:8px">
+          <div class="style-grid" id="posterTemplateGrid">
+            <!-- Filled by poster.js with live template previews -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Text Card -->
+      <div class="card">
+        <div class="card-hd">
+          Your Text
+          <button class="btn btn-ghost btn-sm" onclick="posterLoadExample()">Try example</button>
+        </div>
+        <div class="card-bd">
+          <div class="field">
+            <label for="pTop">Top line <span class="label-norm">— optional</span></label>
+            <input id="pTop" type="text" placeholder="A small line above" oninput="posterChanged()">
+          </div>
+          <div class="field">
+            <label for="pMain">Main text</label>
+            <textarea id="pMain" placeholder="Add your text here" oninput="posterChanged()"></textarea>
+          </div>
+          <div class="field">
+            <label for="pBottom">Bottom line <span class="label-norm">— optional</span></label>
+            <input id="pBottom" type="text" placeholder="Credit, date, handle" oninput="posterChanged()">
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Themes & Shuffle Card -->
+      <div class="card">
+        <div class="card-hd">
+          Color Themes
+          <button class="btn btn-ghost btn-sm" onclick="shufflePosterColors()" title="Shuffle color theme">🔀 Shuffle</button>
+        </div>
+        <div class="card-bd">
+          <label>Theme Palettes</label>
+          <div class="swatches" id="pSwatches" style="margin-bottom:12px">
+            <!-- Filled dynamically with palettes in poster.js -->
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="pTextColor">Text color</label>
+              <div class="color-wrap">
+                <input type="color" id="pTextColor" value="#ffffff" onchange="posterChanged()" oninput="posterChanged()">
+                <span class="color-label" id="pTextColorLabel">#ffffff</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="pBgColor">Background</label>
+              <div class="color-wrap">
+                <input type="color" id="pBgColor" value="#111111" onchange="posterChanged()" oninput="posterChanged()">
+                <span class="color-label" id="pBgColorLabel">#111111</span>
+              </div>
+            </div>
+          </div>
+          <div class="field" style="margin-top:4px">
+            <label for="pBgImg">Background image <span class="label-norm">— optional</span></label>
+            <input type="file" id="pBgImg" accept="image/*" onchange="loadPosterImage(this)" style="padding:8px">
+            <div class="hint" id="pBgImgHint">Upload a photo to use as the poster background.</div>
+          </div>
+          <div class="field" style="margin-top:4px; display:none" id="pClearImgWrap">
+            <button class="btn btn-ghost btn-sm" onclick="clearPosterImage()">✕ Remove image</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout & Typeface Card -->
+      <div class="card">
+        <div class="card-hd">Layout & Typography</div>
+        <div class="card-bd">
+          <div class="row2">
+            <div class="field">
+              <label for="pSize">Size</label>
+              <select id="pSize" onchange="posterChanged()">
+                <option value="1080,1350">Portrait 4:5</option>
+                <option value="1080,1080">Square 1:1</option>
+                <option value="1080,1920">Story 9:16</option>
+                <option value="1240,1754">A4 Poster</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="pFont">Typeface Override</label>
+              <select id="pFont" onchange="posterChanged()">
+                <option value="">Template default</option>
+                <option value='"Playfair Display", serif|500'>Playfair Display (Serif)</option>
+                <option value='"Instrument Serif", serif|400'>Instrument Serif (Classic)</option>
+                <option value='"Cormorant Garamond", serif|400'>Cormorant Garamond</option>
+                <option value='"Archivo Black", sans-serif|400'>Archivo Black (Swiss Heavy)</option>
+                <option value='Anton, sans-serif|400'>Anton (Bold Retro)</option>
+                <option value='"Space Grotesk", sans-serif|700'>Space Grotesk (Tech)</option>
+                <option value='"Instrument Sans", sans-serif|700'>Instrument Sans (Clean)</option>
+                <option value='Caveat, cursive|700'>Caveat (Handwritten)</option>
+                <option value='"Press Start 2P", monospace|400'>Press Start 2P (Pixel)</option>
+              </select>
+            </div>
+          </div>
+          <div class="row2" style="margin-top:12px">
+            <div class="field">
+              <label for="pPos">Text position</label>
+              <select id="pPos" onchange="posterChanged()">
+                <option value="">Template default</option>
+                <option value="top">Top</option>
+                <option value="center">Centre</option>
+                <option value="bottom">Bottom</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Text size <span class="label-norm" id="pTextScaleLabel">100%</span></label>
+              <div class="size-ctrl">
+                <button class="size-btn" onclick="adjustPosterScale(-10)" title="Decrease text size">A−</button>
+                <div class="size-track">
+                  <div class="size-fill" id="pScaleFill" style="width:50%"></div>
+                </div>
+                <button class="size-btn" onclick="adjustPosterScale(10)" title="Increase text size">A+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /controls-col -->
+
+    <!-- RIGHT: Preview -->
+    <div class="preview-col" id="posterPreviewCol">
+      <div class="preview-head">
+        <span class="preview-label" id="posterStyleName">Preview</span>
+        <div class="undo-btns">
+          <button class="icon-btn" onclick="posterUndo()" id="posterUndoBtn" title="Undo (Ctrl+Z)" disabled>↩</button>
+          <button class="icon-btn" onclick="posterRedo()" id="posterRedoBtn" title="Redo (Ctrl+Y)" disabled>↪</button>
+        </div>
+      </div>
+      <canvas id="posterBig"></canvas>
+      <div class="a11y-note" id="posterA11y"></div>
+    </div>
+
+  </div><!-- /cols -->
+</main>
+
+<!-- ====== CAROUSEL MODE ====== -->
+<main id="carouselMode" class="mode-panel wrap hidden" role="tabpanel" aria-labelledby="tabCarousel">
+  <div class="cols">
+
+    <!-- LEFT: Controls -->
+    <div class="controls-col">
+
+      <!-- Writing Card -->
+      <div class="card">
+        <div class="card-hd">
+          Your Writing
+          <button class="btn btn-ghost btn-sm" onclick="carouselLoadExample()">Try example</button>
+        </div>
+        <div class="card-bd">
+          <div class="field">
+            <textarea id="cCopy" placeholder="Paste or write here.&#10;&#10;Leave a blank line between slides — or paste a long block and it'll be split for you.&#10;&#10;- Lines starting with a dash become a list slide&#10;- A short line that's mostly a number becomes a stat slide" style="min-height:160px" oninput="carouselChanged()"></textarea>
+            <div class="hint">Blank line = new slide. Or type <b>---</b> on its own line.</div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="cHook">Hook <span class="label-norm">slide 1</span></label>
+              <input id="cHook" placeholder="The line that stops the scroll" oninput="carouselChanged()">
+            </div>
+            <div class="field">
+              <label for="cCta">Last slide</label>
+              <input id="cCta" placeholder="Save this / Follow for more" oninput="carouselChanged()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brand Card -->
+      <div class="card">
+        <div class="card-hd">Your Brand</div>
+        <div class="card-bd">
+          <div class="row2">
+            <div class="field">
+              <label for="cHandle">Handle</label>
+              <input id="cHandle" placeholder="@yourhandle" oninput="carouselChanged()">
+            </div>
+            <div class="field">
+              <label for="cRatio">Size</label>
+              <select id="cRatio" onchange="carouselChanged()">
+                <option value="4x5">Instagram 4:5</option>
+                <option value="1x1">Square 1:1</option>
+                <option value="li">LinkedIn 4:5</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="cTypeface">Typeface</label>
+            <select id="cTypeface" onchange="carouselChanged()">
+              <option value="inter">'Inter Tight', sans-serif</option>
+              <option value="space">'Space Grotesk', sans-serif</option>
+              <option value="newsreader">Newsreader, serif</option>
+              <option value="archivo">Archivo, sans-serif</option>
+              <option value="bricolage">'Bricolage Grotesque', sans-serif</option>
+              <option value="fraunces">Fraunces, serif</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Text size <span class="label-norm" id="cTextScaleLabel">100%</span></label>
+            <div class="size-ctrl">
+              <button class="size-btn" onclick="adjustCarouselScale(-10)" title="Decrease text size">A−</button>
+              <div class="size-track">
+                <div class="size-fill" id="cScaleFill" style="width:50%"></div>
+              </div>
+              <button class="size-btn" onclick="adjustCarouselScale(10)" title="Increase text size">A+</button>
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="cIcon">List icon</label>
+              <select id="cIcon" onchange="carouselChanged()">
+                <option value="•">Bullet •</option>
+                <option value="→">Arrow →</option>
+                <option value="✓">Check ✓</option>
+                <option value="★">Star ★</option>
+                <option value="◆">Diamond ◆</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cGraphic">Background</label>
+              <select id="cGraphic" onchange="carouselChanged()">
+                <option value="none">Clean</option>
+                <option value="dots">Dot grid</option>
+                <option value="grid">Vertical rules</option>
+                <option value="blob">Soft shapes</option>
+                <option value="numeral">Big numeral</option>
+              </select>
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="cImgMode">Image placement</label>
+              <select id="cImgMode" onchange="carouselChanged()">
+                <option value="top">Above text</option>
+                <option value="left">Beside, left</option>
+                <option value="right">Beside, right</option>
+                <option value="full">Full bleed</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cProgress">Progress</label>
+              <select id="cProgress" onchange="carouselChanged()">
+                <option value="segments">Segments</option>
+                <option value="dots">Dots</option>
+                <option value="line">Thin line</option>
+                <option value="counter">Big counter</option>
+                <option value="off">None</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme & Color Card -->
+      <div class="card">
+        <div class="card-hd">Theme & Color</div>
+        <div class="card-bd">
+          <label>Look</label>
+          <div class="theme-chips" id="cThemeChips">
+            <!-- Filled by carousel.js -->
+          </div>
+          <label style="margin-top:12px">Accent color</label>
+          <div class="swatches" id="cSwatches">
+            <!-- Filled by carousel.js -->
+          </div>
+          <div class="field" style="margin-top:12px">
+            <label for="cLogoUpload">Pull colors from your logo</label>
+            <input type="file" id="cLogoUpload" accept="image/*" onchange="extractLogoColors(this)" style="padding:8px">
+            <div class="hint" id="cLogoHint">Upload a logo and its colors appear as swatches above.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Undo row -->
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <button class="btn btn-ghost btn-sm" onclick="carouselUndo()" id="carouselUndoBtn" disabled>↩ Undo</button>
+        <button class="btn btn-ghost btn-sm" onclick="carouselRedo()" id="carouselRedoBtn" disabled>↪ Redo</button>
+      </div>
+
+    </div><!-- /controls-col -->
+
+    <!-- RIGHT: Deck Preview -->
+    <div class="deck-col">
+      <div class="preview-head">
+        <span class="preview-label" id="deckLabel">No slides yet</span>
+      </div>
+      <div id="carouselDeck" class="slide-deck"></div>
+    </div>
+
+  </div>
+</main>
+
+
+
+<!-- ====== APP STORE & PLAY STORE MODE ====== -->
+<main id="appStoreMode" class="mode-panel wrap hidden" role="tabpanel" aria-labelledby="tabAppStore">
+  <div class="cols">
+
+    <!-- LEFT: Controls -->
+    <div class="controls-col">
+
+      <!-- Ready-Made Store Templates Card -->
+      <div class="card">
+        <div class="card-hd">
+          Design Templates & Themes
+          <span class="label-norm" style="font-size:11px; color:var(--acc); font-weight:600">✦ 1-Click Apply</span>
+        </div>
+        <div class="card-bd" style="padding-top:8px">
+          <div class="style-grid" id="asTemplateGrid">
+            <!-- Filled by appstore.js with live mini previews -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Store Preset & Device Card -->
+      <div class="card">
+        <div class="card-hd">
+          Store & Device Size
+          <span class="label-norm" style="font-size:11px; color:var(--acc); font-weight:600">✦ Official Resolutions</span>
+        </div>
+        <div class="card-bd">
+          <div class="field">
+            <label for="asPreset">Target Store & Device</label>
+            <select id="asPreset" onchange="onStorePresetChange(this.value)">
+              <optgroup label="Apple App Store (iOS)">
+                <option value="ios_6_7" selected>iPhone 6.7" / 6.9" (1290 × 2796 px)</option>
+                <option value="ios_6_5">iPhone 6.5" (1242 × 2688 px)</option>
+                <option value="ios_5_5">iPhone 5.5" (1242 × 2208 px)</option>
+                <option value="ios_ipad">iPad Pro 12.9" / 13" (2048 × 2732 px)</option>
+              </optgroup>
+              <optgroup label="Google Play Store (Android)">
+                <option value="android_phone">Android Phone Modern (1080 × 2400 px)</option>
+                <option value="android_16_9">Android Phone 16:9 (1080 × 1920 px)</option>
+                <option value="android_tablet">Android 10" Tablet (1600 × 2560 px)</option>
+                <option value="play_feature">Play Store Feature Graphic (1024 × 500 px)</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="asFrameStyle">Device Mockup</label>
+              <select id="asFrameStyle" onchange="onStoreFrameChange(this.value)">
+                <option value="iphone" selected>Apple iPhone (Island)</option>
+                <option value="android">Android Phone (Hole)</option>
+                <option value="clay">Clay Minimalist</option>
+                <option value="floating">Floating Borderless</option>
+                <option value="none">No Frame (Clean)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="asLayoutPos">Position</label>
+              <select id="asLayoutPos" onchange="onStoreLayoutChange(this.value)">
+                <option value="bottom" selected>Anchored Bottom</option>
+                <option value="center">Centered</option>
+                <option value="tilted">3D Tilted (~4°)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Screen Content Card -->
+      <div class="card">
+        <div class="card-hd">
+          <span id="asActiveScreenLabel">Screen Content</span>
+          <button class="btn btn-ghost btn-sm" onclick="addStoreScreen()">+ Add Screen</button>
+        </div>
+        <div class="card-bd">
+          <div class="field">
+            <label for="asBadge">Tag / Badge <span class="label-norm">— optional</span></label>
+            <input type="text" id="asBadge" placeholder="e.g. ✦ #1 MESSAGING APP" oninput="onStoreBadgeInput(this.value)">
+          </div>
+          <div class="field">
+            <label for="asHeadline">Headline</label>
+            <input type="text" id="asHeadline" placeholder="Main value proposition" oninput="onStoreHeadlineInput(this.value)">
+          </div>
+          <div class="field">
+            <label for="asSubline">Sub-Headline <span class="label-norm">— optional</span></label>
+            <input type="text" id="asSubline" placeholder="Supporting feature details" oninput="onStoreSublineInput(this.value)">
+          </div>
+
+          <div class="field" style="margin-top:10px">
+            <label for="asScreenImgInput">Upload App Screenshot</label>
+            <input type="file" id="asScreenImgInput" accept="image/*" onchange="onStoreScreenshotSelected(this)" style="padding:8px">
+            <div class="hint">Upload your app's raw screenshot to put inside the device frame.</div>
+          </div>
+          <div class="field" style="margin-top:4px">
+            <button class="btn btn-ghost btn-sm" id="asRemoveImgBtn" onclick="removeActiveStoreImage()" style="display:none">✕ Clear Screenshot</button>
+          </div>
+
+          <!-- Batch Upload Button -->
+          <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--line)">
+            <label>Batch Import</label>
+            <button class="btn btn-ghost btn-sm" onclick="$('asBatchInput').click()" style="width:100%; justify-content:center">
+              📂 Batch Upload Multiple Screenshots
+            </button>
+            <input type="file" id="asBatchInput" accept="image/*" multiple style="display:none" onchange="onStoreBatchSelected(this)">
+            <div class="hint">Select up to 8-10 screenshots at once to auto-create all screens!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme & Typography Card -->
+      <div class="card">
+        <div class="card-hd">Theme & Style</div>
+        <div class="card-bd">
+          <label>Showcase Themes</label>
+          <div class="theme-chips" id="asThemeChips">
+            <!-- Filled by appstore.js -->
+          </div>
+
+          <div class="row2" style="margin-top:14px">
+            <div class="field">
+              <label for="asTypeface">Typeface</label>
+              <select id="asTypeface" onchange="onStoreTypefaceChange(this.value)">
+                <option value="'Inter Tight', sans-serif">Inter Tight (Modern UI)</option>
+                <option value="'Space Grotesk', sans-serif">Space Grotesk (Tech)</option>
+                <option value="'Bricolage Grotesque', sans-serif">Bricolage (Punchy)</option>
+                <option value="'Archivo Black', sans-serif">Archivo Black (Bold)</option>
+                <option value="'Playfair Display', serif">Playfair Display (Serif)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Text size <span class="label-norm" id="asTextScaleLabel">100%</span></label>
+              <div class="size-ctrl">
+                <button class="size-btn" onclick="adjustStoreScale(-10)" title="Decrease text size">A−</button>
+                <div class="size-track">
+                  <div class="size-fill" id="asScaleFill" style="width:50%"></div>
+                </div>
+                <button class="size-btn" onclick="adjustStoreScale(10)" title="Increase text size">A+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /controls-col -->
+
+    <!-- RIGHT: Multi-Screen Deck Preview -->
+    <div class="deck-col">
+      <div class="preview-head">
+        <span class="preview-label">Store Screenshots Deck</span>
+        <button class="btn btn-primary btn-sm" id="asDownloadAllBtnTop" onclick="downloadAllStoreScreensZip()">
+          📦 Download All (ZIP)
+        </button>
+      </div>
+      <div id="appStoreDeck" class="store-deck">
+        <!-- Filled by appstore.js with live interactive canvases -->
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ====== BG REMOVER MODE ====== -->
+<main id="bgRemoverMode" class="mode-panel wrap hidden" role="tabpanel" aria-labelledby="tabBgRemover">
+  <div class="cols">
+
+    <!-- LEFT: Upload & Options -->
+    <div class="controls-col">
+
+      <!-- Upload Card -->
+      <div class="card">
+        <div class="card-hd">
+          Upload Image
+          <span class="label-norm" style="font-size:11px; color:var(--acc); font-weight:600">✦ 100% Free & Private</span>
+        </div>
+        <div class="card-bd">
+          <!-- Dropzone -->
+          <div class="bg-dropzone" id="bgDropzone" onclick="$('bgFileInput').click()">
+            <input type="file" id="bgFileInput" accept="image/*" style="display:none" onchange="onBgFileSelected(this)">
+            <div class="bg-dropzone-icon">✂️</div>
+            <div class="bg-dropzone-title">Click to upload or drag & drop</div>
+            <div class="bg-dropzone-sub">PNG, JPG, WebP — Any photo or product</div>
+          </div>
+
+          <!-- Quick Samples -->
+          <div style="margin-top:14px">
+            <label>Try with sample photo</label>
+            <div class="swatches" id="bgSamplesRow" style="gap:6px">
+              <!-- Filled by bgremover.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Processing & Backdrop Options Card (hidden until image loaded) -->
+      <div class="card" id="bgOptionsCard" style="display:none">
+        <div class="card-hd">
+          AI Subject Isolation & Backdrop
+        </div>
+        <div class="card-bd">
+          <div class="field">
+            <div style="font-size:12.5px; color:var(--ink2); margin-bottom:8px" id="bgStatusText">Ready to process</div>
+            <button class="btn btn-primary" id="bgProcessBtn" onclick="processBgRemoval()" style="width:100%; justify-content:center; padding:12px">
+              ✨ Remove Background (AI)
+            </button>
+            <!-- Progress bar -->
+            <div class="bg-progress-bar" id="bgProgressBar" style="display:none; margin-top:8px">
+              <div class="bg-progress-fill" id="bgProgressFill" style="width:0%"></div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px; border-top:1px solid var(--line); padding-top:14px">
+            <label>Backdrop Color</label>
+            <div class="swatches" style="gap:8px; margin-bottom:12px">
+              <button class="swatch-dot bg-backdrop-swatch" data-color="transparent" aria-pressed="true" onclick="setBgBackdrop('transparent')" title="Transparent PNG" style="background: repeating-conic-gradient(#808080 0% 25%, #ffffff 0% 50%) 50% / 10px 10px;"></button>
+              <button class="swatch-dot bg-backdrop-swatch" data-color="#ffffff" aria-pressed="false" onclick="setBgBackdrop('#ffffff')" title="Pure White" style="background:#ffffff; border:1px solid var(--line)"></button>
+              <button class="swatch-dot bg-backdrop-swatch" data-color="#111118" aria-pressed="false" onclick="setBgBackdrop('#111118')" title="Dark Slate" style="background:#111118"></button>
+              <button class="swatch-dot bg-backdrop-swatch" data-color="#7C6EFA" aria-pressed="false" onclick="setBgBackdrop('#7C6EFA')" title="Creator Violet" style="background:#7C6EFA"></button>
+              <button class="swatch-dot bg-backdrop-swatch" data-color="#FF5A5A" aria-pressed="false" onclick="setBgBackdrop('#FF5A5A')" title="Coral Red" style="background:#FF5A5A"></button>
+              <button class="swatch-dot bg-backdrop-swatch" data-color="#4ADE80" aria-pressed="false" onclick="setBgBackdrop('#4ADE80')" title="Emerald Mint" style="background:#4ADE80"></button>
+              <button class="swatch-dot bg-backdrop-swatch" data-color="#FCD34D" aria-pressed="false" onclick="setBgBackdrop('#FCD34D')" title="Warm Gold" style="background:#FCD34D"></button>
+            </div>
+            <div class="field">
+              <label for="bgrCustomColor">Custom Color</label>
+              <div class="color-wrap">
+                <input type="color" id="bgrCustomColor" value="#ffffff" oninput="onCustomBgColorChange(this)" onchange="onCustomBgColorChange(this)">
+                <span class="color-label">Pick any color</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div style="margin-top:16px; border-top:1px solid var(--line); padding-top:14px; display:flex; flex-direction:column; gap:8px">
+            <button class="btn btn-ghost" id="bgUseInPosterBtn" onclick="sendBgCutoutToPoster()" disabled style="width:100%; justify-content:center">
+              🖼 Use Cutout in Poster Maker →
+            </button>
+            <button class="btn btn-ghost" id="bgUseInCarouselBtn" onclick="sendBgCutoutToCarousel()" disabled style="width:100%; justify-content:center">
+              📑 Use Cutout in Carousel Slide →
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /controls-col -->
+
+    <!-- RIGHT: Live Preview Canvas -->
+    <div class="preview-col">
+      <div class="preview-head">
+        <span class="preview-label">Preview Canvas</span>
+        <button class="btn btn-ghost btn-sm" id="bgToggleOrigBtn" onclick="toggleBgShowOriginal()" style="display:none">
+          👁 View Original
+        </button>
+      </div>
+      <div class="bg-checkerboard-wrap">
+        <canvas id="bgRemoverCanvas"></canvas>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ====== STICKY DOWNLOAD BAR ====== -->
+<div class="dl-bar" id="dlBar">
+  <div class="dl-bar-inner">
+    <div class="dl-info">
+      <div class="dl-info-key" id="dlBarKey">Poster</div>
+      <div class="dl-info-val" id="dlBarVal">Write something above</div>
+    </div>
+    <!-- Poster bar controls -->
+    <div id="posterDlControls">
+      <select id="pFmt" class="fmt-select">
+        <option value="png">PNG</option>
+        <option value="jpg">JPEG</option>
+        <option value="svg">SVG</option>
+      </select>
+      <button class="btn btn-primary" id="posterDlBtn" onclick="downloadPoster()" disabled>Download</button>
+    </div>
+    <!-- Carousel bar controls (hidden initially) -->
+    <div id="carouselDlControls" class="hidden">
+      <button class="btn btn-ghost" id="carouselPdfBtn" onclick="downloadCarouselPDF()" disabled>PDF (LinkedIn)</button>
+      <button class="btn btn-primary" id="carouselZipBtn" onclick="downloadCarouselZip()" disabled>PNGs (ZIP)</button>
+    </div>
+    <!-- App Store bar controls (hidden initially) -->
+    <div id="appStoreDlControls" class="hidden">
+      <button class="btn btn-primary" id="asDownloadAllBtn" onclick="downloadAllStoreScreensZip()">📦 Download All (ZIP)</button>
+    </div>
+    <!-- BG Remover bar controls (hidden initially) -->
+    <div id="bgRemoverDlControls" class="hidden">
+      <button class="btn btn-primary" id="bgDownloadBtn" onclick="downloadBgCutout()" disabled>↓ Download Image</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ====== TOAST ====== -->
+<div class="toast" id="toast"></div>
+
+<!-- ====== SCRIPTS ====== -->
+<!-- JSZip for carousel & store ZIP download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<!-- jsPDF for carousel PDF download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="app.js"></script>
+<script src="poster.js"></script>
+<script src="carousel.js"></script>
+<script src="bgremover.js"></script>
+<script src="appstore.js"></script>
+
+</body>
+</html>
