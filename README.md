@@ -12,12 +12,14 @@
 CreatorKit brings Canva-grade creation tools together in a lightweight, responsive, and privacy-focused web application.
 
 ```
-┌────────────────────────────────────────────────────────────────────────┐
-│                              CreatorKit                                │
-├──────────────┬──────────────────┬──────────────────┬───────────────────┤
-│  🖼 Poster   │   📑 Carousel    │   📱 App Store   │   ✂️ BG Remover   │
-│  Designers   │  Social Decks    │  Store Posters   │   AI Cutouts      │
-└──────────────┴──────────────────┴──────────────────┴───────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                            CreatorKit                                            │
+├──────────────┬──────────────────┬──────────────────┬───────────────────┬─────────────────────────┤
+│  🖼 Poster   │   📑 Carousel    │   📱 App Store   │   ✂️ BG Remover   │     📊 Infographic      │
+│  Designers   │  Social Decks    │  Store Posters   │   AI Cutouts      │  Comparisons & Stats    │
+├──────────────┴──────────────────┴──────────────────┴───────────────────┴─────────────────────────┤
+│   🎨 Global 1-Click Brand Kit                 📐 Multi-Platform Social Auto-Resizer (ZIP)       │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -89,6 +91,50 @@ CreatorKit brings Canva-grade creation tools together in a lightweight, responsi
   * `🖼 Use Cutout in Poster Maker →`
   * `📑 Use Cutout in Carousel Slide →`
   * `↓ Download HD Image`
+
+---
+
+### 5. 📊 Comparison & Infographic Card Maker
+* **5 High-Engagement Post Frameworks**:
+  * ⚖️ **Before vs After**: Side-by-side problem vs. solution breakdown.
+  * ✅ **Do's & Don'ts**: Best practices vs. common mistakes comparison.
+  * 🔄 **Old vs New Way**: Legacy workflow vs. modern AI approach.
+  * 📈 **Stat & Metric Callouts**: Bold headline percentage growth (e.g. `+340%`) with key breakdown bullets.
+  * 🏛️ **3-Pillar Framework**: 3-step numbered methodology cards (`01`, `02`, `03`).
+* **5 Curated Color Themes**: *Dark Obsidian, Neon Cyber, Creator Violet, Tech Cyan, Clean Editorial*.
+* **Aspect Ratios**: Portrait 4:5 (`1080 × 1350 px`), Square 1:1 (`1080 × 1080 px`), and Landscape Banner 16:9 (`1200 × 675 px`).
+* **Interconnected Studio Workflows**:
+  * `📑 Insert in Carousel →`: Injects formatted comparison slide directly into your active Carousel deck with 1 click.
+  * `↓ Download Infographic (HD)`: Export high-res PNG or JPEG graphics for single-image posts.
+
+---
+
+### 6. 🎨 1-Click Brand Kit (Global Branding Sync)
+* **Centralized Identity Hub**:
+  * Configure your **Author / Brand Name** and **Social Handle** (`@yourhandle`).
+  * Set **Primary Accent Color** and **Secondary Accent Color**.
+  * Choose **Default Background & Text Colors**.
+  * Select your **Brand Typography** (*Inter Tight, Space Grotesk, Playfair Display, Bricolage, Newsreader, Archivo Black*).
+  * Upload custom **Brand Logo / Avatar Image**.
+* **100% Client-Side Privacy**: Saved securely to your browser's `localStorage` (`ck-brand-kit`) with zero server sync.
+* **Universal 1-Click Sync (`✨ Brand Kit`)**:
+  * **Poster Designer**: Automatically syncs brand colors, typography, and sets your handle in the bottom credit line.
+  * **Carousel Decks**: Syncs author handle, slide accent colors, and matching dark/light themes.
+  * **Infographic Maker**: Rebrands category tag, author watermark, and accent highlights.
+
+---
+
+### 7. 📐 Multi-Platform Social Auto-Resizer (Cross-Post Hub)
+* **Design Once, Publish Everywhere**:
+  * 📸 **Instagram Portrait 4:5** (`1080 × 1350 px`)
+  * 🔲 **Square 1:1 (IG / LinkedIn / X)** (`1080 × 1080 px`)
+  * 📱 **Story / Reel / TikTok 9:16** (`1080 × 1920 px`)
+  * 🐦 **Twitter / X Timeline Card 16:9** (`1200 × 675 px`)
+  * 📌 **Pinterest Pin 2:3** (`1000 × 1500 px`)
+* **Smart Ambient Padding & Scaling Engine**:
+  * Intelligently fits artwork with ambient background blur and drop-shadows so no typography is ever cropped or distorted.
+* **1-Click Batch Download (ZIP)**:
+  * Generates a packaged ZIP archive containing all 5 social network sizes with clean file names (`01-ig-portrait-1080x1350.png`, `02-square-1080x1080.png`, etc.).
 
 ---
 

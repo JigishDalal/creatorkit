@@ -32,10 +32,18 @@
       <button class="tab-btn" id="tabBgRemover" role="tab" aria-selected="false" data-mode="bgremover" onclick="switchMode('bgremover')">
         <span class="tab-icon">✂️</span> BG Remover
       </button>
+      <button class="tab-btn" id="tabInfographic" role="tab" aria-selected="false" data-mode="infographic" onclick="switchMode('infographic')">
+        <span class="tab-icon">📊</span> Infographic
+      </button>
     </nav>
-    <button class="theme-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" title="Toggle theme">
-      <span id="themeIcon">☀️</span>
-    </button>
+    <div style="display:flex; align-items:center; gap:8px">
+      <button class="btn btn-ghost btn-sm" id="brandKitHeaderBtn" onclick="openBrandKitModal()" title="Open Brand Kit" style="font-size:12.5px; padding:6px 12px">
+        <span>🎨</span> Brand Kit
+      </button>
+      <button class="theme-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" title="Toggle theme">
+        <span id="themeIcon">☀️</span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -85,7 +93,10 @@
       <div class="card">
         <div class="card-hd">
           Color Themes
-          <button class="btn btn-ghost btn-sm" onclick="shufflePosterColors()" title="Shuffle color theme">🔀 Shuffle</button>
+          <div style="display:flex; gap:6px">
+            <button class="btn btn-ghost btn-sm" onclick="applyBrandKitToPoster()" title="Apply your Brand Kit">✨ Brand Kit</button>
+            <button class="btn btn-ghost btn-sm" onclick="shufflePosterColors()" title="Shuffle color theme">🔀 Shuffle</button>
+          </div>
         </div>
         <div class="card-bd">
           <label>Theme Palettes</label>
@@ -179,9 +190,12 @@
     <div class="preview-col" id="posterPreviewCol">
       <div class="preview-head">
         <span class="preview-label" id="posterStyleName">Preview</span>
-        <div class="undo-btns">
-          <button class="icon-btn" onclick="posterUndo()" id="posterUndoBtn" title="Undo (Ctrl+Z)" disabled>↩</button>
-          <button class="icon-btn" onclick="posterRedo()" id="posterRedoBtn" title="Redo (Ctrl+Y)" disabled>↪</button>
+        <div style="display:flex; align-items:center; gap:6px">
+          <button class="btn btn-ghost btn-sm" onclick="openResizerModal('poster')" title="Multi-Platform Auto-Resizer">📐 Multi-Size</button>
+          <div class="undo-btns">
+            <button class="icon-btn" onclick="posterUndo()" id="posterUndoBtn" title="Undo (Ctrl+Z)" disabled>↩</button>
+            <button class="icon-btn" onclick="posterRedo()" id="posterRedoBtn" title="Redo (Ctrl+Y)" disabled>↪</button>
+          </div>
         </div>
       </div>
       <canvas id="posterBig"></canvas>
@@ -224,7 +238,10 @@
 
       <!-- Brand Card -->
       <div class="card">
-        <div class="card-hd">Your Brand</div>
+        <div class="card-hd">
+          Your Brand
+          <button class="btn btn-ghost btn-sm" onclick="applyBrandKitToCarousel()" title="Apply your Brand Kit">✨ Brand Kit</button>
+        </div>
         <div class="card-bd">
           <div class="row2">
             <div class="field">
@@ -608,6 +625,204 @@
   </div>
 </main>
 
+<!-- ====== INFOGRAPHIC & COMPARISON MODE ====== -->
+<main id="infographicMode" class="mode-panel wrap hidden" role="tabpanel" aria-labelledby="tabInfographic">
+  <div class="cols">
+
+    <!-- LEFT: Controls -->
+    <div class="controls-col">
+
+      <!-- Template Selector Card -->
+      <div class="card">
+        <div class="card-hd">
+          Infographic Format
+          <span class="label-norm" style="font-size:11px; color:var(--acc); font-weight:600">✦ 5 Creator Styles</span>
+        </div>
+        <div class="card-bd" style="padding-top:8px">
+          <div class="info-tpl-grid">
+            <button class="info-tpl-btn active" data-tpl="before_after" onclick="setInfographicTemplate('before_after')">
+              <span class="info-tpl-icon">⚖️</span>
+              <span class="info-tpl-name">Before vs After</span>
+            </button>
+            <button class="info-tpl-btn" data-tpl="dos_donts" onclick="setInfographicTemplate('dos_donts')">
+              <span class="info-tpl-icon">✅</span>
+              <span class="info-tpl-name">Do's & Don'ts</span>
+            </button>
+            <button class="info-tpl-btn" data-tpl="old_new" onclick="setInfographicTemplate('old_new')">
+              <span class="info-tpl-icon">🔄</span>
+              <span class="info-tpl-name">Old vs New Way</span>
+            </button>
+            <button class="info-tpl-btn" data-tpl="stat_metric" onclick="setInfographicTemplate('stat_metric')">
+              <span class="info-tpl-icon">📈</span>
+              <span class="info-tpl-name">Stat / Growth Callout</span>
+            </button>
+            <button class="info-tpl-btn" data-tpl="three_pillars" onclick="setInfographicTemplate('three_pillars')">
+              <span class="info-tpl-icon">🏛️</span>
+              <span class="info-tpl-name">3-Pillar Framework</span>
+            </button>
+          </div>
+
+          <!-- Quick Examples -->
+          <div style="margin-top:12px; border-top:1px solid var(--line); padding-top:10px">
+            <label>Try Example:</label>
+            <div id="infoExamplesRow" style="display:flex; flex-wrap:wrap; gap:6px; margin-top:4px"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Card -->
+      <div class="card">
+        <div class="card-hd">
+          Headline & Content
+          <button class="btn btn-ghost btn-sm" onclick="applyBrandKitToInfographic()" title="Apply Brand Kit">✨ Brand Kit</button>
+        </div>
+        <div class="card-bd">
+          <div class="row2">
+            <div class="field">
+              <label for="infoCategory">Category Tag</label>
+              <input id="infoCategory" type="text" value="DEVELOPER PLAYBOOK" oninput="onInfographicChanged()">
+            </div>
+            <div class="field">
+              <label for="infoAuthor">Author / Handle</label>
+              <input id="infoAuthor" type="text" value="@alexcreates" oninput="onInfographicChanged()">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="infoTitle">Main Title</label>
+            <input id="infoTitle" type="text" value="Junior vs Senior Engineering" oninput="onInfographicChanged()">
+          </div>
+
+          <div class="field">
+            <label for="infoSubtitle">Subtitle / Key Takeaway</label>
+            <input id="infoSubtitle" type="text" value="The key shift from writing code to architecting systems" oninput="onInfographicChanged()">
+          </div>
+
+          <!-- Comparison Fields (Before / After & Do's / Don'ts) -->
+          <div id="infoComparisonFields">
+            <div class="field">
+              <label for="infoLeftHeader">Left Column Header</label>
+              <input id="infoLeftHeader" type="text" value="Junior Approach" oninput="onInfographicChanged()">
+            </div>
+            <div class="field">
+              <label for="infoLeftText">Left Bullets <span class="label-norm">(1 per line)</span></label>
+              <textarea id="infoLeftText" rows="4" oninput="onInfographicChanged()"></textarea>
+            </div>
+
+            <div class="field" style="margin-top:12px; border-top:1px dashed var(--line); padding-top:10px">
+              <label for="infoRightHeader">Right Column Header</label>
+              <input id="infoRightHeader" type="text" value="Senior Approach" oninput="onInfographicChanged()">
+            </div>
+            <div class="field">
+              <label for="infoRightText">Right Bullets <span class="label-norm">(1 per line)</span></label>
+              <textarea id="infoRightText" rows="4" oninput="onInfographicChanged()"></textarea>
+            </div>
+          </div>
+
+          <!-- Stat Metric Fields -->
+          <div id="infoStatFields" class="hidden">
+            <div class="row2">
+              <div class="field">
+                <label for="infoStatNumber">Stat / Big Number</label>
+                <input id="infoStatNumber" type="text" value="+340%" oninput="onInfographicChanged()">
+              </div>
+              <div class="field">
+                <label for="infoStatLabel">Metric Label</label>
+                <input id="infoStatLabel" type="text" value="Velocity Growth" oninput="onInfographicChanged()">
+              </div>
+            </div>
+            <div class="field">
+              <label for="infoStatBullets">Key Breakdown Points <span class="label-norm">(1 per line)</span></label>
+              <textarea id="infoStatBullets" rows="4" oninput="onInfographicChanged()"></textarea>
+            </div>
+          </div>
+
+          <!-- 3-Pillars Fields -->
+          <div id="infoPillarFields" class="hidden">
+            <div class="field">
+              <label for="infoP1Title">Pillar 1 Title & Description</label>
+              <input id="infoP1Title" type="text" value="System Design" oninput="onInfographicChanged()" style="margin-bottom:6px">
+              <textarea id="infoP1Desc" rows="2" oninput="onInfographicChanged()"></textarea>
+            </div>
+            <div class="field" style="margin-top:10px">
+              <label for="infoP2Title">Pillar 2 Title & Description</label>
+              <input id="infoP2Title" type="text" value="AI Pair Programming" oninput="onInfographicChanged()" style="margin-bottom:6px">
+              <textarea id="infoP2Desc" rows="2" oninput="onInfographicChanged()"></textarea>
+            </div>
+            <div class="field" style="margin-top:10px">
+              <label for="infoP3Title">Pillar 3 Title & Description</label>
+              <input id="infoP3Title" type="text" value="User Experience" oninput="onInfographicChanged()" style="margin-bottom:6px">
+              <textarea id="infoP3Desc" rows="2" oninput="onInfographicChanged()"></textarea>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Styling & Theme Card -->
+      <div class="card">
+        <div class="card-hd">Design & Aspect Ratio</div>
+        <div class="card-bd">
+          <label>Color Theme</label>
+          <div class="info-theme-grid">
+            <button class="info-theme-btn active" data-theme="dark_contrast" onclick="setInfographicTheme('dark_contrast')">
+              <span class="info-theme-dot" style="background:#7C6EFA"></span> Dark Obsidian
+            </button>
+            <button class="info-theme-btn" data-theme="emerald_ruby" onclick="setInfographicTheme('emerald_ruby')">
+              <span class="info-theme-dot" style="background:#10B981"></span> Neon Cyber
+            </button>
+            <button class="info-theme-btn" data-theme="creator_violet" onclick="setInfographicTheme('creator_violet')">
+              <span class="info-theme-dot" style="background:#A855F7"></span> Creator Violet
+            </button>
+            <button class="info-theme-btn" data-theme="cyber_slate" onclick="setInfographicTheme('cyber_slate')">
+              <span class="info-theme-dot" style="background:#06B6D4"></span> Tech Cyan
+            </button>
+            <button class="info-theme-btn" data-theme="clean_light" onclick="setInfographicTheme('clean_light')">
+              <span class="info-theme-dot" style="background:#FFFFFF; border:1px solid #999"></span> Clean Editorial
+            </button>
+          </div>
+
+          <div style="margin-top:14px">
+            <label>Aspect Ratio</label>
+            <div style="display:flex; gap:6px">
+              <button class="btn btn-ghost btn-sm info-ratio-btn active" data-ratio="4x5" onclick="setInfographicRatio('4x5')" style="flex:1; justify-content:center">Portrait 4:5</button>
+              <button class="btn btn-ghost btn-sm info-ratio-btn" data-ratio="1x1" onclick="setInfographicRatio('1x1')" style="flex:1; justify-content:center">Square 1:1</button>
+              <button class="btn btn-ghost btn-sm info-ratio-btn" data-ratio="16x9" onclick="setInfographicRatio('16x9')" style="flex:1; justify-content:center">Banner 16:9</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /controls-col -->
+
+    <!-- RIGHT: Live Preview -->
+    <div class="preview-col">
+      <div class="preview-head">
+        <span class="preview-label">Live Infographic Preview</span>
+        <button class="btn btn-ghost btn-sm" onclick="openResizerModal('infographic')" title="Multi-Platform Auto-Resizer">
+          📐 Multi-Size
+        </button>
+      </div>
+
+      <div class="info-canvas-wrap">
+        <canvas id="infographicCanvas"></canvas>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div style="display:flex; gap:10px; margin-top:14px; width:100%">
+        <button class="btn btn-primary" id="infoDownloadBtn" onclick="downloadInfographic()" style="flex:2; justify-content:center; padding:12px">
+          ↓ Download Infographic (HD)
+        </button>
+        <button class="btn btn-ghost" id="infoCarouselBtn" onclick="sendInfographicToCarousel()" style="flex:1.5; justify-content:center">
+          📑 Insert in Carousel →
+        </button>
+      </div>
+
+    </div><!-- /preview-col -->
+
+  </div>
+</main>
+
 <!-- ====== STICKY DOWNLOAD BAR ====== -->
 <div class="dl-bar" id="dlBar">
   <div class="dl-bar-inner">
@@ -637,7 +852,146 @@
     <div id="bgRemoverDlControls" class="hidden">
       <button class="btn btn-primary" id="bgDownloadBtn" onclick="downloadBgCutout()" disabled>↓ Download Image</button>
     </div>
+    <!-- Infographic bar controls (hidden initially) -->
+    <div id="infographicDlControls" class="hidden" style="display:flex; align-items:center; gap:8px">
+      <select id="infoFmt" class="fmt-select">
+        <option value="png">PNG</option>
+        <option value="jpg">JPEG</option>
+      </select>
+      <button class="btn btn-primary" onclick="downloadInfographic()">↓ Download</button>
+    </div>
 
+  </div>
+</div>
+
+<!-- ====== BRAND KIT MODAL ====== -->
+<div class="modal-backdrop hidden" id="brandKitModal" onclick="if(event.target===this)closeBrandKitModal()">
+  <div class="modal-dialog">
+    <div class="modal-hd">
+      <div style="display:flex; align-items:center; gap:8px">
+        <span style="font-size:18px">🎨</span>
+        <span style="font-weight:700; font-size:16px">Your Brand Kit</span>
+      </div>
+      <button class="modal-close-btn" onclick="closeBrandKitModal()">✕</button>
+    </div>
+    <div class="modal-bd">
+      <p style="font-size:13px; color:var(--mut); margin:0 0 16px 0">Set your brand identity once. Click <b>"Apply Brand Kit"</b> in any tool to rebrand your designs instantly.</p>
+
+      <!-- Live Brand Badge Preview -->
+      <div style="margin-bottom:18px">
+        <label>Live Brand Preview</label>
+        <div class="bk-preview-badge" id="bkPreviewBadge">
+          <div style="display:flex; align-items:center; gap:10px">
+            <img id="bkPreviewLogo" class="bk-avatar-img" src="" alt="Brand Logo" style="display:none">
+            <div id="bkPreviewAvatarFallback" class="bk-avatar-fallback">A</div>
+            <div>
+              <div id="bkPreviewName" style="font-weight:700; font-size:14px">Alex Morgan</div>
+              <div id="bkPreviewHandle" style="font-size:12px; opacity:0.8">@alexcreates</div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px">
+            <span class="bk-dot" id="bkPreviewDot"></span>
+            <span style="font-size:11px; font-weight:600; opacity:0.85">OFFICIAL BRAND</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="bkName">Brand / Author Name</label>
+          <input id="bkName" type="text" value="Alex Morgan" oninput="onBrandKitFieldChanged()">
+        </div>
+        <div class="field">
+          <label for="bkHandle">Handle</label>
+          <input id="bkHandle" type="text" value="@alexcreates" oninput="onBrandKitFieldChanged()">
+        </div>
+      </div>
+
+      <!-- Color palette -->
+      <div class="row2">
+        <div class="field">
+          <label for="bkPrimaryColor">Primary Accent Color</label>
+          <div class="color-wrap">
+            <input type="color" id="bkPrimaryColor" value="#7C6EFA" oninput="onBrandKitFieldChanged()">
+            <span class="color-label">Primary</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="bkSecondaryColor">Secondary Color</label>
+          <div class="color-wrap">
+            <input type="color" id="bkSecondaryColor" value="#A896FF" oninput="onBrandKitFieldChanged()">
+            <span class="color-label">Secondary</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="bkBgColor">Default Background</label>
+          <div class="color-wrap">
+            <input type="color" id="bkBgColor" value="#0F0F13" oninput="onBrandKitFieldChanged()">
+            <span class="color-label">Background</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="bkTextColor">Default Text Color</label>
+          <div class="color-wrap">
+            <input type="color" id="bkTextColor" value="#EEEEF2" oninput="onBrandKitFieldChanged()">
+            <span class="color-label">Text</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="bkFont">Brand Typography</label>
+        <select id="bkFont" onchange="onBrandKitFieldChanged()">
+          <option value="Inter Tight">Inter Tight (Modern Clean)</option>
+          <option value="Space Grotesk">Space Grotesk (Tech Monospace)</option>
+          <option value="Playfair Display">Playfair Display (Editorial Serif)</option>
+          <option value="Bricolage Grotesque">Bricolage Grotesque (Bold Graphic)</option>
+          <option value="Newsreader">Newsreader (Classic Editorial)</option>
+          <option value="Archivo Black">Archivo Black (Heavy Impact)</option>
+        </select>
+      </div>
+
+      <!-- Logo / Avatar Upload -->
+      <div class="field" style="margin-top:12px; border-top:1px solid var(--line); padding-top:12px">
+        <label>Brand Logo / Avatar Image</label>
+        <div style="display:flex; gap:8px; align-items:center; margin-top:4px">
+          <input type="file" id="bkLogoInput" accept="image/*" style="display:none" onchange="onBrandLogoSelected(this)">
+          <button class="btn btn-ghost btn-sm" onclick="$('bkLogoInput').click()">📁 Upload Logo</button>
+          <button class="btn btn-ghost btn-sm" onclick="removeBrandLogo()">✕ Remove</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-ghost" onclick="closeBrandKitModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveBrandKit(); closeBrandKitModal()">Save Brand Kit ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MULTI-PLATFORM RESIZER MODAL ====== -->
+<div class="modal-backdrop hidden" id="resizerModal" onclick="if(event.target===this)closeResizerModal()">
+  <div class="modal-dialog modal-dialog-lg">
+    <div class="modal-hd">
+      <div style="display:flex; align-items:center; gap:8px">
+        <span style="font-size:18px">📐</span>
+        <div>
+          <div style="font-weight:700; font-size:16px">Multi-Platform Auto-Resizer</div>
+          <div style="font-size:11.5px; color:var(--mut)">Auto-reflowed & formatted for every social media network</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px">
+        <button class="btn btn-primary btn-sm" onclick="downloadAllResizedZip()">📦 Download All (ZIP)</button>
+        <button class="modal-close-btn" onclick="closeResizerModal()">✕</button>
+      </div>
+    </div>
+    <div class="modal-bd" style="max-height:68vh; overflow-y:auto">
+      <div class="resizer-grid" id="resizerGrid">
+        <!-- Filled dynamically by resizer.js -->
+      </div>
+    </div>
   </div>
 </div>
 
@@ -655,6 +1009,9 @@
 <script src="carousel.js"></script>
 <script src="bgremover.js"></script>
 <script src="appstore.js"></script>
+<script src="brandkit.js"></script>
+<script src="infographic.js"></script>
+<script src="resizer.js"></script>
 
 </body>
 </html>

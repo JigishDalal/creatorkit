@@ -94,12 +94,14 @@ function switchMode(mode) {
   $('carouselMode').classList.toggle('hidden', mode !== 'carousel');
   if ($('appStoreMode')) $('appStoreMode').classList.toggle('hidden', mode !== 'appstore');
   if ($('bgRemoverMode')) $('bgRemoverMode').classList.toggle('hidden', mode !== 'bgremover');
+  if ($('infographicMode')) $('infographicMode').classList.toggle('hidden', mode !== 'infographic');
   // Download bar
   $('posterDlControls').classList.toggle('hidden', mode !== 'poster');
   $('carouselDlControls').classList.toggle('hidden', mode !== 'carousel');
   if ($('appStoreDlControls')) $('appStoreDlControls').classList.toggle('hidden', mode !== 'appstore');
   if ($('bgRemoverDlControls')) $('bgRemoverDlControls').classList.toggle('hidden', mode !== 'bgremover');
-  $('dlBarKey').textContent = mode === 'poster' ? 'Poster' : mode === 'carousel' ? 'Carousel' : mode === 'appstore' ? 'Store Posters' : 'BG Remover';
+  if ($('infographicDlControls')) $('infographicDlControls').classList.toggle('hidden', mode !== 'infographic');
+  $('dlBarKey').textContent = mode === 'poster' ? 'Poster' : mode === 'carousel' ? 'Carousel' : mode === 'appstore' ? 'Store Posters' : mode === 'infographic' ? 'Infographic' : 'BG Remover';
   // Update bar label
   updateBarLabel();
 }
@@ -121,6 +123,9 @@ function updateBarLabel() {
     } else {
       $('dlBarVal').textContent = 'Design store posters';
     }
+  } else if (APP.mode === 'infographic') {
+    var infoTitle = (typeof INFOGRAPHIC_STATE !== 'undefined' && INFOGRAPHIC_STATE.title) ? INFOGRAPHIC_STATE.title : 'Comparison Graphic';
+    $('dlBarVal').textContent = infoTitle + ' • 5 Templates';
   } else if (APP.mode === 'bgremover') {
     if (typeof BG_STATE !== 'undefined' && BG_STATE.processedImage) {
       $('dlBarVal').textContent = 'Cutout ready (' + (BG_STATE.activeBgColor === 'transparent' ? 'Transparent PNG' : 'Custom Backdrop') + ')';
@@ -392,5 +397,9 @@ function triggerDownload(url, filename) {
 /* -------- Init -------- */
 document.addEventListener('DOMContentLoaded', function() {
   updateColorLabels();
+  if (typeof initBgRemover === 'function') initBgRemover();
+  if (typeof initAppStore === 'function') initAppStore();
+  if (typeof initBrandKit === 'function') initBrandKit();
+  if (typeof initInfographics === 'function') initInfographics();
   switchMode('poster');
 });
