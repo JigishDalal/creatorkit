@@ -119,16 +119,18 @@ function onBrandLogoSelected(input) {
     reader.onload = function(e) {
       BRAND_KIT.logoUrl = e.target.result;
       updateBrandKitModalUI();
-      showToast('Brand logo uploaded!');
+      showToast('✓ Brand logo uploaded!');
     };
     reader.readAsDataURL(file);
+    input.value = '';
   }
 }
 
 function removeBrandLogo() {
   BRAND_KIT.logoUrl = '';
+  if ($('bkLogoInput')) $('bkLogoInput').value = '';
   updateBrandKitModalUI();
-  showToast('Brand logo removed');
+  showToast('✓ Brand logo removed');
 }
 
 /* =============================================
@@ -189,6 +191,21 @@ function applyBrandKitToInfographic() {
     if (typeof renderInfographic === 'function') renderInfographic();
   }
   showToast('✨ Applied Brand Kit to Infographic!');
+}
+
+/* 4. Apply to Invoice / Quotation Studio */
+function applyBrandKitToInvoice() {
+  loadBrandKit();
+  if (typeof INVOICE_STATE !== 'undefined') {
+    if (BRAND_KIT.name) INVOICE_STATE.senderName = BRAND_KIT.name;
+    if (BRAND_KIT.primaryColor) INVOICE_STATE.accentColor = BRAND_KIT.primaryColor;
+    if (BRAND_KIT.fontFamily) INVOICE_STATE.fontFamily = BRAND_KIT.fontFamily;
+    if (BRAND_KIT.logoUrl) INVOICE_STATE.logoUrl = BRAND_KIT.logoUrl;
+    if (typeof populateInvoiceForm === 'function') populateInvoiceForm();
+    if (typeof saveInvoiceDraft === 'function') saveInvoiceDraft();
+    if (typeof renderInvoice === 'function') renderInvoice();
+  }
+  showToast('✨ Applied Brand Kit to Invoice Studio!');
 }
 
 /* Helper to check if a hex color is dark */

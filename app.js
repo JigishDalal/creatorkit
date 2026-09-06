@@ -95,13 +95,27 @@ function switchMode(mode) {
   if ($('appStoreMode')) $('appStoreMode').classList.toggle('hidden', mode !== 'appstore');
   if ($('bgRemoverMode')) $('bgRemoverMode').classList.toggle('hidden', mode !== 'bgremover');
   if ($('infographicMode')) $('infographicMode').classList.toggle('hidden', mode !== 'infographic');
+  if ($('invoiceMode')) $('invoiceMode').classList.toggle('hidden', mode !== 'invoice');
   // Download bar
   $('posterDlControls').classList.toggle('hidden', mode !== 'poster');
   $('carouselDlControls').classList.toggle('hidden', mode !== 'carousel');
   if ($('appStoreDlControls')) $('appStoreDlControls').classList.toggle('hidden', mode !== 'appstore');
   if ($('bgRemoverDlControls')) $('bgRemoverDlControls').classList.toggle('hidden', mode !== 'bgremover');
   if ($('infographicDlControls')) $('infographicDlControls').classList.toggle('hidden', mode !== 'infographic');
-  $('dlBarKey').textContent = mode === 'poster' ? 'Poster' : mode === 'carousel' ? 'Carousel' : mode === 'appstore' ? 'Store Posters' : mode === 'infographic' ? 'Infographic' : 'BG Remover';
+  if ($('invoiceDlControls')) $('invoiceDlControls').classList.toggle('hidden', mode !== 'invoice');
+  $('dlBarKey').textContent = mode === 'poster' ? 'Poster' : mode === 'carousel' ? 'Carousel' : mode === 'appstore' ? 'Store Posters' : mode === 'infographic' ? 'Infographic' : mode === 'invoice' ? 'Invoice Studio' : 'BG Remover';
+  
+  // Trigger active mode render
+  if (mode === 'poster' && typeof posterChanged === 'function') {
+    posterChanged();
+  } else if (mode === 'infographic' && typeof renderInfographic === 'function') {
+    renderInfographic();
+  } else if (mode === 'invoice' && typeof renderInvoice === 'function') {
+    renderInvoice();
+  } else if (mode === 'appstore' && typeof renderAppStorePreviews === 'function') {
+    renderAppStorePreviews();
+  }
+  
   // Update bar label
   updateBarLabel();
 }
@@ -126,6 +140,13 @@ function updateBarLabel() {
   } else if (APP.mode === 'infographic') {
     var infoTitle = (typeof INFOGRAPHIC_STATE !== 'undefined' && INFOGRAPHIC_STATE.title) ? INFOGRAPHIC_STATE.title : 'Comparison Graphic';
     $('dlBarVal').textContent = infoTitle + ' • 5 Templates';
+  } else if (APP.mode === 'invoice') {
+    if (typeof INVOICE_STATE !== 'undefined') {
+      var totals = typeof calculateInvoiceTotals === 'function' ? calculateInvoiceTotals() : { grandTotal: 0 };
+      $('dlBarVal').textContent = (INVOICE_STATE.docType || 'INVOICE') + ' ' + (INVOICE_STATE.docNumber || '') + ' • ' + (INVOICE_STATE.currency || '$') + totals.grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    } else {
+      $('dlBarVal').textContent = 'Invoice & Quotation Studio';
+    }
   } else if (APP.mode === 'bgremover') {
     if (typeof BG_STATE !== 'undefined' && BG_STATE.processedImage) {
       $('dlBarVal').textContent = 'Cutout ready (' + (BG_STATE.activeBgColor === 'transparent' ? 'Transparent PNG' : 'Custom Backdrop') + ')';
@@ -401,5 +422,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typeof initAppStore === 'function') initAppStore();
   if (typeof initBrandKit === 'function') initBrandKit();
   if (typeof initInfographics === 'function') initInfographics();
+  if (typeof initInvoiceStudio === 'function') initInvoiceStudio();
   switchMode('poster');
 });

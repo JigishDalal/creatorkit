@@ -35,6 +35,9 @@
       <button class="tab-btn" id="tabInfographic" role="tab" aria-selected="false" data-mode="infographic" onclick="switchMode('infographic')">
         <span class="tab-icon">📊</span> Infographic
       </button>
+      <button class="tab-btn" id="tabInvoice" role="tab" aria-selected="false" data-mode="invoice" onclick="switchMode('invoice')">
+        <span class="tab-icon">🧾</span> Invoice
+      </button>
     </nav>
     <div style="display:flex; align-items:center; gap:8px">
       <button class="btn btn-ghost btn-sm" id="brandKitHeaderBtn" onclick="openBrandKitModal()" title="Open Brand Kit" style="font-size:12.5px; padding:6px 12px">
@@ -412,13 +415,16 @@
 
           <div class="row2">
             <div class="field">
-              <label for="asFrameStyle">Device Mockup</label>
+              <label for="asFrameStyle">Device Mockup / Media Display</label>
               <select id="asFrameStyle" onchange="onStoreFrameChange(this.value)">
                 <option value="iphone" selected>Apple iPhone (Island)</option>
                 <option value="android">Android Phone (Hole)</option>
                 <option value="clay">Clay Minimalist</option>
                 <option value="floating">Floating Borderless</option>
-                <option value="none">No Frame (Clean)</option>
+                <option value="none">Raw Image (No Bezel)</option>
+                <option value="full_canvas">🖼 Full Canvas (100% Image Only — No Phone, No Text)</option>
+                <option value="full_bleed">🖼 Single Full Image (Hero Banner)</option>
+                <option value="hidden">🚫 Remove Mobile Screen (Text Only)</option>
               </select>
             </div>
             <div class="field">
@@ -451,6 +457,22 @@
           <div class="field">
             <label for="asSubline">Sub-Headline <span class="label-norm">— optional</span></label>
             <input type="text" id="asSubline" placeholder="Supporting feature details" oninput="onStoreSublineInput(this.value)">
+          </div>
+
+          <div class="field" style="margin-top:10px">
+            <label for="asScreenFrameOverride">Mockup for this Screen</label>
+            <select id="asScreenFrameOverride" onchange="onScreenFrameOverrideChange(this.value)">
+              <option value="inherit">✨ Match Deck Default</option>
+              <option value="full_canvas">🖼 Full Canvas (100% Image Only — No Phone, No Text)</option>
+              <option value="full_bleed">🖼 Single Full Image (Hero Banner)</option>
+              <option value="none">Raw Image (No Bezel)</option>
+              <option value="iphone">Apple iPhone (Island)</option>
+              <option value="android">Android Phone (Hole)</option>
+              <option value="clay">Clay Minimalist</option>
+              <option value="floating">Floating Borderless</option>
+              <option value="hidden">🚫 Remove Mobile Screen (Text Only)</option>
+            </select>
+            <div class="hint">Override or remove the phone mockup on this specific screen only.</div>
           </div>
 
           <div class="field" style="margin-top:10px">
@@ -823,6 +845,284 @@
   </div>
 </main>
 
+<!-- ====== INVOICE & QUOTATION MODE ====== -->
+<main id="invoiceMode" class="mode-panel wrap hidden" role="tabpanel" aria-labelledby="tabInvoice">
+  <div class="cols">
+
+    <!-- LEFT: Controls -->
+    <div class="controls-col">
+
+      <!-- Template & Doc Type Card -->
+      <div class="card">
+        <div class="card-hd">
+          Template & Document Type
+          <button class="btn btn-ghost btn-sm" onclick="applyBrandKitToInvoice()" title="Sync your Brand Kit identity">✨ Sync Brand Kit</button>
+        </div>
+        <div class="card-bd">
+          <div class="row2">
+            <div class="field">
+              <label for="invDocType">Document Type</label>
+              <select id="invDocType" onchange="onInvoiceFieldChanged()">
+                <option value="INVOICE">Invoice</option>
+                <option value="QUOTATION">Quotation / Estimate</option>
+                <option value="PROFORMA">Proforma Invoice</option>
+                <option value="RECEIPT">Receipt</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="invTheme">Design Layout</label>
+              <select id="invTheme" onchange="onInvoiceFieldChanged()">
+                <option value="modern">Modern Minimalist</option>
+                <option value="executive">Executive Slate</option>
+                <option value="creative">Creative Studio</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:6px">
+            <label>1-Click Sample Loaders</label>
+            <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:4px">
+              <button class="btn btn-ghost btn-sm" onclick="loadInvoicePreset('indiagst')">🇮🇳 India GST</button>
+              <button class="btn btn-ghost btn-sm" onclick="loadInvoicePreset('webdev')">💻 US Web Dev</button>
+              <button class="btn btn-ghost btn-sm" onclick="loadInvoicePreset('retainer')">🇬🇧 UK Retainer</button>
+              <button class="btn btn-ghost btn-sm" onclick="loadInvoicePreset('quote')">📊 Quote / Est.</button>
+              <button class="btn btn-ghost btn-sm" onclick="loadInvoicePreset('photography')">📸 Creative Gig</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document Metadata Card -->
+      <div class="card">
+        <div class="card-hd">Document Metadata</div>
+        <div class="card-bd">
+          <div class="row2">
+            <div class="field">
+              <label for="invDocNumber">Document #</label>
+              <input type="text" id="invDocNumber" value="INV-2026-001" oninput="onInvoiceFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="invStatus">Status</label>
+              <select id="invStatus" onchange="onInvoiceFieldChanged()">
+                <option value="PENDING">Pending (Due)</option>
+                <option value="PAID">Paid ✓</option>
+                <option value="DRAFT">Draft</option>
+                <option value="APPROVED">Approved</option>
+              </select>
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="invIssueDate">Issue Date</label>
+              <input type="date" id="invIssueDate" onchange="onInvoiceFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="invDueDate">Due Date</label>
+              <input type="date" id="invDueDate" onchange="onInvoiceFieldChanged()">
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="invCurrency">Currency Symbol</label>
+              <select id="invCurrency" onchange="onInvoiceFieldChanged()">
+                <option value="₹">INR (₹)</option>
+                <option value="$">USD ($)</option>
+                <option value="€">EUR (€)</option>
+                <option value="£">GBP (£)</option>
+                <option value="CA$">CAD (CA$)</option>
+                <option value="A$">AUD (A$)</option>
+                <option value="¥">JPY (¥)</option>
+                <option value="S$">SGD (S$)</option>
+                <option value="AED ">AED (AED)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="invAccentColor">Brand Accent Color</label>
+              <div class="color-wrap">
+                <input type="color" id="invAccentColor" value="#7C6EFA" oninput="onInvoiceFieldChanged()">
+                <span class="color-label">Accent</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sender (From) Card -->
+      <div class="card">
+        <div class="card-hd">
+          Your Business (From)
+        </div>
+        <div class="card-bd">
+          <div class="row2">
+            <div class="field">
+              <label for="invSenderName">Business / Creator Name</label>
+              <input type="text" id="invSenderName" placeholder="Your Name or Studio" oninput="onInvoiceFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="invSenderEmail">Email Address</label>
+              <input type="email" id="invSenderEmail" placeholder="billing@yourstudio.com" oninput="onInvoiceFieldChanged()">
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="invSenderPhone">Phone Number</label>
+              <input type="text" id="invSenderPhone" placeholder="+91 98765 43210" oninput="onInvoiceFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="invSenderAddress">City / Address</label>
+              <input type="text" id="invSenderAddress" placeholder="Mumbai, MH, India" oninput="onInvoiceFieldChanged()">
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="invTaxType">Tax / Business ID Type</label>
+              <select id="invTaxType" onchange="onTaxTypeChanged()">
+                <option value="GSTIN">GSTIN (India 🇮🇳)</option>
+                <option value="EIN">EIN / Tax ID (USA 🇺🇸)</option>
+                <option value="VAT_UK">VAT Reg (UK 🇬🇧)</option>
+                <option value="VAT_EU">VAT ID (EU 🇪🇺)</option>
+                <option value="ABN">ABN (Australia 🇦🇺)</option>
+                <option value="BN">Business No. (Canada 🇨🇦)</option>
+                <option value="TRN">TRN (UAE / GCC 🇦🇪)</option>
+                <option value="UEN">UEN (Singapore 🇸🇬)</option>
+                <option value="CUSTOM">Custom ID</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="invSenderTaxId" id="invTaxIdLabel">GST Number (GSTIN)</label>
+              <input type="text" id="invSenderTaxId" placeholder="e.g. 27AAAAA0000A1Z5" oninput="onInvoiceFieldChanged()">
+            </div>
+          </div>
+
+          <!-- Logo Management -->
+          <div class="field" style="margin-top:10px; padding-top:10px; border-top:1px solid var(--line)">
+            <label>Brand / Company Logo</label>
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; background:var(--card2); border:1px solid var(--line); border-radius:var(--radius-sm); padding:8px 12px; margin-top:4px">
+              <div style="display:flex; align-items:center; gap:10px">
+                <img id="invLogoThumb" src="" alt="Logo" style="width:36px; height:36px; object-fit:contain; border-radius:4px; background:#fff; padding:2px; display:none; border:1px solid var(--line)">
+                <div id="invLogoEmptyIcon" style="width:36px; height:36px; border-radius:4px; background:var(--soft); display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--mut)">🖼</div>
+                <div>
+                  <div id="invLogoStatusText" style="font-size:13px; font-weight:600; color:var(--ink)">No Logo Attached</div>
+                  <div style="font-size:11px; color:var(--mut)">PNG, JPG or SVG format</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:6px">
+                <input type="file" id="invLogoInput" accept="image/*" style="display:none" onchange="onInvoiceLogoSelected(this)">
+                <button class="btn btn-ghost btn-sm" onclick="$('invLogoInput').click()">📁 Upload Logo</button>
+                <button class="btn btn-ghost btn-sm" id="invRemoveLogoBtn" onclick="removeInvoiceLogo()" style="color:var(--red); display:none">✕ Remove Logo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Client (Bill To) Card -->
+      <div class="card">
+        <div class="card-hd">Client Details (Bill To)</div>
+        <div class="card-bd">
+          <div class="row2">
+            <div class="field">
+              <label for="invClientName">Client Contact Name</label>
+              <input type="text" id="invClientName" placeholder="e.g. Rahul Sharma" oninput="onInvoiceFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="invClientCompany">Company Name</label>
+              <input type="text" id="invClientCompany" placeholder="e.g. NextGen Digital Pvt Ltd" oninput="onInvoiceFieldChanged()">
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="invClientEmail">Client Email</label>
+              <input type="email" id="invClientEmail" placeholder="client@company.com" oninput="onInvoiceFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="invClientPhone">Client Phone</label>
+              <input type="text" id="invClientPhone" placeholder="+91 98111 22233" oninput="onInvoiceFieldChanged()">
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="invClientAddress">Client Address</label>
+              <input type="text" id="invClientAddress" placeholder="Bengaluru, KA, India" oninput="onInvoiceFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="invClientTaxId">Client GSTIN / Tax ID <span class="label-norm">— optional</span></label>
+              <input type="text" id="invClientTaxId" placeholder="e.g. 29BBBBB1111B2Z6" oninput="onInvoiceFieldChanged()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Line Items Card -->
+      <div class="card">
+        <div class="card-hd">
+          Line Items
+          <button class="btn btn-primary btn-sm" onclick="addInvoiceItem()">+ Add Item</button>
+        </div>
+        <div class="card-bd">
+          <div id="invItemsList" class="inv-items-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Taxes, Discounts & Notes Card -->
+      <div class="card">
+        <div class="card-hd">Discounts, Taxes & Notes</div>
+        <div class="card-bd">
+          <div class="row2">
+            <div class="field">
+              <label for="invDiscountValue">Discount (% or Flat)</label>
+              <input type="number" id="invDiscountValue" min="0" step="any" value="0" oninput="onInvoiceFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="invTaxRate">Tax Rate (%)</label>
+              <input type="number" id="invTaxRate" min="0" step="any" value="8.5" oninput="onInvoiceFieldChanged()">
+            </div>
+          </div>
+          <div class="field">
+            <label for="invShipping">Shipping / Handling Fee</label>
+            <input type="number" id="invShipping" min="0" step="any" value="0" oninput="onInvoiceFieldChanged()">
+          </div>
+          <div class="field">
+            <label for="invPaymentTerms">Payment Instructions</label>
+            <textarea id="invPaymentTerms" rows="3" placeholder="Bank details, wire instructions, or PayPal link" oninput="onInvoiceFieldChanged()"></textarea>
+          </div>
+          <div class="field">
+            <label for="invNotes">Notes & Terms</label>
+            <textarea id="invNotes" rows="2" placeholder="Thank you message, warranty, terms of service" oninput="onInvoiceFieldChanged()"></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /controls-col -->
+
+    <!-- RIGHT: Live Document Preview -->
+    <div class="preview-col">
+      <div class="preview-hd">
+        <span class="preview-title">Document Preview (A4)</span>
+        <div style="display:flex; gap:6px">
+          <button class="btn btn-ghost btn-sm" onclick="printInvoice()" title="Print or Save as PDF via Browser">🖨 Print</button>
+        </div>
+      </div>
+
+      <div class="invoice-canvas-wrap">
+        <canvas id="invoiceCanvas"></canvas>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:14px; width:100%">
+        <button class="btn btn-primary" onclick="downloadInvoicePDF()" style="flex:2; justify-content:center; padding:12px">
+          📄 Download PDF
+        </button>
+        <button class="btn btn-ghost" onclick="downloadInvoicePNG()" style="flex:1.5; justify-content:center">
+          🖼 Download PNG
+        </button>
+      </div>
+    </div><!-- /preview-col -->
+
+  </div>
+</main>
+
 <!-- ====== STICKY DOWNLOAD BAR ====== -->
 <div class="dl-bar" id="dlBar">
   <div class="dl-bar-inner">
@@ -845,7 +1145,8 @@
       <button class="btn btn-primary" id="carouselZipBtn" onclick="downloadCarouselZip()" disabled>PNGs (ZIP)</button>
     </div>
     <!-- App Store bar controls (hidden initially) -->
-    <div id="appStoreDlControls" class="hidden">
+    <div id="appStoreDlControls" class="hidden" style="display:flex; align-items:center; gap:8px">
+      <button class="btn btn-ghost" onclick="downloadActiveStoreScreen()">↓ Save Screen (PNG)</button>
       <button class="btn btn-primary" id="asDownloadAllBtn" onclick="downloadAllStoreScreensZip()">📦 Download All (ZIP)</button>
     </div>
     <!-- BG Remover bar controls (hidden initially) -->
@@ -859,6 +1160,12 @@
         <option value="jpg">JPEG</option>
       </select>
       <button class="btn btn-primary" onclick="downloadInfographic()">↓ Download</button>
+    </div>
+    <!-- Invoice bar controls (hidden initially) -->
+    <div id="invoiceDlControls" class="hidden" style="display:flex; align-items:center; gap:8px">
+      <button class="btn btn-ghost" onclick="printInvoice()">🖨 Print</button>
+      <button class="btn btn-ghost" onclick="downloadInvoicePNG()">🖼 PNG</button>
+      <button class="btn btn-primary" onclick="downloadInvoicePDF()">📄 Download PDF</button>
     </div>
 
   </div>
@@ -1012,6 +1319,7 @@
 <script src="brandkit.js"></script>
 <script src="infographic.js"></script>
 <script src="resizer.js"></script>
+<script src="invoice.js"></script>
 
 </body>
 </html>

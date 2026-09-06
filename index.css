@@ -1135,3 +1135,159 @@ input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50%; }
   box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
 
+/* =============================================
+   INVOICE & QUOTATION STUDIO STYLES
+   ============================================= */
+.invoice-canvas-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  background: var(--soft);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-sizing: border-box;
+}
+
+#invoiceCanvas {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1240 / 1754;
+  border-radius: 6px;
+  box-shadow: var(--shadow-lg);
+  background: #FFFFFF;
+  display: block;
+}
+
+.inv-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inv-item-card {
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.inv-item-card:hover {
+  border-color: var(--acc-line);
+}
+
+.inv-item-card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.inv-item-desc-input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.inv-del-btn {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--mut);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+.inv-del-btn:hover:not([disabled]) {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+  transform: scale(1.04);
+}
+
+.inv-item-card-bottom {
+  display: grid;
+  grid-template-columns: minmax(60px, 1fr) minmax(90px, 1.3fr) minmax(100px, 1.4fr);
+  gap: 8px;
+  align-items: end;
+}
+
+.inv-subfield {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.inv-sublabel {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mut);
+  margin-bottom: 4px;
+}
+
+.inv-num-input {
+  width: 100%;
+  padding: 7px 8px;
+  font-size: 13.5px;
+  text-align: right;
+  border-radius: var(--radius-sm);
+}
+
+.inv-subfield-total {
+  text-align: right;
+}
+
+.inv-item-calc-total {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+  padding: 0 8px;
+  background: var(--soft);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mode-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    scrollbar-width: none;
+  }
+  .mode-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .preview-col {
+    position: static;
+    margin-top: 16px;
+  }
+  .inv-item-card-bottom {
+    grid-template-columns: 1fr 1fr;
+  }
+  .inv-subfield-total {
+    grid-column: span 2;
+  }
+}
+
+

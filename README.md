@@ -1,6 +1,6 @@
 # ✦ CreatorKit — All-in-One Creator Studio
 
-> **Design stunning posters, multi-slide social carousels, official App Store & Play Store screenshot showcases, and isolate image backgrounds with client-side AI.**  
+> **Design stunning posters, multi-slide social carousels, official App Store & Play Store showcases, isolate image backgrounds with client-side AI, and generate professional brand-synced invoices & quotations.**  
 > 100% Free • No Watermarks • Zero Backend • Everything Runs Privately on Your Device.
 
 🌐 **Live Demo**: [https://jigishdalal.github.io/creatorkit/](https://jigishdalal.github.io/creatorkit/)
@@ -12,14 +12,14 @@
 CreatorKit brings Canva-grade creation tools together in a lightweight, responsive, and privacy-focused web application.
 
 ```
-┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                            CreatorKit                                            │
-├──────────────┬──────────────────┬──────────────────┬───────────────────┬─────────────────────────┤
-│  🖼 Poster   │   📑 Carousel    │   📱 App Store   │   ✂️ BG Remover   │     📊 Infographic      │
-│  Designers   │  Social Decks    │  Store Posters   │   AI Cutouts      │  Comparisons & Stats    │
-├──────────────┴──────────────────┴──────────────────┴───────────────────┴─────────────────────────┤
-│   🎨 Global 1-Click Brand Kit                 📐 Multi-Platform Social Auto-Resizer (ZIP)       │
-└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                 CreatorKit                                                 │
+├──────────────┬──────────────────┬──────────────────┬───────────────────┬───────────────────┬───────────────┤
+│  🖼 Poster   │   📑 Carousel    │   📱 App Store   │   ✂️ BG Remover   │  📊 Infographics  │  🧾 Invoices  │
+│  Designers   │  Social Decks    │  Store Posters   │   AI Cutouts      │  Comparisons/Stats│  & Quotations │
+├──────────────┴──────────────────┴──────────────────┴───────────────────┴───────────────────┴───────────────┤
+│   🎨 Global 1-Click Brand Kit                     📐 Multi-Platform Social Auto-Resizer (ZIP)              │
+└────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -70,12 +70,15 @@ CreatorKit brings Canva-grade creation tools together in a lightweight, responsi
   * 💎 *FinTech Titanium* (Obsidian black + radial glow ring)
   * 🌿 *Wellness Calm* (Gentle sunrise peach + elegant serif font)
   * ⚡ *Spotify Electric* (Vibrant violet/magenta sunset gradient)
-* **Realistic Device Mockups**:
-  * Modern Apple iPhone (Dynamic Island, glass reflection, metallic rim)
+* **Realistic Device Mockups & Per-Screen Customization**:
+  * Apple iPhone (Dynamic Island pill, glare reflections, metallic rim)
   * Android Phone (Centered punch-hole camera)
-  * Clay Minimalist Frame & Floating Borderless Cards
+  * Clay Minimalist Finish & Floating Borderless Cards
+  * **Per-Screen Frame Overrides**: Select **"🚫 Remove Mobile Screen (Text Only)"** or **"🖼 Single Full Image (Hero Banner)"** for specific slides (e.g. title hook or full illustration) without altering the device frame on other screens in your deck.
 * **Batch Screenshot Import**: Upload all your app screenshots at once to auto-create the full deck.
-* **1-Click ZIP Download**: Generates high-res PNG images (`01-screen-1290x2796.png`, etc.) packaged in a ZIP file ready for store submission.
+* **Flexible Export Options**:
+  * **1-Click ZIP Download**: Generates high-res PNG images (`screen-1-1290x2796.png`, etc.) packaged in a ZIP file ready for store submission.
+  * **Single-Screen PNG Download**: Download only the currently active screen directly.
 
 ---
 
@@ -135,6 +138,38 @@ CreatorKit brings Canva-grade creation tools together in a lightweight, responsi
   * Intelligently fits artwork with ambient background blur and drop-shadows so no typography is ever cropped or distorted.
 * **1-Click Batch Download (ZIP)**:
   * Generates a packaged ZIP archive containing all 5 social network sizes with clean file names (`01-ig-portrait-1080x1350.png`, `02-square-1080x1080.png`, etc.).
+
+---
+
+### 8. 🧾 Invoice & Quotation Studio (Brand Kit Powered)
+* **Reuses Global Brand Kit**:
+  * 1-Click syncs your **Brand Name**, **Logo**, **Primary Accent Color**, and **Typography** into official commercial documents.
+* **Multiple Commercial Document Types**:
+  * 🧾 **Invoice**
+  * 📊 **Quotation / Estimate**
+  * 📑 **Proforma Invoice**
+  * 🧾 **Payment Receipt**
+* **3 Designer Layout Themes**:
+  * *Modern Minimalist*, *Executive Slate*, *Creative Studio*.
+* **1-Click Industry Sample Presets**:
+  * 🇮🇳 *India GST Tech / Creative Retainer* (₹ INR, 18% GST, GSTIN)
+  * 💻 *US Web Development Project* ($ USD, EIN)
+  * 🇬🇧 *UK Creative Retainer* (£ GBP, 20% VAT)
+  * 📊 *Project Quote / Estimate*
+  * 📸 *Commercial Photography & Video Package*
+* **Global Tax & Business ID Selector**:
+  * Built-in support for **GSTIN** (India 🇮🇳), **EIN / Tax ID** (USA 🇺🇸), **VAT Reg** (UK 🇬🇧), **VAT ID** (EU 🇪🇺), **ABN** (Australia 🇦🇺), **BN / GST** (Canada 🇨🇦), **TRN** (UAE / GCC 🇦🇪), **UEN** (Singapore 🇸🇬), and Custom Tax IDs.
+  * Dedicated support for **Client GSTIN / Tax ID** for B2B tax compliance.
+* **Dynamic Real-Time Billing Engine**:
+  * Add/remove line items dynamically with auto-calculated quantities, rates, and item totals.
+  * Auto-calculated **Subtotal**, **Discounts** (% or flat), **Tax / VAT / GST rates**, and **Shipping / Extra Fees**.
+  * Dynamic currency switcher: `INR (₹)`, `USD ($)`, `EUR (€)`, `GBP (£)`, `CAD (CA$)`, `AUD (A$)`, `JPY (¥)`, `SGD (S$)`, `AED (AED)`.
+  * Interactive Status Pills: `PAID`, `PENDING (DUE)`, `DRAFT`, `APPROVED`.
+* **Export & Print**:
+  * 📄 **Download PDF**: High-resolution, vector-crisp A4 document export ready to email clients.
+  * 🖼 **Download PNG**: Instant image snapshot for WhatsApp, Slack, or SMS communication.
+  * 🖨 **Print / Save as PDF**: Native browser print window with dedicated 300 DPI print styling.
+  * 💾 **Auto-Saved Drafts**: Retains current state in `localStorage` so client work is never lost.
 
 ---
 

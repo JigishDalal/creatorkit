@@ -577,8 +577,19 @@ function populateActiveScreenForm() {
   var sInp = $('asSubline');
   if (sInp) sInp.value = screen.subline || '';
 
+  var frameInp = $('asScreenFrameOverride');
+  if (frameInp) frameInp.value = screen.frameStyle || 'inherit';
+
   var rmImgBtn = $('asRemoveImgBtn');
   if (rmImgBtn) rmImgBtn.style.display = screen.image ? 'inline-flex' : 'none';
+}
+
+function onScreenFrameOverrideChange(val) {
+  var idx = APP_STORE_STATE.activeScreenIndex;
+  if (APP_STORE_STATE.screens[idx]) {
+    APP_STORE_STATE.screens[idx].frameStyle = val;
+    renderStoreScreen(idx);
+  }
 }
 
 function onStoreBadgeInput(val) {
@@ -846,6 +857,24 @@ function renderStoreScreen(index) {
   var screen = APP_STORE_STATE.screens[index];
   if (!screen) return;
 
+  var frame = (screen && screen.frameStyle && screen.frameStyle !== 'inherit') ? screen.frameStyle : APP_STORE_STATE.frameStyle;
+
+  // Full Canvas 100% Image-Only Mode (No mockups, no text, edge-to-edge artwork)
+  if (frame === 'full_canvas') {
+    var img = screen.image || createDemoScreenImage(index, screen.headline);
+    if (img) {
+      var scale = Math.max(W / img.width, H / img.height);
+      var sw = img.width * scale;
+      var sh = img.height * scale;
+      var sx = (W - sw) / 2;
+      var sy = (H - sh) / 2;
+      ctx.drawImage(img, sx, sy, sw, sh);
+    } else {
+      drawStoreBackground(ctx, W, H, theme);
+    }
+    return;
+  }
+
   // 1. Draw Background
   drawStoreBackground(ctx, W, H, theme);
 
@@ -854,7 +883,7 @@ function renderStoreScreen(index) {
 
   // 3. Draw Device Mockup & App Screenshot
   var img = screen.image || createDemoScreenImage(index, screen.headline);
-  drawStoreDeviceMockup(ctx, W, H, img, textBottomY, theme);
+  drawStoreDeviceMockup(ctx, W, H, img, textBottomY, theme, screen);
 }
 
 /* Background renderer (Mesh Aura, Solid, Grid, Radial Glow) */
@@ -1023,9 +1052,60 @@ function wrapStoreText(ctx, text, maxW) {
 }
 
 /* Device Mockup renderer */
-function drawStoreDeviceMockup(ctx, W, H, img, textBottomY, theme) {
-  var frame = APP_STORE_STATE.frameStyle;
+function drawStoreDeviceMockup(ctx, W, H, img, textBottomY, theme, screen) {
+  var frame = (screen && screen.frameStyle && screen.frameStyle !== 'inherit') ? screen.frameStyle : APP_STORE_STATE.frameStyle;
   var layout = APP_STORE_STATE.layoutPos;
+
+  // 1. Remove mobile frame entirely if hidden
+  if (frame === 'hidden') {
+    return;
+  }
+
+  // 2. Full single image hero display (No phone bezels)
+  if (frame === 'full_bleed') {
+    if (img) {
+      ctx.save();
+      var hasText = screen && ((screen.headline && screen.headline.trim()) || (screen.subline && screen.subline.trim()) || (screen.badge && screen.badge.trim()));
+      var heroY = hasText ? textBottomY + Math.round(H * 0.025) : Math.round(H * 0.04);
+      var heroH = H - heroY - Math.round(H * 0.045);
+      var heroW = W * 0.90;
+      var heroX = (W - heroW) / 2;
+      var heroR = Math.round(W * 0.04);
+
+      if (layout === 'tilted') {
+        ctx.translate(W / 2, heroY + heroH / 2);
+        ctx.rotate(-0.05);
+        ctx.translate(-W / 2, -(heroY + heroH / 2));
+      }
+
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.45)';
+      ctx.shadowBlur = Math.round(W * 0.05);
+      ctx.shadowOffsetY = Math.round(H * 0.02);
+      roundRectStore(ctx, heroX, heroY, heroW, heroH, heroR);
+      ctx.fillStyle = '#000000';
+      ctx.fill();
+      ctx.restore();
+
+      ctx.save();
+      if (layout === 'tilted') {
+        ctx.translate(W / 2, heroY + heroH / 2);
+        ctx.rotate(-0.05);
+        ctx.translate(-W / 2, -(heroY + heroH / 2));
+      }
+      roundRectStore(ctx, heroX, heroY, heroW, heroH, heroR);
+      ctx.clip();
+
+      // Cover-fit image
+      var scale = Math.max(heroW / img.width, heroH / img.height);
+      var sw = img.width * scale;
+      var sh = img.height * scale;
+      var sx = heroX + (heroW - sw) / 2;
+      var sy = heroY + (heroH - sh) / 2;
+      ctx.drawImage(img, sx, sy, sw, sh);
+      ctx.restore();
+    }
+    return;
+  }
 
   // Device dimensions
   var phoneW = W * 0.84;
@@ -1171,6 +1251,11 @@ function drawStoreDeviceMockup(ctx, W, H, img, textBottomY, theme) {
 }
 
 /* -------- Export & Downloads -------- */
+function downloadActiveStoreScreen() {
+  var idx = APP_STORE_STATE.activeScreenIndex || 0;
+  downloadSingleStoreScreen(idx);
+}
+
 function downloadSingleStoreScreen(idx) {
   var canvas = $('storeCanvas_' + idx);
   if (!canvas) return;
