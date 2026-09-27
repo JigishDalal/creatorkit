@@ -7,6 +7,42 @@
 
 ---
 
+## 🚀 How to Run & Setup
+
+Because CreatorKit now includes a **Video Captions Studio** that uses an AI model (OpenAI Whisper) to generate transcripts, it requires a Python backend.
+
+### 1. Prerequisites
+- Python 3.8 or higher installed on your computer.
+- `ffmpeg` installed (required for Whisper to extract audio).
+  - **Mac:** `brew install ffmpeg`
+  - **Windows:** Download from [gyan.dev](https://www.gyan.dev/ffmpeg/builds/)
+  - **Linux:** `sudo apt install ffmpeg`
+
+### 2. Setup
+Open your terminal in the project directory and run:
+
+```bash
+# Install required Python packages
+pip install -r requirements.txt
+```
+
+### 3. Running the App
+Start the custom backend server by running:
+
+```bash
+python server.py
+```
+Then, open your web browser and navigate to: [http://localhost:8000](http://localhost:8000)
+
+> [!WARNING]
+> **Vercel Hosting Limitations:**
+> You **cannot** host this full stack easily on Vercel's free tier. 
+> 1. Vercel Serverless Functions have a strict **50MB size limit**, but the Whisper ML model and `ffmpeg` binaries are much larger.
+> 2. Vercel has a **10-second timeout**, but transcribing video often takes longer.
+> **Alternative Hosting:** To host this online, you should use services designed for longer-running applications like **Render**, **Railway**, **Fly.io**, or an AWS EC2 / DigitalOcean Droplet.
+
+---
+
 ## 🌟 Features Overview
 
 CreatorKit brings Canva-grade creation tools together in a lightweight, responsive, and privacy-focused web application.
@@ -200,6 +236,7 @@ CreatorKit brings Canva-grade creation tools together in a lightweight, responsi
    # Or using Node serve / npx:
    npx serve . --listen 3456
    ```
+   python3 server.py
 
 3. Open **`http://localhost:3456/`** in your browser.
 

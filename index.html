@@ -38,6 +38,9 @@
       <button class="tab-btn" id="tabInvoice" role="tab" aria-selected="false" data-mode="invoice" onclick="switchMode('invoice')">
         <span class="tab-icon">🧾</span> Invoice
       </button>
+      <button class="tab-btn" id="tabCaptions" role="tab" aria-selected="false" data-mode="captions" onclick="switchMode('captions')">
+        <span class="tab-icon">✨</span> Captions Studio
+      </button>
     </nav>
     <div style="display:flex; align-items:center; gap:8px">
       <button class="btn btn-ghost btn-sm" id="brandKitHeaderBtn" onclick="openBrandKitModal()" title="Open Brand Kit" style="font-size:12.5px; padding:6px 12px">
@@ -1302,6 +1305,81 @@
   </div>
 </div>
 
+<!-- ====== CAPTIONS STUDIO MODE ====== -->
+<main id="captionsMode" class="mode-panel wrap hidden" role="tabpanel" aria-labelledby="tabCaptions">
+  <div class="cols" style="max-width: 800px; margin: 0 auto; display: block;">
+    <div class="card" style="padding: 30px;">
+      <h2 style="margin-top:0">AI Video Captions</h2>
+      <p style="color:var(--text-muted); font-size:14px; margin-bottom: 20px;">
+        Upload a video to automatically generate and animate captions.
+      </p>
+      
+      <div class="control-group">
+        <label for="videoUploadInput">Upload Video</label>
+        <input type="file" id="videoUploadInput" accept="video/mp4,video/x-m4v,video/*" style="width: 100%;">
+      </div>
+
+      <div class="control-group" style="margin-top: 15px;">
+        <label for="animationStyleSelect">Animation Style</label>
+        <select id="animationStyleSelect" style="width: 100%;">
+          <option value="style-pop">Pop In (Default)</option>
+          <option value="style-highlight">Highlight Word</option>
+          <option value="style-fade">Fade In</option>
+          <option value="style-karaoke">Karaoke Overlay</option>
+        </select>
+      </div>
+
+      <div class="control-group" style="margin-top: 15px;">
+        <label for="captionPositionSelect">Caption Position</label>
+        <select id="captionPositionSelect" style="width: 100%;">
+          <option value="center">Middle</option>
+          <option value="bottom">Bottom</option>
+          <option value="top">Top</option>
+        </select>
+      </div>
+      
+      <button id="generateCaptionsBtn" class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="generateCaptions()">
+        <span class="btn-icon">✨</span> Generate Captions
+      </button>
+      
+      <div id="captionsResultContainer" style="margin-top: 20px; display: none; text-align: center; position: relative;">
+        <h4 style="margin-bottom: 10px;">Preview</h4>
+        
+        <div style="position: relative; display: inline-block; width: 100%; max-width: 600px; background: #000; border-radius: 8px; overflow: hidden;">
+          <video id="captionsVideoPreview" controls style="width: 100%; display: block;"></video>
+          
+          <!-- Overlay for animated captions -->
+          <div id="captionOverlay" class="caption-overlay style-pop"></div>
+        </div>
+        
+        <!-- Transcript Editor -->
+        <div style="margin-top: 20px; text-align: left;">
+          <h4>Edit Transcript</h4>
+          <p style="font-size: 13px; color: var(--text-muted);">Click on any word below to edit it. The animation will update automatically.</p>
+          <div id="transcriptEditor" style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; max-height: 200px; overflow-y: auto; margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px;">
+            <!-- Words will be injected here as editable inputs -->
+          </div>
+        </div>
+        
+        <!-- Export Section -->
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+          <h4>Export Video</h4>
+          <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button id="exportFrontendBtn" class="btn btn-secondary" style="flex: 1;" onclick="exportVideoFrontend()">
+              <span class="btn-icon">⚡</span> Export Fast (Browser)
+            </button>
+            <button id="exportBackendBtn" class="btn btn-primary" style="flex: 1;" onclick="exportVideoBackend()">
+              <span class="btn-icon">🔥</span> Export HQ (Server Burn-in)
+            </button>
+          </div>
+          <div id="exportStatus" style="margin-top: 10px; font-size: 13px; color: var(--text-muted);"></div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</main>
+
 <!-- ====== TOAST ====== -->
 <div class="toast" id="toast"></div>
 
@@ -1320,6 +1398,6 @@
 <script src="infographic.js"></script>
 <script src="resizer.js"></script>
 <script src="invoice.js"></script>
-
+<script src="captions.js"></script>
 </body>
 </html>

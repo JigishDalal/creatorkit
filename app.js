@@ -96,6 +96,7 @@ function switchMode(mode) {
   if ($('bgRemoverMode')) $('bgRemoverMode').classList.toggle('hidden', mode !== 'bgremover');
   if ($('infographicMode')) $('infographicMode').classList.toggle('hidden', mode !== 'infographic');
   if ($('invoiceMode')) $('invoiceMode').classList.toggle('hidden', mode !== 'invoice');
+  if ($('captionsMode')) $('captionsMode').classList.toggle('hidden', mode !== 'captions');
   // Download bar
   $('posterDlControls').classList.toggle('hidden', mode !== 'poster');
   $('carouselDlControls').classList.toggle('hidden', mode !== 'carousel');
@@ -103,7 +104,7 @@ function switchMode(mode) {
   if ($('bgRemoverDlControls')) $('bgRemoverDlControls').classList.toggle('hidden', mode !== 'bgremover');
   if ($('infographicDlControls')) $('infographicDlControls').classList.toggle('hidden', mode !== 'infographic');
   if ($('invoiceDlControls')) $('invoiceDlControls').classList.toggle('hidden', mode !== 'invoice');
-  $('dlBarKey').textContent = mode === 'poster' ? 'Poster' : mode === 'carousel' ? 'Carousel' : mode === 'appstore' ? 'Store Posters' : mode === 'infographic' ? 'Infographic' : mode === 'invoice' ? 'Invoice Studio' : 'BG Remover';
+  $('dlBarKey').textContent = mode === 'poster' ? 'Poster' : mode === 'carousel' ? 'Carousel' : mode === 'appstore' ? 'Store Posters' : mode === 'infographic' ? 'Infographic' : mode === 'invoice' ? 'Invoice Studio' : mode === 'captions' ? 'Captions Studio' : 'BG Remover';
   
   // Trigger active mode render
   if (mode === 'poster' && typeof posterChanged === 'function') {

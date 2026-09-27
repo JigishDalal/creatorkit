@@ -1290,4 +1290,112 @@ input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50%; }
   }
 }
 
+/* =========================================
+   CAPTIONS STUDIO
+========================================= */
 
+.caption-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+  pointer-events: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.caption-word {
+  display: inline-block;
+  opacity: 0; /* hidden until shown */
+  transition: all 0.2s ease;
+}
+
+/* POP IN STYLE */
+.style-pop .caption-word.past {
+  opacity: 1;
+}
+.style-pop .caption-word.active {
+  opacity: 1;
+  color: #ffeb3b; /* yellow highlight */
+  transform: scale(1.2);
+}
+.style-pop .caption-word.future {
+  opacity: 0;
+}
+
+/* HIGHLIGHT WORD STYLE */
+.style-highlight .caption-word.past {
+  opacity: 0.5;
+  color: white;
+}
+.style-highlight .caption-word.active {
+  opacity: 1;
+  color: #00e676; /* Green highlight */
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0 8px;
+  border-radius: 4px;
+}
+.style-highlight .caption-word.future {
+  opacity: 0;
+}
+
+/* FADE IN STYLE */
+.style-fade .caption-word.past {
+  opacity: 1;
+}
+.style-fade .caption-word.active {
+  opacity: 1;
+  animation: fadeIn 0.3s forwards;
+}
+.style-fade .caption-word.future {
+  opacity: 0;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* KARAOKE STYLE */
+.style-karaoke .caption-word.past {
+  opacity: 1;
+  color: #ff4081; /* Pink */
+}
+.style-karaoke .caption-word.active {
+  opacity: 1;
+  color: #ff4081;
+  text-decoration: underline;
+}
+.style-karaoke .caption-word.future {
+  opacity: 1;
+  color: white;
+}
+
+.transcript-word-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  width: auto;
+  min-width: 40px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.transcript-word-input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #ffeb3b;
+  outline: none;
+}
