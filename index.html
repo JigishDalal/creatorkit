@@ -38,6 +38,9 @@
       <button class="tab-btn" id="tabInvoice" role="tab" aria-selected="false" data-mode="invoice" onclick="switchMode('invoice')">
         <span class="tab-icon">🧾</span> Invoice
       </button>
+      <button class="tab-btn" id="tabBarcode" role="tab" aria-selected="false" data-mode="barcode" onclick="switchMode('barcode')">
+        <span class="tab-icon">🏷️</span> Barcode & Label
+      </button>
     </nav>
     <div style="display:flex; align-items:center; gap:8px">
       <button class="btn btn-ghost btn-sm" id="brandKitHeaderBtn" onclick="openBrandKitModal()" title="Open Brand Kit" style="font-size:12.5px; padding:6px 12px">
@@ -1123,6 +1126,259 @@
   </div>
 </main>
 
+<!-- ====== BARCODE & QR CODE STUDIO ====== -->
+<main id="barcodeMode" class="mode-panel wrap hidden" role="tabpanel" aria-labelledby="tabBarcode">
+  <div class="cols">
+
+    <!-- LEFT: Controls -->
+    <div class="controls-col">
+
+      <!-- Card 1: Convert Any Detail into Barcode or QR Code -->
+      <div class="card">
+        <div class="card-hd">
+          1. Choose Code Type & Link Category
+          <button class="btn btn-ghost btn-sm" onclick="applyBrandKitToBarcode()" title="Sync your Brand Kit identity">✨ Sync Brand Kit</button>
+        </div>
+        <div class="card-bd">
+          <!-- Code Type Selector -->
+          <div class="row2" style="margin-bottom:12px">
+            <button type="button" class="bc-type-btn" id="btnTypeCodeBarcode" onclick="setBarcodeCodeType('barcode')">
+              <span style="font-size:20px; line-height:1">▇</span>
+              <div>
+                <div style="font-weight:700; font-size:13.5px">1D Barcode</div>
+                <div style="font-size:10px; opacity:0.8">Universal / Retail Barcode</div>
+              </div>
+            </button>
+            <button type="button" class="bc-type-btn active" id="btnTypeCodeQr" onclick="setBarcodeCodeType('qrcode')">
+              <span style="font-size:20px; line-height:1">⛶</span>
+              <div>
+                <div style="font-weight:700; font-size:13.5px">2D QR Code</div>
+                <div style="font-size:10px; opacity:0.8">Maps / Social / Links</div>
+              </div>
+            </button>
+          </div>
+
+          <!-- Quick Link Category Chips -->
+          <label>Link / Content Category</label>
+          <div class="bc-link-chips" style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px">
+            <button type="button" class="bc-chip active" id="chipLinkLoc" onclick="selectLinkCategory('location')">📍 Location Link</button>
+            <button type="button" class="bc-chip" id="chipLinkWeb" onclick="selectLinkCategory('website')">🌐 Website Link</button>
+            <button type="button" class="bc-chip" id="chipLinkInsta" onclick="selectLinkCategory('instagram')">📸 Instagram</button>
+            <button type="button" class="bc-chip" id="chipLinkWa" onclick="selectLinkCategory('whatsapp')">💬 WhatsApp</button>
+            <button type="button" class="bc-chip" id="chipLinkWifi" onclick="selectLinkCategory('wifi')">📶 Store Wi-Fi</button>
+            <button type="button" class="bc-chip" id="chipLinkText" onclick="selectLinkCategory('custom')">🔤 Product SKU / Text</button>
+          </div>
+
+          <!-- Category Specific Helpers -->
+          <div id="helperLoc" style="display:block; margin-bottom:10px">
+            <label for="bcLocInput">Google Maps / Shop Location Link</label>
+            <input type="text" id="bcLocInput" value="https://maps.google.com/?q=FreshMart+Supermarket" placeholder="e.g. https://maps.google.com/?q=... or Shop Address" oninput="onLinkHelperChanged('location')">
+          </div>
+
+          <div id="helperWeb" style="display:none; margin-bottom:10px">
+            <label for="bcWebInput">Shop Website Address</label>
+            <input type="text" id="bcWebInput" value="https://freshmart.com" placeholder="e.g. https://yourshop.com" oninput="onLinkHelperChanged('website')">
+          </div>
+
+          <div id="helperInsta" style="display:none; margin-bottom:10px">
+            <label for="bcInstaInput">Instagram Username / Handle</label>
+            <input type="text" id="bcInstaInput" value="freshmart" placeholder="e.g. yourstore" oninput="onLinkHelperChanged('instagram')">
+          </div>
+
+          <div id="helperWa" style="display:none; margin-bottom:10px">
+            <div class="row2">
+              <div class="field">
+                <label for="bcWaPhone">WhatsApp Phone Number</label>
+                <input type="text" id="bcWaPhone" value="+15551234567" placeholder="e.g. +1 555 123 4567" oninput="onLinkHelperChanged('whatsapp')">
+              </div>
+              <div class="field">
+                <label for="bcWaMsg">Default Greeting Message</label>
+                <input type="text" id="bcWaMsg" value="Hello! I would like to order." placeholder="e.g. Hi, order inquiry" oninput="onLinkHelperChanged('whatsapp')">
+              </div>
+            </div>
+          </div>
+
+          <div id="helperWifi" style="display:none; margin-bottom:10px">
+            <div class="row2">
+              <div class="field">
+                <label for="bcWifiSsid">Wi-Fi Network Name (SSID)</label>
+                <input type="text" id="bcWifiSsid" value="FreshMart_Guest" placeholder="Network Name" oninput="onLinkHelperChanged('wifi')">
+              </div>
+              <div class="field">
+                <label for="bcWifiPass">Wi-Fi Password</label>
+                <input type="text" id="bcWifiPass" value="fresh123" placeholder="Wi-Fi Password" oninput="onLinkHelperChanged('wifi')">
+              </div>
+            </div>
+          </div>
+
+          <!-- Raw Data / Link input (Live Synced) -->
+          <div class="field">
+            <label for="bcDataToConvert">Encoded Content (Data Converted into Code)</label>
+            <input type="text" id="bcDataToConvert" value="https://maps.google.com/?q=FreshMart+Supermarket" placeholder="Enter URL, text, or code..." oninput="onBarcodeFieldChanged()">
+            <div class="hint">This exact link or text is encoded into the QR code or Barcode.</div>
+          </div>
+
+          <!-- Format dropdown (for 1D Barcode) -->
+          <div class="field" id="bcFormatWrap" style="display:none; margin-top:10px">
+            <label for="bcFormat">Barcode Symbology</label>
+            <select id="bcFormat" onchange="onBarcodeFieldChanged()">
+              <option value="CODE128">CODE128 (Universal Letters, Digits & Symbols)</option>
+              <option value="EAN13">EAN-13 (Standard Retail 13 Digits)</option>
+              <option value="UPC">UPC-A (Standard Retail 12 Digits)</option>
+              <option value="CODE39">CODE39 (Alphanumeric Industrial)</option>
+              <option value="EAN8">EAN-8 (Compact 8 Digits)</option>
+            </select>
+          </div>
+
+          <!-- Checkbox: Show readable text under barcode -->
+          <div id="bcDisplayValueWrap" style="display:none; align-items:center; gap:8px; margin-top:8px">
+            <input type="checkbox" id="bcDisplayValue" checked onchange="onBarcodeFieldChanged()" style="width:16px; height:16px; cursor:pointer">
+            <label for="bcDisplayValue" style="margin:0; text-transform:none; font-size:12.5px; font-weight:600; cursor:pointer">Show code value text below barcode</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Label Mode & Shop/Location Details -->
+      <div class="card">
+        <div class="card-hd">
+          2. Label Display Style
+        </div>
+        <div class="card-bd">
+          <label>Choose Display Mode</label>
+          <div class="row2" style="margin-bottom:12px">
+            <button type="button" class="bc-mode-btn" id="btnModeOnlyCode" onclick="setBarcodeLabelMode('only_code')">
+              <span style="font-size:18px">🎯</span>
+              <div>
+                <div style="font-weight:700; font-size:13.5px">Only Code</div>
+                <div style="font-size:10px; opacity:0.8">Pure Sticker (No Text)</div>
+              </div>
+            </button>
+            <button type="button" class="bc-mode-btn active" id="btnModeShopLabel" onclick="setBarcodeLabelMode('shop_label')">
+              <span style="font-size:18px">🏪</span>
+              <div>
+                <div style="font-weight:700; font-size:13.5px">Shop & Location</div>
+                <div style="font-size:10px; opacity:0.8">Include Store & Location Text</div>
+              </div>
+            </button>
+          </div>
+
+          <!-- Shop, Location, Website & Social details -->
+          <div id="bcShopDetailsCard">
+            <div class="field">
+              <label for="bcShopName">Shop / Store / Business Name</label>
+              <input type="text" id="bcShopName" value="FreshMart Supermarket" placeholder="e.g. FreshMart Supermarket" oninput="onBarcodeFieldChanged()">
+            </div>
+
+            <div class="field">
+              <label for="bcLocation">Shop Location / Address / Aisle / Shelf</label>
+              <input type="text" id="bcLocation" value="124 Main Street • Aisle 3" placeholder="e.g. 124 Main Street or Aisle 3, Shelf B" oninput="onBarcodeFieldChanged()">
+            </div>
+
+            <div class="row2">
+              <div class="field">
+                <label for="bcWebsiteText">Website (On Label)</label>
+                <input type="text" id="bcWebsiteText" value="www.freshmart.com" placeholder="e.g. www.freshmart.com" oninput="onBarcodeFieldChanged()">
+              </div>
+              <div class="field">
+                <label for="bcSocialText">Social Media Handle (On Label)</label>
+                <input type="text" id="bcSocialText" value="@freshmart" placeholder="e.g. @freshmart" oninput="onBarcodeFieldChanged()">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="bcItemOrPrice">Action Text / Price / Note <span class="label-norm">— optional</span></label>
+              <input type="text" id="bcItemOrPrice" value="Scan for Location & Store Hours" placeholder="e.g. Scan for Location & Store Hours or $4.49" oninput="onBarcodeFieldChanged()">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Card 3: Print Size & Border -->
+      <div class="card">
+        <div class="card-hd">3. Print Size & Border</div>
+        <div class="card-bd">
+          <div class="field">
+            <label for="bcPrintSize">Select Label & Print Size</label>
+            <select id="bcPrintSize" onchange="onBarcodeFieldChanged()">
+              <option value="50x25">🏷️ 50 × 25 mm (2" × 1" — Thermal Retail Sticker)</option>
+              <option value="50x30" selected>🏷️ 50 × 30 mm (2" × 1.2" — Price Tag)</option>
+              <option value="58x40">🏷️ 58 × 40 mm (POS Thermal Roll)</option>
+              <option value="70x35">🏷️ 70 × 35 mm (2.75" × 1.4" — Apparel Hangtag)</option>
+              <option value="100x50">🏷️ 100 × 50 mm (4" × 2" — Shelf / Bin Tag)</option>
+              <option value="square_50">⬛ 50 × 50 mm (2" × 2" — Square Sticker)</option>
+              <option value="a4_24">📄 A4 Sheet Grid (24 Labels — 3 × 8 Sheet)</option>
+              <option value="custom">📐 Custom Dimensions (mm)</option>
+            </select>
+          </div>
+
+          <div class="row2" id="bcCustomSizeRow" style="display:none">
+            <div class="field">
+              <label for="bcCustomW">Width (mm)</label>
+              <input type="number" id="bcCustomW" value="50" min="15" max="300" oninput="onBarcodeFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="bcCustomH">Height (mm)</label>
+              <input type="number" id="bcCustomH" value="30" min="10" max="300" oninput="onBarcodeFieldChanged()">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="bcBorderStyle">Sticker Cut Border</label>
+            <select id="bcBorderStyle" onchange="onBarcodeFieldChanged()">
+              <option value="dashed">Dashed Guide (Easy Cut)</option>
+              <option value="solid">Solid Frame</option>
+              <option value="none">No Border (Borderless)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /controls-col -->
+
+    <!-- RIGHT: Live Preview & Print Engine -->
+    <div class="preview-col">
+      <div class="card" style="margin-bottom:0">
+        <div class="card-hd" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px">
+          <div style="display:flex; align-items:center; gap:8px">
+            <span>🏷️</span>
+            <span style="font-weight:700">Live Print Preview</span>
+            <span class="badge" id="bcDimensionsBadge" style="font-size:11px; font-weight:600; padding:2px 8px; border-radius:999px; background:var(--card2); border:1px solid var(--line); color:var(--ink2)">50 × 30 mm @ 300 DPI</span>
+          </div>
+          <div style="display:flex; gap:4px">
+            <button class="btn btn-ghost btn-sm active" id="bcViewSingleBtn" onclick="setBarcodeViewMode('single')">Single Label</button>
+            <button class="btn btn-ghost btn-sm" id="bcViewSheetBtn" onclick="setBarcodeViewMode('sheet')">A4 Sheet Grid</button>
+          </div>
+        </div>
+
+        <div class="card-bd" style="padding:16px; background:var(--soft); display:flex; flex-direction:column; align-items:center; gap:16px">
+          
+          <!-- Canvas Container -->
+          <div class="barcode-canvas-wrap" id="barcodeCanvasWrap">
+            <canvas id="barcodeCanvas"></canvas>
+          </div>
+
+          <!-- Quick Action Buttons Below Preview -->
+          <div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; width:100%">
+            <button class="btn btn-primary" onclick="printBarcodeLabel()">🖨 Print Label</button>
+            <button class="btn btn-primary" onclick="printBarcodeA4Sheet()">📑 Print A4 Sheet</button>
+            <button class="btn btn-ghost" onclick="downloadBarcodePNG()">🖼 PNG</button>
+            <button class="btn btn-ghost" onclick="downloadBarcodePDF()">📄 PDF</button>
+            <button class="btn btn-ghost" onclick="downloadBarcodeSVG()">⚡ SVG</button>
+            <button class="btn btn-ghost" onclick="copyBarcodeToClipboard()">📋 Copy Image</button>
+          </div>
+
+          <div style="font-size:11.5px; color:var(--mut); text-align:center; max-width:480px; line-height:1.5">
+            💡 <b>100% Free & Client-Side</b>: Ready for thermal roll printers (Munbyn, Rollo, Zebra, Brother) and standard A4 sticker paper.
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /preview-col -->
+
+  </div>
+</main>
+
 <!-- ====== STICKY DOWNLOAD BAR ====== -->
 <div class="dl-bar" id="dlBar">
   <div class="dl-bar-inner">
@@ -1166,6 +1422,13 @@
       <button class="btn btn-ghost" onclick="printInvoice()">🖨 Print</button>
       <button class="btn btn-ghost" onclick="downloadInvoicePNG()">🖼 PNG</button>
       <button class="btn btn-primary" onclick="downloadInvoicePDF()">📄 Download PDF</button>
+    </div>
+    <!-- Barcode bar controls (hidden initially) -->
+    <div id="barcodeDlControls" class="hidden" style="display:flex; align-items:center; gap:8px">
+      <button class="btn btn-ghost" onclick="printBarcodeLabel()">🖨 Print Label</button>
+      <button class="btn btn-ghost" onclick="printBarcodeA4Sheet()">📑 Print Sheet</button>
+      <button class="btn btn-ghost" onclick="copyBarcodeToClipboard()">📋 Copy</button>
+      <button class="btn btn-primary" onclick="downloadBarcodePNG()">↓ Download PNG</button>
     </div>
 
   </div>
@@ -1310,6 +1573,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <!-- jsPDF for carousel PDF download -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- JsBarcode for high-fidelity retail/logistics barcodes -->
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<!-- QRCode.js for 2D location map & website QR codes -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script src="app.js"></script>
 <script src="poster.js"></script>
@@ -1320,6 +1587,7 @@
 <script src="infographic.js"></script>
 <script src="resizer.js"></script>
 <script src="invoice.js"></script>
+<script src="barcode.js"></script>
 
 </body>
 </html>

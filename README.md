@@ -12,14 +12,14 @@
 CreatorKit brings Canva-grade creation tools together in a lightweight, responsive, and privacy-focused web application.
 
 ```
-┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                                 CreatorKit                                                 │
-├──────────────┬──────────────────┬──────────────────┬───────────────────┬───────────────────┬───────────────┤
-│  🖼 Poster   │   📑 Carousel    │   📱 App Store   │   ✂️ BG Remover   │  📊 Infographics  │  🧾 Invoices  │
-│  Designers   │  Social Decks    │  Store Posters   │   AI Cutouts      │  Comparisons/Stats│  & Quotations │
-├──────────────┴──────────────────┴──────────────────┴───────────────────┴───────────────────┴───────────────┤
-│   🎨 Global 1-Click Brand Kit                     📐 Multi-Platform Social Auto-Resizer (ZIP)              │
-└────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                       CreatorKit                                                        │
+├──────────────┬──────────────────┬──────────────────┬───────────────────┬───────────────────┬───────────────┬────────────┤
+│  🖼 Poster   │   📑 Carousel    │   📱 App Store   │   ✂️ BG Remover   │  📊 Infographics  │  🧾 Invoices  │ 🏷️ Barcode │
+│  Designers   │  Social Decks    │  Store Posters   │   AI Cutouts      │  Comparisons/Stats│  & Quotations │  & Labels  │
+├──────────────┴──────────────────┴──────────────────┴───────────────────┴───────────────────┴───────────────┴────────────┤
+│   🎨 Global 1-Click Brand Kit                                  📐 Multi-Platform Social Auto-Resizer (ZIP)              │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -173,13 +173,42 @@ CreatorKit brings Canva-grade creation tools together in a lightweight, responsi
 
 ---
 
+### 9. 🏷️ Free Barcode & QR Code Studio
+* **Instant Detail-to-Code Conversion**:
+  * Enter any text, link, Google Maps location, store URL, or product code — it is instantly converted into a scannable **1D Barcode** or **2D QR Code** based on your selection.
+  * 1-Click Code Switcher:
+    * **▇ 1D Barcode**: Support for *CODE128* (universal letters & numbers), *EAN-13*, *UPC-A*, *CODE39*, and *EAN-8*.
+    * **⛶ 2D QR Code**: Scannable QR code for shop Google Maps links, store websites, and contact info.
+* **Clean Display Styles (Zero Text Collisions)**:
+  * 🎯 **Only Code (Pure Sticker)**: Clean standalone barcode or QR code sticker, perfect for sticking onto products, boxes, or asset tags.
+  * 🏪 **Shop & Location Label**: Clean, professional label with:
+    * Shop / Business Name (top line)
+    * Dedicated Shop Location / Aisle / Shelf / Address (subline with `📍`)
+    * High-visibility Barcode or QR Code in center
+    * Optional Item Name, Price, or Note at bottom
+* **Flexible Print Sizes & Multi-Label Sheet Printing**:
+  * **Thermal Roll Sticker Sizes**: `50 × 25 mm (2" × 1")`, `50 × 30 mm`, `58 × 40 mm POS`, `70 × 35 mm`, `100 × 50 mm Shelf`, `50 × 50 mm Square`.
+  * **A4 Sheet Grid**: 24-up sticker grid (`3 × 8` sheet) ready for standard adhesive paper.
+  * **Custom Dimensions**: Enter any custom width & height in millimeters.
+* **Export & Print**:
+  * 🖨 **Print Label**: Native thermal roll print dialog with millimeter `@page` sizing.
+  * 📑 **Print A4 Sheet**: Printable 24-up sticker grid.
+  * 🖼 **Download PNG**: High-resolution 300 DPI raster graphic.
+  * 📄 **Download PDF**: Vector-crisp PDF document.
+  * ⚡ **Download SVG**: Pure vector graphic for vinyl cutters and graphic design.
+  * 📋 **Copy to Clipboard**: 1-click clipboard image copy.
+
+---
+
 ## 🛠 Tech Stack
 
 * **Frontend**: Vanilla JavaScript (ES6+), HTML5 Canvas API
 * **Styling**: Vanilla CSS3 Design System with custom tokens, responsive breakpoints, and dark/light theme switching
 * **Libraries**:
   * [JSZip](https://stuk.github.io/jszip/) — Client-side ZIP archive creation
-  * [jsPDF](https://github.com/parallax/jsPDF) — Multi-page PDF generation for LinkedIn
+  * [jsPDF](https://github.com/parallax/jsPDF) — Multi-page PDF generation
+  * [JsBarcode](https://github.com/lindell/JsBarcode) — Client-side retail & logistics barcode generator
+  * [QRCode.js](https://davidshimjs.github.io/qrcodejs/) — 2D QR Code generator
   * [@imgly/background-removal](https://github.com/imgly/background-removal-js) — Client-side neural background removal
 
 ---

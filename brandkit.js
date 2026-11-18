@@ -208,6 +208,20 @@ function applyBrandKitToInvoice() {
   showToast('✨ Applied Brand Kit to Invoice Studio!');
 }
 
+/* 5. Apply to Barcode & Label Studio */
+function applyBrandKitToBarcode() {
+  loadBrandKit();
+  if (typeof BARCODE_STATE !== 'undefined') {
+    if (BRAND_KIT.name) BARCODE_STATE.shopName = BRAND_KIT.name;
+    if (BRAND_KIT.primaryColor) BARCODE_STATE.accentColor = BRAND_KIT.primaryColor;
+    if (BRAND_KIT.fontFamily) BARCODE_STATE.fontFamily = BRAND_KIT.fontFamily;
+    if (typeof populateBarcodeForm === 'function') populateBarcodeForm();
+    if (typeof saveBarcodeState === 'function') saveBarcodeState();
+    if (typeof renderBarcode === 'function') renderBarcode();
+  }
+  showToast('✨ Applied Brand Kit to Barcode Studio!');
+}
+
 /* Helper to check if a hex color is dark */
 function isColorDark(hex) {
   if (!hex) return true;

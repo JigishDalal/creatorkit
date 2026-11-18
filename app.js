@@ -96,6 +96,7 @@ function switchMode(mode) {
   if ($('bgRemoverMode')) $('bgRemoverMode').classList.toggle('hidden', mode !== 'bgremover');
   if ($('infographicMode')) $('infographicMode').classList.toggle('hidden', mode !== 'infographic');
   if ($('invoiceMode')) $('invoiceMode').classList.toggle('hidden', mode !== 'invoice');
+  if ($('barcodeMode')) $('barcodeMode').classList.toggle('hidden', mode !== 'barcode');
   // Download bar
   $('posterDlControls').classList.toggle('hidden', mode !== 'poster');
   $('carouselDlControls').classList.toggle('hidden', mode !== 'carousel');
@@ -103,7 +104,8 @@ function switchMode(mode) {
   if ($('bgRemoverDlControls')) $('bgRemoverDlControls').classList.toggle('hidden', mode !== 'bgremover');
   if ($('infographicDlControls')) $('infographicDlControls').classList.toggle('hidden', mode !== 'infographic');
   if ($('invoiceDlControls')) $('invoiceDlControls').classList.toggle('hidden', mode !== 'invoice');
-  $('dlBarKey').textContent = mode === 'poster' ? 'Poster' : mode === 'carousel' ? 'Carousel' : mode === 'appstore' ? 'Store Posters' : mode === 'infographic' ? 'Infographic' : mode === 'invoice' ? 'Invoice Studio' : 'BG Remover';
+  if ($('barcodeDlControls')) $('barcodeDlControls').classList.toggle('hidden', mode !== 'barcode');
+  $('dlBarKey').textContent = mode === 'poster' ? 'Poster' : mode === 'carousel' ? 'Carousel' : mode === 'appstore' ? 'Store Posters' : mode === 'infographic' ? 'Infographic' : mode === 'invoice' ? 'Invoice Studio' : mode === 'barcode' ? 'Barcode Studio' : 'BG Remover';
   
   // Trigger active mode render
   if (mode === 'poster' && typeof posterChanged === 'function') {
@@ -114,6 +116,8 @@ function switchMode(mode) {
     renderInvoice();
   } else if (mode === 'appstore' && typeof renderAppStorePreviews === 'function') {
     renderAppStorePreviews();
+  } else if (mode === 'barcode' && typeof renderBarcode === 'function') {
+    renderBarcode();
   }
   
   // Update bar label
@@ -146,6 +150,16 @@ function updateBarLabel() {
       $('dlBarVal').textContent = (INVOICE_STATE.docType || 'INVOICE') + ' ' + (INVOICE_STATE.docNumber || '') + ' • ' + (INVOICE_STATE.currency || '$') + totals.grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     } else {
       $('dlBarVal').textContent = 'Invoice & Quotation Studio';
+    }
+  } else if (APP.mode === 'barcode') {
+    if (typeof BARCODE_STATE !== 'undefined') {
+      var isOnlyCode = BARCODE_STATE.labelMode === 'only_code';
+      var title = isOnlyCode ? (BARCODE_STATE.codeType === 'qrcode' ? 'QR Code Only' : 'Barcode Only') : (BARCODE_STATE.shopName || 'Shop Label');
+      var type = BARCODE_STATE.codeType === 'qrcode' ? 'QR Code' : (BARCODE_STATE.barcodeFormat || 'CODE128');
+      var dims = typeof getActivePrintDimensions === 'function' ? getActivePrintDimensions() : { w: 50, h: 30 };
+      $('dlBarVal').textContent = title + ' • ' + type + ' • ' + dims.w + '×' + dims.h + ' mm';
+    } else {
+      $('dlBarVal').textContent = 'Barcode & QR Code Studio';
     }
   } else if (APP.mode === 'bgremover') {
     if (typeof BG_STATE !== 'undefined' && BG_STATE.processedImage) {
@@ -423,5 +437,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typeof initBrandKit === 'function') initBrandKit();
   if (typeof initInfographics === 'function') initInfographics();
   if (typeof initInvoiceStudio === 'function') initInvoiceStudio();
+  if (typeof initBarcodeStudio === 'function') initBarcodeStudio();
   switchMode('poster');
 });

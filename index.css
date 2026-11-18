@@ -143,6 +143,8 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 .tab-btn.active {
   background: var(--acc);
@@ -1289,5 +1291,92 @@ input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50%; }
     grid-column: span 2;
   }
 }
+
+/* =============================================
+   BARCODE & SHOP LABEL STUDIO STYLES
+   ============================================= */
+.barcode-canvas-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: var(--card2);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-sizing: border-box;
+  min-height: 280px;
+  overflow: auto;
+}
+
+#barcodeCanvas {
+  max-width: 100%;
+  max-height: 480px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: var(--shadow-lg);
+  background: #FFFFFF;
+  display: block;
+}
+
+.bc-type-btn,
+.bc-mode-btn {
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  color: var(--ink);
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.bc-type-btn:hover,
+.bc-mode-btn:hover {
+  background: var(--soft);
+  border-color: var(--acc);
+  transform: translateY(-1px);
+}
+
+.bc-type-btn.active,
+.bc-mode-btn.active {
+  background: var(--acc-soft);
+  border-color: var(--acc);
+  color: var(--acc);
+  box-shadow: 0 0 0 2px var(--acc-line);
+}
+
+.bc-chip {
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--mut);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.bc-chip:hover {
+  color: var(--ink);
+  background: var(--soft);
+  border-color: var(--acc);
+}
+
+.bc-chip.active {
+  background: var(--acc);
+  border-color: var(--acc);
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(124,110,250,0.3);
+}
+
+
+
 
 
