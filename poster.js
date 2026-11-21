@@ -43,7 +43,7 @@ var POSTER_TEMPLATES = [
     bgColor: '#090A16',
     topLine: 'CREATIVE CONCEPT',
     mainText: 'Embrace The Infinite Glow of Innovation',
-    bottomLine: '@creatorkit'
+    bottomLine: '@privadesign'
   },
   {
     id: 'cyber_neon',
@@ -151,7 +151,7 @@ var POSTER_TEMPLATES = [
     bgColor: '#111111',
     topLine: 'BOLD IMPACT',
     mainText: 'MAKE THEM STOP AND STARE AT YOUR POST',
-    bottomLine: '@creatorkit'
+    bottomLine: '@privadesign'
   }
 ];
 
@@ -1438,7 +1438,7 @@ function renderTemplateThumb(canvas, tpl) {
   var dummyState = {
     topLine: tpl.topLine || 'HEADER',
     mainText: tpl.mainText || 'Sample Text',
-    bottomLine: tpl.bottomLine || '@creatorkit',
+    bottomLine: tpl.bottomLine || '@privadesign',
     font: tpl.font || '',
     pos: '',
     textColor: tpl.textColor,
@@ -1491,7 +1491,7 @@ var SAMPLE_QUOTES = [
   { top: 'CREATIVE VISION', main: 'Simplicity is the ultimate sophistication.', bottom: '— Leonardo da Vinci' },
   { top: 'DAILY MOTIVATION', main: 'Think differently and push the boundaries.', bottom: '— Steve Jobs' },
   { top: 'DESIGN PRINCIPLE', main: 'Good design is as little design as possible.', bottom: '— Dieter Rams' },
-  { top: 'INNOVATION', main: 'The best way to predict the future is to create it.', bottom: '@creatorkit' }
+  { top: 'INNOVATION', main: 'The best way to predict the future is to create it.', bottom: '@privadesign' }
 ];
 var _sampleIdx = 0;
 

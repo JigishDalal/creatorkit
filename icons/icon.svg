@@ -1,28 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1E1B4B"/>
-      <stop offset="50%" stop-color="#110E28"/>
-      <stop offset="100%" stop-color="#090714"/>
+    <linearGradient id="pdGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="50%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
     </linearGradient>
-    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="sparkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="40%" stop-color="#C4B5FD"/>
-      <stop offset="100%" stop-color="#7C6EFA"/>
+      <stop offset="50%" stop-color="#EEF2FF"/>
+      <stop offset="100%" stop-color="#C7D2FE"/>
     </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="16" result="blur"/>
-      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#6366F1" flood-opacity="0.38"/>
     </filter>
   </defs>
 
-  <!-- Squircle App Icon Background -->
-  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#bgGrad)" stroke="#3730A3" stroke-width="4"/>
+  <!-- App Squircle Tile Base -->
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#pdGrad)" filter="url(#softGlow)"/>
 
-  <!-- Glowing Aura -->
-  <circle cx="256" cy="256" r="140" fill="#7C6EFA" opacity="0.22" filter="url(#glow)"/>
+  <!-- Inner Soft Glass Reflection / Rim -->
+  <rect x="36" y="36" width="440" height="440" rx="100" fill="#0C101D" fill-opacity="0.28"/>
+  <rect x="36" y="36" width="440" height="220" rx="100" fill="#FFFFFF" fill-opacity="0.08"/>
 
-  <!-- Branded ✦ Four-Point Star Sparkle -->
-  <path d="M 256 76 C 256 186 286 226 406 256 C 286 286 256 326 256 436 C 256 326 226 286 106 256 C 226 226 256 186 256 76 Z" 
-        fill="url(#starGrad)" filter="url(#glow)"/>
+  <!-- Protective Privacy Shield Contour -->
+  <path d="M 256 100 L 370 148 C 370 262 256 360 256 392 C 256 360 142 262 142 148 Z" 
+        fill="#090D18" fill-opacity="0.55" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="8" stroke-linejoin="round"/>
+
+  <!-- Brilliant 4-Point Creative Spark ✦ -->
+  <path d="M 256 156 C 256 215 278 238 338 256 C 278 274 256 297 256 356 C 256 297 234 274 174 256 C 234 238 256 215 256 156 Z" 
+        fill="url(#sparkGrad)"/>
+
+  <!-- Radiant Center Jewel -->
+  <circle cx="256" cy="256" r="16" fill="#FFFFFF"/>
 </svg>

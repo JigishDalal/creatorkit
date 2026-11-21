@@ -187,7 +187,7 @@ function downloadAllResizedZip() {
   }
 
   var zip = new JSZip();
-  var folder = zip.folder('creatorkit-social-pack');
+  var folder = zip.folder('privadesign-social-pack');
 
   RESIZER_PLATFORMS.forEach(function(plat, idx) {
     var canvas = RESIZER_STATE.renderedCanvases[plat.key];
@@ -201,7 +201,7 @@ function downloadAllResizedZip() {
 
   zip.generateAsync({ type: 'blob' }).then(function(content) {
     var link = document.createElement('a');
-    link.download = 'creatorkit-social-pack-' + Date.now() + '.zip';
+    link.download = 'privadesign-social-pack-' + Date.now() + '.zip';
     link.href = URL.createObjectURL(content);
     document.body.appendChild(link);
     link.click();

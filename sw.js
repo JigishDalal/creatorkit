@@ -1,10 +1,10 @@
 /* =============================================
-   sw.js — CreatorKit Progressive Web App Service Worker
+   sw.js — PrivaDesign Progressive Web App Service Worker
    100% Offline Capability, Instant Local Shell Caching
    ============================================= */
 'use strict';
 
-var CACHE_NAME = 'creatorkit-v1.0.1';
+var CACHE_NAME = 'privadesign-v1.0.0';
 
 var STATIC_ASSETS = [
   './',

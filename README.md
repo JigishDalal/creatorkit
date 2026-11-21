@@ -1,15 +1,15 @@
-# ✦ CreatorKit — All-in-One Creator Studio
+# ✦ PrivaDesign — 100% Private All-in-One Creator Studio
 
 > **Design stunning posters, multi-slide social carousels, official App Store & Play Store showcases, isolate image backgrounds with client-side AI, and generate professional brand-synced invoices & quotations.**  
 > 100% Free • No Watermarks • Zero Backend • Everything Runs Privately on Your Device.
 
-🌐 **Live Demo**: [https://jigishdalal.github.io/creatorkit/](https://jigishdalal.github.io/creatorkit/)
+🌐 **Live Demo**: [https://jigishdalal.github.io/privadesign/](https://jigishdalal.github.io/privadesign/)
 
 ---
 
 ## ⚡ Quick Start: How to Run the Project
 
-CreatorKit is 100% client-side with **zero build steps** and **no npm installations** required. You can run it immediately using any of the following methods:
+PrivaDesign is 100% client-side with **zero build steps** and **no npm installations** required. You can run it immediately using any of the following methods:
 
 ### Option 1: Python 3 (Fastest & Zero Setup)
 ```bash
@@ -45,17 +45,17 @@ npx http-server -p 3456
 ### 📲 Running Offline as an Installed Native App (PWA)
 1. Open **`http://localhost:3456/`** in Chrome, Edge, or Brave.
 2. Click the **`📲 Install App`** button in the header (or click the install icon in the URL bar).
-3. CreatorKit installs directly into your Applications / Dock and works **100% offline with zero internet connection**.
+3. PrivaDesign installs directly into your Applications / Dock and works **100% offline with zero internet connection**.
 
 ---
 
 ## 🌟 Features Overview
 
-CreatorKit brings Canva-grade creation tools together in a lightweight, responsive, and privacy-focused web application.
+PrivaDesign brings Canva-grade creation tools together in a lightweight, responsive, and privacy-focused web application.
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                                                CreatorKit                                                                │
+│                                                               PrivaDesign                                                                │
 ├──────────────┬──────────────────┬──────────────────┬───────────────────┬───────────────────┬───────────────┬────────────┬────────────────┤
 │  🖼 Poster   │   📑 Carousel    │   📱 App Store   │   ✂️ BG Remover   │  📊 Infographics  │  🧾 Invoices  │ 🏷️ Barcode │  🎬 Thumbnail  │
 │  Designers   │  Social Decks    │  Store Posters   │   AI Cutouts      │  Comparisons/Stats│  & Quotations │  & Labels  │  YouTube HighCTR│
@@ -321,7 +321,7 @@ CreatorKit brings Canva-grade creation tools together in a lightweight, responsi
 ---
 
 ### 9. 📲 Progressive Web App (PWA) & Offline Studio
-* **Native Desktop & Mobile Install**: Install CreatorKit as a standalone application on macOS, Windows, ChromeOS, Android, and iOS (Safari "Add to Home Screen").
+* **Native Desktop & Mobile Install**: Install PrivaDesign as a standalone application on macOS, Windows, ChromeOS, Android, and iOS (Safari "Add to Home Screen").
 * **100% Offline Capability (`sw.js`)**: Service Worker caches the local application shell, stylesheets, scripts, and fonts. Launch and create posters or thumbnails with zero internet connection (airplane, subway, travel).
 * **Deep Link Shortcuts**: Native app dock/home screen shortcuts launch straight into:
   * 🎬 YouTube Thumbnail Studio (`#thumbnail`)
@@ -350,8 +350,8 @@ CreatorKit brings Canva-grade creation tools together in a lightweight, responsi
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/JigishDalal/creatorkit.git
-   cd creatorkit
+   git clone https://github.com/JigishDalal/privadesign.git
+   cd privadesign
    ```
 
 2. **Run with any local web server**:
@@ -369,12 +369,12 @@ CreatorKit brings Canva-grade creation tools together in a lightweight, responsi
 
 ## 🚀 Deployment (GitHub Pages)
 
-CreatorKit is 100% static and requires no build pipeline.
+PrivaDesign is 100% static and requires no build pipeline.
 
 1. Push your code to the `main` branch.
 2. In your repository, go to **Settings > Pages**.
 3. Under **Build and deployment**, set **Source** to `Deploy from a branch` and select `main / (root)`.
-4. Your site is live at `https://<your-username>.github.io/creatorkit/`.
+4. Your site is live at `https://<your-username>.github.io/privadesign/`.
 
 ---
 

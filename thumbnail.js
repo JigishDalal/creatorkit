@@ -1914,10 +1914,10 @@ function renderCodeMockup(ctx, W, H, scaleFactor) {
   ctx.fillStyle = '#94A3B8';
   ctx.font = '600 ' + Math.round(9.5 * scaleFactor) + 'px Menlo, monospace';
   ctx.textAlign = 'center';
-  ctx.fillText('index.js — CreatorKit', W / 2, 14 * scaleFactor);
+  ctx.fillText('index.js — PrivaDesign', W / 2, 14 * scaleFactor);
 
   var lines = [
-    { num: '1', txt: 'import { AI, Agent } from "@creatorkit/core";', col: '#93C5FD' },
+    { num: '1', txt: 'import { AI, Agent } from "@privadesign/core";', col: '#93C5FD' },
     { num: '2', txt: '', col: '' },
     { num: '3', txt: '// Initialize High-CTR Engine', col: '#64748B' },
     { num: '4', txt: 'const agent = new Agent({', col: '#F472B6' },
@@ -2631,7 +2631,7 @@ function updateFeedSimulator() {
 
   // Update text metadata across views
   var title = THUMBNAIL_STATE.videoTitle || THUMBNAIL_STATE.headline || 'Untitled Video';
-  var channel = THUMBNAIL_STATE.channelName || 'CreatorKit Channel';
+  var channel = THUMBNAIL_STATE.channelName || 'PrivaDesign Channel';
   var time = THUMBNAIL_STATE.timestampText || '14:01';
 
   ['ytFeedTitle', 'ytMobileTitle', 'ytSearchTitle', 'ytSidebarTitle'].forEach(function(id) {

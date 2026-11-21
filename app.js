@@ -463,7 +463,7 @@ function initPwaEngine() {
             if (!installingWorker) return;
             installingWorker.onstatechange = function() {
               if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                showToast('🚀 CreatorKit updated! Reload to use the latest version.');
+                showToast('🚀 PrivaDesign updated! Reload to use the latest version.');
               }
             };
           };
@@ -489,7 +489,7 @@ function initPwaEngine() {
     deferredPwaPrompt = null;
     var installBtn = $('pwaInstallBtn');
     if (installBtn) installBtn.style.display = 'none';
-    showToast('✓ CreatorKit successfully installed as an app!');
+    showToast('✓ PrivaDesign successfully installed as an app!');
   });
 
   // 4. Online / Offline status notification
@@ -507,14 +507,14 @@ function triggerPwaInstall() {
     if (isIOS) {
       showToast('📱 On iOS: Tap Share (□↑) and select "Add to Home Screen"');
     } else {
-      showToast('To install: click your browser menu (⋮) → "Install CreatorKit"');
+      showToast('To install: click your browser menu (⋮) → "Install PrivaDesign"');
     }
     return;
   }
   deferredPwaPrompt.prompt();
   deferredPwaPrompt.userChoice.then(function(choice) {
     if (choice.outcome === 'accepted') {
-      showToast('✓ Installing CreatorKit...');
+      showToast('✓ Installing PrivaDesign...');
     }
     deferredPwaPrompt = null;
     var installBtn = $('pwaInstallBtn');

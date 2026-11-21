@@ -632,10 +632,10 @@ function drawInfographicFooter(ctx, W, H, theme) {
   ctx.font = '500 ' + Math.round(W * 0.019) + 'px "Inter Tight", sans-serif';
   ctx.textAlign = 'left';
   ctx.textBaseline = 'middle';
-  ctx.fillText('✦ ' + (INFOGRAPHIC_STATE.author || '@creatorkit'), padX, fy);
+  ctx.fillText('✦ ' + (INFOGRAPHIC_STATE.author || '@privadesign'), padX, fy);
 
   ctx.textAlign = 'right';
-  ctx.fillText('creatorkit.studio', W - padX, fy);
+  ctx.fillText('privadesign.studio', W - padX, fy);
   ctx.restore();
 }
 

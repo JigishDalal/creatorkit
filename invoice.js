@@ -962,7 +962,7 @@ function drawInvoiceContent(ctx, W, H, accent, font, sym, totals, pad, logoImg) 
   ctx.textAlign = 'left';
   ctx.font = '500 14px ' + font + ', sans-serif';
   ctx.fillStyle = '#94A3B8';
-  ctx.fillText('Generated with CreatorKit Studio • Professional Client-Side Billing', pad, footY);
+  ctx.fillText('Generated with PrivaDesign Studio • Professional Client-Side Billing', pad, footY);
   
   ctx.textAlign = 'right';
   ctx.fillText('Page 1 of 1', W - pad, footY);

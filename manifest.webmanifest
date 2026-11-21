@@ -1,14 +1,14 @@
 {
   "id": "/",
-  "name": "CreatorKit — Graphic & Content Studio",
-  "short_name": "CreatorKit",
-  "description": "100% client-side, privacy-first graphic design suite for YouTube thumbnails, posters, carousel decks, invoices, barcodes, and mockups.",
+  "name": "PrivaDesign — Private Graphic & Content Studio",
+  "short_name": "PrivaDesign",
+  "description": "100% private, client-side creative suite for YouTube thumbnails, posters, carousel decks, invoices, barcodes, and mockups. Zero backend, zero tracking.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0F0F13",
-  "theme_color": "#7C6EFA",
+  "theme_color": "#6366F1",
   "categories": [
     "graphics",
     "photo",
