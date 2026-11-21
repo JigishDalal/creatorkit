@@ -7,7 +7,7 @@
   <meta name="description" content="Make stunning posters and carousel slides in seconds. Free, no watermark, nothing leaves your device.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter+Tight:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Press+Start+2P&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter+Tight:wght@400;500;600;700;800;900&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Montserrat:wght@700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Press+Start+2P&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -40,6 +40,9 @@
       </button>
       <button class="tab-btn" id="tabBarcode" role="tab" aria-selected="false" data-mode="barcode" onclick="switchMode('barcode')">
         <span class="tab-icon">🏷️</span> Barcode & Label
+      </button>
+      <button class="tab-btn" id="tabThumbnail" role="tab" aria-selected="false" data-mode="thumbnail" onclick="switchMode('thumbnail')">
+        <span class="tab-icon">🎬</span> Thumbnail
       </button>
     </nav>
     <div style="display:flex; align-items:center; gap:8px">
@@ -1379,6 +1382,878 @@
   </div>
 </main>
 
+<!-- ====== YOUTUBE THUMBNAIL STUDIO ====== -->
+<main id="thumbnailMode" class="mode-panel wrap hidden" role="tabpanel" aria-labelledby="tabThumbnail">
+  <div class="cols">
+
+    <!-- LEFT: Controls -->
+    <div class="controls-col">
+
+      <!-- Preset Templates Card -->
+      <div class="card">
+        <div class="card-hd">
+          High-CTR Templates
+          <button class="btn btn-ghost btn-sm" onclick="applyBrandKitToThumbnail()" title="Sync your Brand Kit identity">✨ Sync Brand Kit</button>
+        </div>
+        <div class="card-bd">
+          <label>1-Click Viral Presets</label>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:8px; margin-top:6px">
+            <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('productivity')">
+              <span style="font-size:18px">⏰</span>
+              <div>
+                <div style="font-weight:700; font-size:13px">Productivity</div>
+                <div style="font-size:10px; opacity:0.8">Calendar & Timeblock</div>
+              </div>
+            </button>
+            <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('secondbrain')">
+              <span style="font-size:18px">🧠</span>
+              <div>
+                <div style="font-weight:700; font-size:13px">Second Brain</div>
+                <div style="font-size:10px; opacity:0.8">Notion & ChatGPT</div>
+              </div>
+            </button>
+            <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('marketnews')">
+              <span style="font-size:18px">📰</span>
+              <div>
+                <div style="font-weight:700; font-size:13px">BIZ News</div>
+                <div style="font-size:10px; opacity:0.8">Channel Badge & Stat</div>
+              </div>
+            </button>
+            <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('techkeynote')">
+              <span style="font-size:18px">⚡</span>
+              <div>
+                <div style="font-weight:700; font-size:13px">Tech Keynote</div>
+                <div style="font-size:10px; opacity:0.8">PC Mag & Slide</div>
+              </div>
+            </button>
+            <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('storydrama')">
+              <span style="font-size:18px">🎙️</span>
+              <div>
+                <div style="font-weight:700; font-size:13px">Story & Drama</div>
+                <div style="font-size:10px; opacity:0.8">Cinematic Studio</div>
+              </div>
+            </button>
+            <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('claudecode')">
+              <span style="font-size:18px">💻</span>
+              <div>
+                <div style="font-weight:700; font-size:13px">Claude Code FREE</div>
+                <div style="font-size:10px; opacity:0.8">Ishan Sharma / AI Hook</div>
+              </div>
+            </button>
+            <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('mrbeast')">
+              <span style="font-size:18px">💥</span>
+              <div>
+                <div style="font-weight:700; font-size:13px">MrBeast Viral</div>
+                <div style="font-size:10px; opacity:0.8">Heavy Contrast & Tilt</div>
+              </div>
+            </button>
+            <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('financewealth')">
+              <span style="font-size:18px">💰</span>
+              <div>
+                <div style="font-weight:700; font-size:13px">Finance $10K</div>
+                <div style="font-size:10px; opacity:0.8">Bebas & Profit Chart</div>
+              </div>
+            </button>
+            <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('techreview')">
+              <span style="font-size:18px">🍎</span>
+              <div>
+                <div style="font-weight:700; font-size:13px">Tech Review</div>
+                <div style="font-size:10px; opacity:0.8">MKBHD Style Warning</div>
+              </div>
+            </button>
+            <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('codingapp')">
+              <span style="font-size:18px">🚀</span>
+              <div>
+                <div style="font-weight:700; font-size:13px">SaaS in 24h</div>
+                <div style="font-size:10px; opacity:0.8">Code Screen & Cyan</div>
+              </div>
+            </button>
+            <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('gamingchallenge')">
+              <span style="font-size:18px">🎮</span>
+              <div>
+                <div style="font-weight:700; font-size:13px">Gaming 100 vs 1</div>
+                <div style="font-size:10px; opacity:0.8">Anton & Neon Purple</div>
+              </div>
+            </button>
+            <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('podcastinterview')">
+              <span style="font-size:18px">🎙️</span>
+              <div>
+                <div style="font-weight:700; font-size:13px">Deep Podcast</div>
+                <div style="font-size:10px; opacity:0.8">Playfair Serif & Gold</div>
+              </div>
+            </button>
+          </div>
+
+          <!-- 1-Click A/B Test Variations Button & Drawer -->
+          <div style="margin-top:10px; padding-top:10px; border-top:1px solid var(--line)">
+            <button type="button" class="btn btn-primary" onclick="generateThumbnailVariations()" style="width:100%; justify-content:center; gap:6px">
+              <span>⚡</span> Generate 4 Variations for A/B Testing
+            </button>
+          </div>
+
+          <div id="ytVariationsWrap" style="display:none; margin-top:12px">
+            <div style="font-size:12px; font-weight:700; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center">
+              <span>🔀 4 Instant A/B Variations</span>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="$('ytVariationsWrap').style.display='none'" style="font-size:10px; padding:1px 6px">✕ Close</button>
+            </div>
+            <div id="ytVariationsList" style="display:grid; grid-template-columns:1fr 1fr; gap:8px"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Video Keyframe Extractor Card (Wayin.ai Video-First Workflow) -->
+      <div class="card">
+        <div class="card-hd" style="display:flex; justify-content:space-between; align-items:center">
+          <span>🎥 Video Keyframe Extractor <span class="badge" style="font-size:10px; background:var(--accent); color:#fff; border-radius:999px; padding:2px 7px; margin-left:4px">Wayin.ai Style</span></span>
+          <button type="button" class="btn btn-ghost btn-sm" onclick="loadSampleVideoClip()" title="Load test clip without uploading">✨ Try Sample Clip</button>
+        </div>
+        <div class="card-bd">
+          <!-- Dropzone / Input -->
+          <div id="ytVideoDropzone" class="dropzone" style="padding:16px; text-align:center; border:2px dashed var(--line); border-radius:var(--radius-sm); cursor:pointer" onclick="$('ytVideoFileInput').click()">
+            <input type="file" id="ytVideoFileInput" accept="video/mp4,video/webm,video/ogg,video/quicktime" style="display:none" onchange="onThumbnailVideoSelected(this)">
+            <div style="font-size:24px; margin-bottom:6px">📹</div>
+            <div style="font-size:13px; font-weight:700">Drop Video File or Click to Browse</div>
+            <div style="font-size:11px; color:var(--mut); margin-top:2px">Supports MP4, MOV, WebM • 100% In-Browser & Private</div>
+          </div>
+
+          <!-- Video Player & Scrubber (Initially hidden until video loaded) -->
+          <div id="ytVideoControlsWrap" style="display:none; margin-top:12px">
+            <!-- Hidden video element -->
+            <video id="ytVideoElem" preload="auto" playsinline style="display:none"></video>
+
+            <!-- Video Frame Live Scrub Preview Canvas -->
+            <div style="position:relative; width:100%; aspect-ratio:16/9; background:#000; border-radius:6px; overflow:hidden; border:1px solid var(--line); margin-bottom:8px">
+              <canvas id="ytVideoFramePreview" style="width:100%; height:100%; object-fit:contain; display:block"></canvas>
+              <div id="ytVideoTimeBadge" style="position:absolute; bottom:6px; right:8px; background:rgba(0,0,0,0.85); color:#fff; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px">00:00:00 / 00:00:00</div>
+            </div>
+
+            <!-- Timeline Scrubber Range -->
+            <div style="display:flex; flex-direction:column; gap:4px; margin-bottom:8px">
+              <input type="range" id="ytVideoSeeker" min="0" max="100" value="0" step="0.05" oninput="onThumbnailVideoSeek(this.value)" style="width:100%">
+            </div>
+
+            <!-- Precision Nudge Buttons -->
+            <div style="display:flex; justify-content:center; gap:6px; margin-bottom:12px; flex-wrap:wrap">
+              <button type="button" class="btn btn-ghost btn-sm" onclick="stepThumbnailVideo(-1)">-1s</button>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="stepThumbnailVideo(-0.1)" title="Fine-tune open eyes / expressions">-0.1s</button>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="stepThumbnailVideo(0.1)" title="Fine-tune open eyes / expressions">+0.1s</button>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="stepThumbnailVideo(1)">+1s</button>
+            </div>
+
+            <!-- Frame Actions (3 Main Pipelines) -->
+            <div style="display:grid; grid-template-columns:1fr; gap:6px">
+              <button type="button" class="btn btn-primary btn-sm" onclick="captureVideoAsBackdrop()" style="justify-content:center">
+                📸 Use Frame as Backdrop Background
+              </button>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="captureVideoAsCutout()" style="justify-content:center; border:1px solid var(--line)" id="ytAiCutoutBtn">
+                ✂️ Extract Face / Subject with AI Cutout
+              </button>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="captureVideoAsGraphic()" style="justify-content:center; border:1px solid var(--line)">
+                🃏 Use Frame as Proof / Mockup Card
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typography & Headline Card -->
+      <div class="card">
+        <div class="card-hd">Headline & Typography</div>
+        <div class="card-bd">
+          <div class="field">
+            <label for="ytHeadline">Main Headline <span class="label-norm">— Keep short & punchy</span></label>
+            <textarea id="ytHeadline" placeholder="e.g. DON'T DO THIS!" style="min-height:64px" oninput="onThumbnailFieldChanged()">DON'T DO THIS!</textarea>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="ytHighlight">Highlight Word <span class="label-norm">— Eye-catcher</span></label>
+              <input type="text" id="ytHighlight" value="DON'T" placeholder="Word to highlight" oninput="onThumbnailFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="ytSubtitle">Subtitle / Tag <span class="label-norm">— optional</span></label>
+              <input type="text" id="ytSubtitle" value="Worst Mistake Ever" placeholder="Secondary line" oninput="onThumbnailFieldChanged()">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="ytBadge">Badge Text <span class="label-norm">— Top attention grabber</span></label>
+            <input type="text" id="ytBadge" value="⚠️ WARNING" placeholder="e.g. ⚠️ WARNING or ⚡ NEW" oninput="onThumbnailFieldChanged()">
+          </div>
+
+          <div class="field" style="background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:6px; padding:10px">
+            <label for="ytShowTeaser" style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:700; font-size:12px; margin-bottom:6px">
+              <input type="checkbox" id="ytShowTeaser" onchange="onThumbnailFieldChanged()">
+              <span>💬 Teaser Subtitle Bar <span class="label-norm">— Ishan Sharma style viral hook</span></span>
+            </label>
+            <input type="text" id="ytTeaserText" value="without using the internet. Hi everyone, I'm Ishan Sharma and today I'll show you" placeholder="Teaser spoken hook line..." oninput="onThumbnailFieldChanged()" style="font-size:11.5px">
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="ytFont">Font Family</label>
+              <select id="ytFont" onchange="onThumbnailFieldChanged()">
+                <option value="Bebas Neue">Bebas Neue (Viral YouTube King)</option>
+                <option value="Anton" selected>Anton (Heavy YouTube)</option>
+                <option value="Montserrat">Montserrat (Ultra Clean Bold)</option>
+                <option value="Archivo Black">Archivo Black (Super Punchy)</option>
+                <option value="Bricolage Grotesque">Bricolage Grotesque (Modern Graphic)</option>
+                <option value="Space Grotesk">Space Grotesk (Tech Monospace)</option>
+                <option value="Playfair Display">Playfair Display (Cinematic Serif)</option>
+                <option value="Inter Tight">Inter Tight (Clean Sans)</option>
+                <option value="Caveat">Caveat (Handwritten Viral Note)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="ytTilt">Slant / Dynamic Tilt <span class="label-norm" id="ytTiltVal">-3°</span></label>
+              <input type="range" id="ytTilt" min="-12" max="12" value="-3" step="1" oninput="onThumbnailFieldChanged()">
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="ytTextAlign">Alignment</label>
+              <select id="ytTextAlign" onchange="onThumbnailFieldChanged()">
+                <option value="left" selected>Left Align</option>
+                <option value="center">Centered</option>
+                <option value="right">Right Align</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="ytLineHeight">Line Spacing <span class="label-norm" id="ytLineHeightVal">1.05</span></label>
+              <input type="range" id="ytLineHeight" min="0.80" max="1.35" value="1.05" step="0.05" oninput="onThumbnailFieldChanged()">
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:2px; margin-bottom:8px">
+            <label for="ytAllCaps" style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:700; font-size:12px">
+              <input type="checkbox" id="ytAllCaps" onchange="onThumbnailFieldChanged()">
+              <span>🔤 ALL CAPS Mode <span class="label-norm">— Viral High Impact</span></span>
+            </label>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="ytFontSize">Font Size <span class="label-norm" id="ytFontSizeVal">90px</span></label>
+              <input type="range" id="ytFontSize" min="48" max="130" value="90" step="2" oninput="onThumbnailFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="ytStrokeWidth">Outline Stroke <span class="label-norm" id="ytStrokeWidthVal">14px</span></label>
+              <input type="range" id="ytStrokeWidth" min="0" max="24" value="14" step="2" oninput="onThumbnailFieldChanged()">
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="ytTextColor">Text Color</label>
+              <div class="color-wrap">
+                <input type="color" id="ytTextColor" value="#FFFFFF" onchange="onThumbnailFieldChanged()" oninput="onThumbnailFieldChanged()">
+                <span class="color-label">White</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="ytHighlightColor">Highlight Color</label>
+              <div class="color-wrap">
+                <input type="color" id="ytHighlightColor" value="#FFE600" onchange="onThumbnailFieldChanged()" oninput="onThumbnailFieldChanged()">
+                <span class="color-label">Neon Yellow</span>
+              </div>
+            </div>
+          </div>
+          <div class="field" style="margin-top:8px">
+            <label for="ytStrokeColor">Outline Stroke Color</label>
+            <div class="color-wrap">
+              <input type="color" id="ytStrokeColor" value="#000000" onchange="onThumbnailFieldChanged()" oninput="onThumbnailFieldChanged()">
+              <span class="color-label">Black</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creator Cutout & Image Card -->
+      <div class="card">
+        <div class="card-hd">Creator Cutout & Reaction Face</div>
+        <div class="card-bd">
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">
+            <input type="file" id="ytCutoutInput" accept="image/*" style="display:none" onchange="onThumbnailCutoutSelected(this)">
+            <button class="btn btn-ghost btn-sm" onclick="$('ytCutoutInput').click()">📁 Upload Cutout Photo</button>
+            <button class="btn btn-ghost btn-sm" onclick="sendBgCutoutToThumbnail()">✂️ Import from BG Remover</button>
+            <button class="btn btn-ghost btn-sm" id="ytRemoveCutoutBtn" onclick="removeThumbnailCutout()" style="color:var(--red); display:none">✕ Remove</button>
+          </div>
+
+          <div class="row2" style="margin-top:12px">
+            <div class="field">
+              <label for="ytCutoutPos">Position</label>
+              <select id="ytCutoutPos" onchange="onThumbnailFieldChanged()">
+                <option value="right" selected>Right Side (Classic)</option>
+                <option value="left">Left Side</option>
+                <option value="center">Centered</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="ytCutoutGlowWidth">Cutout Glow / Outline <span class="label-norm" id="ytCutoutGlowWidthVal">12px</span></label>
+              <input type="range" id="ytCutoutGlowWidth" min="0" max="30" value="12" step="2" oninput="onThumbnailFieldChanged()">
+            </div>
+          </div>
+
+          <div class="field" style="background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:6px; padding:10px; margin-top:8px">
+            <label for="ytDualToneRim" style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:700; font-size:12px; margin-bottom:8px">
+              <input type="checkbox" id="ytDualToneRim" checked onchange="onThumbnailFieldChanged()">
+              <span>⚡ Directional Dual-Tone Rim Light <span class="label-norm">(Hollywood Pro Lighting)</span></span>
+            </label>
+            <div class="row2">
+              <div class="field">
+                <label for="ytRimKeyColor">Key Rim Light</label>
+                <div class="color-wrap">
+                  <input type="color" id="ytRimKeyColor" value="#F59E0B" onchange="onThumbnailFieldChanged()" oninput="onThumbnailFieldChanged()">
+                  <span class="color-label">Warm Key</span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="ytRimFillColor">Opposing Fill Rim</label>
+                <div class="color-wrap">
+                  <input type="color" id="ytRimFillColor" value="#38BDF8" onchange="onThumbnailFieldChanged()" oninput="onThumbnailFieldChanged()">
+                  <span class="color-label">Cool Fill</span>
+                </div>
+              </div>
+            </div>
+            <div class="field" style="margin-top:6px">
+              <label for="ytRimIntensity">Rim Light Width <span class="label-norm" id="ytRimIntensityVal">10px</span></label>
+              <input type="range" id="ytRimIntensity" min="0" max="24" value="10" step="1" oninput="onThumbnailFieldChanged()">
+            </div>
+          </div>
+
+          <div class="row2" style="margin-top:8px">
+            <div class="field">
+              <label for="ytCutoutGlowColor">Single Glow Fallback</label>
+              <div class="color-wrap">
+                <input type="color" id="ytCutoutGlowColor" value="#FFFFFF" onchange="onThumbnailFieldChanged()" oninput="onThumbnailFieldChanged()">
+                <span class="color-label">Glow Color</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="ytFacialClarity">Facial Clarity & Eyes <span class="label-norm" id="ytFacialClarityVal">25%</span></label>
+              <input type="range" id="ytFacialClarity" min="0" max="100" value="25" step="5" oninput="onThumbnailFieldChanged()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary Graphic & Screenshot Card (Calendar, Notion, Code, Chart, Custom UI) -->
+      <div class="card">
+        <div class="card-hd" style="display:flex; justify-content:space-between; align-items:center">
+          <span>Graphic & Screenshot Card</span>
+          <label style="margin:0; display:flex; align-items:center; gap:6px; cursor:pointer">
+            <input type="checkbox" id="ytGraphicEnabled" checked onchange="onThumbnailFieldChanged()" style="width:16px; height:16px; cursor:pointer">
+            <span style="font-size:12px; font-weight:700; text-transform:none">Enabled</span>
+          </label>
+        </div>
+        <div class="card-bd">
+          <div class="row2">
+            <div class="field">
+              <label for="ytGraphicType">Preset Graphic</label>
+              <select id="ytGraphicType" onchange="onThumbnailFieldChanged()">
+                <option value="calendar" selected>📅 Google Calendar (Time Blocking)</option>
+                <option value="notion">🧠 Notion Workspace (Second Brain)</option>
+                <option value="code">💻 VS Code Editor (Syntax Lines)</option>
+                <option value="chart">📈 Stock Trading Chart (All-Time High)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="ytGraphicFrame">Frame Style</label>
+              <select id="ytGraphicFrame" onchange="onThumbnailFieldChanged()">
+                <option value="card" selected>🃏 Floating Card with Shadow</option>
+                <option value="laptop">💻 Laptop Screen Mockup</option>
+                <option value="clean">🖼 Flat Borderless Inset</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:8px">
+            <input type="file" id="ytGraphicInput" accept="image/*" style="display:none" onchange="onThumbnailGraphicSelected(this)">
+            <button class="btn btn-ghost btn-sm" onclick="$('ytGraphicInput').click()">📁 Upload Custom Screenshot / UI</button>
+            <button class="btn btn-ghost btn-sm" id="ytRemoveGraphicBtn" onclick="removeThumbnailGraphic()" style="color:var(--red); display:none">✕ Reset to Preset</button>
+          </div>
+
+          <div class="row2" style="margin-top:12px">
+            <div class="field">
+              <label for="ytGraphicPos">Card Placement</label>
+              <select id="ytGraphicPos" onchange="onThumbnailFieldChanged()">
+                <option value="right" selected>Right Side (Opposite Creator)</option>
+                <option value="left">Left Side</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="ytGraphicTilt">3D Tilt Angle <span class="label-norm" id="ytGraphicTiltVal">3°</span></label>
+              <input type="range" id="ytGraphicTilt" min="-15" max="15" value="3" step="1" oninput="onThumbnailFieldChanged()">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="ytGraphicScale">Card Size / Scale <span class="label-norm" id="ytGraphicScaleVal">95%</span></label>
+            <input type="range" id="ytGraphicScale" min="60" max="120" value="95" step="5" oninput="onThumbnailFieldChanged()">
+          </div>
+
+          <div class="field" style="margin-top:8px">
+            <label for="ytGraphicPerspective" style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:700; font-size:12px">
+              <input type="checkbox" id="ytGraphicPerspective" checked onchange="onThumbnailFieldChanged()">
+              <span>✨ 3D Glass Specular Sheen & True Contact Shadows</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Channel Logo Badge & Tool Badges Card -->
+      <div class="card">
+        <div class="card-hd">Channel Badge & Tool Badges</div>
+        <div class="card-bd">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px">
+            <label style="margin:0; display:flex; align-items:center; gap:6px; cursor:pointer">
+              <input type="checkbox" id="ytShowChannelBadge" onchange="onThumbnailFieldChanged()" style="width:16px; height:16px; cursor:pointer">
+              <span style="font-size:12px; font-weight:700; text-transform:none">Show Channel Corner Badge</span>
+            </label>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="ytChannelBadgeText">Badge Text <span class="label-norm">(e.g. BIZ ADDA / PC MAG)</span></label>
+              <input type="text" id="ytChannelBadgeText" value="BIZ ADDA" placeholder="Channel initials or logo text" oninput="onThumbnailFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="ytChannelBadgeShape">Badge Shape</label>
+              <select id="ytChannelBadgeShape" onchange="onThumbnailFieldChanged()">
+                <option value="pill">Pill Rounded</option>
+                <option value="circle">Circle (News Style)</option>
+                <option value="square">Square (Magazine Style)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="ytChannelBadgeColor">Badge Color</label>
+            <div class="color-wrap">
+              <input type="color" id="ytChannelBadgeColor" value="#0284C7" onchange="onThumbnailFieldChanged()" oninput="onThumbnailFieldChanged()">
+              <span class="color-label">Badge Color</span>
+            </div>
+          </div>
+
+          <div style="padding-top:12px; border-top:1px solid var(--line); margin-top:12px">
+            <label style="margin:0 0 8px 0; display:flex; align-items:center; gap:6px; cursor:pointer">
+              <input type="checkbox" id="ytShowToolBadges" onchange="onThumbnailFieldChanged()" style="width:16px; height:16px; cursor:pointer">
+              <span style="font-size:12px; font-weight:700; text-transform:none">Show Tool & Tech Badges (Notion + ChatGPT)</span>
+            </label>
+            <div class="field" style="margin-top:6px">
+              <input type="text" id="ytToolBadgesText" value="with Notion + ChatGPT" placeholder="e.g. with Notion + ChatGPT" oninput="onThumbnailFieldChanged()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Background & Atmosphere Card -->
+      <div class="card">
+        <div class="card-hd">Background & Atmosphere</div>
+        <div class="card-bd">
+          <div class="field">
+            <label for="ytBgGradient">Atmosphere Palette</label>
+            <select id="ytBgGradient" onchange="onThumbnailFieldChanged()">
+              <option value="radial-cyber" selected>🌌 Radial Cyber Obsidian</option>
+              <option value="light-clean">☀️ Clean White (Productivity)</option>
+              <option value="soft-studio">💻 Soft Studio Studio Grey (Notion)</option>
+              <option value="blue-studio">🔵 Vibrant Blue Studio (News)</option>
+              <option value="radial-stage">🔴 Red Keynote Stage (Supercut)</option>
+              <option value="linear-tech">💻 Deep Tech Gradient</option>
+              <option value="linear-finance">📈 Emerald Profit Glow</option>
+              <option value="radial-podcast">🎙️ Studio Spotlight Amber</option>
+              <option value="linear-gaming">🎮 Neon Violet Gaming</option>
+              <option value="linear-cinema">🎬 Dark Cinematic Film</option>
+            </select>
+          </div>
+
+          <div class="field" style="margin-top:8px">
+            <label for="ytAtmosphereEffect">Cinematic Depth Layer FX</label>
+            <select id="ytAtmosphereEffect" onchange="onThumbnailFieldChanged()">
+              <option value="none">Flat (No Depth FX)</option>
+              <option value="fog" selected>🌫️ Cinematic Depth Fog (Atmospheric Separation)</option>
+              <option value="sparks">⚡ Cyber Ember Sparks (Ascending Particles)</option>
+              <option value="dust">✨ Golden Studio Bokeh Dust (Warm Light Flares)</option>
+              <option value="bokeh">🔮 Soft Lens Blur Orbs (Foreground Camera Bokeh)</option>
+            </select>
+          </div>
+
+          <div class="field" style="background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:6px; padding:10px; margin-top:8px">
+            <label for="ytShowHalo" style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:700; font-size:12px; margin-bottom:8px">
+              <input type="checkbox" id="ytShowHalo" checked onchange="onThumbnailFieldChanged()">
+              <span>💡 Head Halo / Backdrop Spotlight <span class="label-norm">(Separates hair from background)</span></span>
+            </label>
+            <div class="row2">
+              <div class="field">
+                <label for="ytHaloColor">Spotlight Color</label>
+                <div class="color-wrap">
+                  <input type="color" id="ytHaloColor" value="#38BDF8" onchange="onThumbnailFieldChanged()" oninput="onThumbnailFieldChanged()">
+                  <span class="color-label">Halo Light</span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="ytHaloRadius">Halo Spread <span class="label-norm" id="ytHaloRadiusVal">65px</span></label>
+                <input type="range" id="ytHaloRadius" min="30" max="120" value="65" step="5" oninput="onThumbnailFieldChanged()">
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:8px; align-items:center; margin-top:12px; margin-bottom:12px">
+            <input type="file" id="ytBgImgInput" accept="image/*" style="display:none" onchange="onThumbnailBgSelected(this)">
+            <button class="btn btn-ghost btn-sm" onclick="$('ytBgImgInput').click()">🖼 Upload Custom Background Photo</button>
+            <button class="btn btn-ghost btn-sm" id="ytRemoveBgBtn" onclick="removeThumbnailBg()" style="color:var(--red); display:none">✕ Reset to Gradient</button>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="ytBgOverlay">Dark Vignette Overlay <span class="label-norm" id="ytBgOverlayVal">20%</span></label>
+              <input type="range" id="ytBgOverlay" min="0" max="80" value="20" step="5" oninput="onThumbnailFieldChanged()">
+            </div>
+            <div class="field">
+              <label for="ytResSelect">Resolution</label>
+              <select id="ytResSelect" onchange="onThumbnailFieldChanged()">
+                <option value="hd" selected>1280 × 720 px (Official YouTube HD)</option>
+                <option value="fhd">1920 × 1080 px (Full HD 1080p)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; padding-top:10px; border-top:1px solid var(--line); margin-top:8px; flex-wrap:wrap; gap:8px">
+            <label style="margin:0; display:flex; align-items:center; gap:8px; cursor:pointer">
+              <input type="checkbox" id="ytShowTimestamp" checked onchange="onThumbnailFieldChanged()" style="width:16px; height:16px; cursor:pointer">
+              <span style="font-size:12px; font-weight:600; text-transform:none">Show Timestamp Badge</span>
+            </label>
+            <input type="text" id="ytTimestampText" value="14:01" placeholder="14:01" style="width:75px; text-align:center; padding:3px 6px; font-size:12px; font-weight:700" oninput="onThumbnailFieldChanged()">
+          </div>
+
+          <!-- Feed Simulator Metadata -->
+          <div style="padding-top:12px; border-top:1px solid var(--line); margin-top:12px">
+            <div style="font-size:11px; font-weight:700; color:var(--mut); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px">Feed Simulator Meta</div>
+            <div class="field">
+              <label for="ytVideoTitleInput">YouTube Video Title</label>
+              <input type="text" id="ytVideoTitleInput" value="I'm Begging You to Manage Your Time (Before It's Too Late)" placeholder="Title shown below thumbnail" oninput="onThumbnailFieldChanged()">
+            </div>
+            <div class="field" style="margin-top:8px">
+              <label for="ytChannelNameInput">Channel Name</label>
+              <input type="text" id="ytChannelNameInput" value="Sarthak Virmani" placeholder="Your channel name" oninput="onThumbnailFieldChanged()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /controls-col -->
+
+    <!-- RIGHT: Live Preview & Canvas -->
+    <div class="preview-col">
+      <div class="card" style="margin-bottom:0">
+        <div class="card-hd" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px">
+          <div style="display:flex; align-items:center; gap:8px">
+            <span>🎬</span>
+            <span style="font-weight:700">Live Preview</span>
+            <div class="seg-ctrl" style="margin-left:8px">
+              <button type="button" class="seg-btn active" id="ytViewCanvasBtn" onclick="setThumbnailView('canvas')">🎬 HD Canvas</button>
+              <button type="button" class="seg-btn" id="ytViewFeedBtn" onclick="setThumbnailView('feed')">🌐 YouTube Feed Simulator</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-bd" style="padding:16px; background:var(--soft); display:flex; flex-direction:column; align-items:center; gap:16px">
+          
+          <!-- Canvas Wrapper -->
+          <div class="thumbnail-canvas-wrap" id="thumbnailCanvasWrap">
+            <canvas id="thumbnailCanvas"></canvas>
+          </div>
+
+          <!-- YouTube Multi-View Feed Simulator (Matches Wayin.ai Placement Testing) -->
+          <div id="ytFeedSimulatorWrap" style="display:none; width:100%">
+            <div class="yt-feed-sim" id="ytFeedSimContainer">
+              <!-- Simulator Nav / View Switcher -->
+              <div class="yt-feed-sim-bar" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1)">
+                <div class="seg-ctrl" style="font-size:11px">
+                  <button type="button" class="seg-btn active" id="ytSimViewHomeBtn" onclick="setSimSubView('home')">🏠 Home Feed</button>
+                  <button type="button" class="seg-btn" id="ytSimViewMobileBtn" onclick="setSimSubView('mobile')">📱 Mobile</button>
+                  <button type="button" class="seg-btn" id="ytSimViewSearchBtn" onclick="setSimSubView('search')">🔍 Search</button>
+                  <button type="button" class="seg-btn" id="ytSimViewSidebarBtn" onclick="setSimSubView('sidebar')">▶️ Watch Next</button>
+                </div>
+                <button type="button" class="btn btn-ghost btn-sm" id="ytThemeToggleBtn" onclick="toggleYtSimTheme()" style="font-size:11px; padding:3px 8px">
+                  <span id="ytThemeIcon">☀️</span> Light / Dark
+                </button>
+              </div>
+
+              <!-- VIEW 1: Desktop Home Feed Grid (3 across) -->
+              <div id="ytSimViewHome">
+                <!-- Top bar -->
+                <div class="yt-feed-header">
+                  <div style="display:flex; align-items:center; gap:6px">
+                    <span style="color:#FF0000; font-size:18px">▶</span>
+                    <span style="font-weight:800; font-size:14px; letter-spacing:-0.5px">YouTube</span>
+                  </div>
+                  <div class="yt-feed-search">
+                    <span style="opacity:0.6; font-size:11px">Search</span>
+                    <span>🔍</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:8px">
+                    <span class="yt-pill-btn">+ Create</span>
+                    <span style="position:relative">🔔<span class="yt-notif-dot">9+</span></span>
+                    <div class="yt-avatar" style="background:#0284C7">J</div>
+                  </div>
+                </div>
+
+                <!-- Topic filter chips -->
+                <div class="yt-chips-row">
+                  <span class="yt-chip active">All</span>
+                  <span class="yt-chip">Gaming</span>
+                  <span class="yt-chip">AI</span>
+                  <span class="yt-chip">Live</span>
+                  <span class="yt-chip">Podcasts</span>
+                  <span class="yt-chip">Tech</span>
+                  <span class="yt-chip">Stock markets</span>
+                  <span class="yt-chip">Mixes</span>
+                </div>
+
+                <!-- 3-Column Video Cards Grid -->
+                <div class="yt-feed-grid">
+                  <!-- Competitor 1 -->
+                  <div class="yt-card">
+                    <div class="yt-thumb-box">
+                      <div class="yt-mock-thumb" style="background:linear-gradient(135deg, #0F172A, #1E293B); position:relative; overflow:hidden">
+                        <!-- Mini Calendar Graphic Simulation -->
+                        <div style="position:absolute; right:6px; top:6px; bottom:6px; width:52%; background:#FFF; border-radius:4px; padding:3px; opacity:0.92; display:flex; flex-direction:column; gap:2px">
+                          <div style="height:4px; background:#E2E8F0; border-radius:2px"></div>
+                          <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1px; flex:1">
+                            <div style="background:#93C5FD; border-radius:1px"></div>
+                            <div style="background:#38BDF8; border-radius:1px"></div>
+                            <div style="background:#C4B5FD; border-radius:1px"></div>
+                            <div style="background:#86EFAC; border-radius:1px"></div>
+                          </div>
+                        </div>
+                        <div style="position:absolute; bottom:6px; left:8px; font-weight:900; font-size:12px; color:#FFF; z-index:2; text-shadow:0 1px 3px rgba(0,0,0,0.8)">everything done by <span style="background:#38BDF8; color:#000; padding:1px 4px; border-radius:3px">10AM</span></div>
+                        <div class="yt-mock-time">14:01</div>
+                      </div>
+                    </div>
+                    <div class="yt-card-meta">
+                      <div class="yt-avatar" style="background:#475569">S</div>
+                      <div style="flex:1">
+                        <div class="yt-card-title">I'm Begging You to Manage Your Time (Before It's Too Late)</div>
+                        <div class="yt-card-sub">Sarthak Virmani ✓ • 289k views • 4 days ago</div>
+                      </div>
+                      <div style="font-size:16px; opacity:0.7">⋮</div>
+                    </div>
+                  </div>
+
+                  <!-- YOUR THUMBNAIL (LIVE CENTER) -->
+                  <div class="yt-card yt-active-card">
+                    <div class="yt-thumb-box">
+                      <img id="ytFeedThumbImg" class="yt-real-thumb" alt="Your YouTube Thumbnail">
+                      <div class="yt-thumb-controls">
+                        <button type="button" class="yt-thumb-ctrl-btn" title="Mute">🔇</button>
+                        <button type="button" class="yt-thumb-ctrl-btn" title="Subtitles CC" style="font-weight:900; font-size:9px">cc</button>
+                      </div>
+                      <div class="yt-mock-time" id="ytFeedBadgeTime">10:40</div>
+                      <div class="yt-your-badge">⭐ YOUR THUMBNAIL IN FEED</div>
+                    </div>
+                    <div class="yt-card-meta">
+                      <div class="yt-avatar" style="background:#7C6EFA">Y</div>
+                      <div style="flex:1">
+                        <div class="yt-card-title" id="ytFeedTitle" style="font-weight:700">everything done by 10AM</div>
+                        <div class="yt-card-sub" id="ytFeedChannel">CreatorKit Studios ✓ • 165k views • 2 days ago</div>
+                      </div>
+                      <div style="font-size:16px; opacity:0.7">⋮</div>
+                    </div>
+                  </div>
+
+                  <!-- Competitor 3 -->
+                  <div class="yt-card">
+                    <div class="yt-thumb-box">
+                      <div class="yt-mock-thumb" style="background:linear-gradient(135deg, #0369A1, #0F172A)">
+                        <div style="position:absolute; top:6px; left:6px; background:#0284C7; border:1px solid #FFF; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:7px; font-weight:900">BIZ</div>
+                        <div style="position:absolute; bottom:6px; left:8px; font-weight:800; font-size:11px; color:#FDE047">नया रिकॉर्ड हाई बनाएगा निफ्टी</div>
+                        <div class="yt-mock-time">10:43</div>
+                      </div>
+                    </div>
+                    <div class="yt-card-meta">
+                      <div class="yt-avatar" style="background:#0284C7">B</div>
+                      <div style="flex:1">
+                        <div class="yt-card-title">BIZ Adda : नया रिकॉर्ड हाई बनाएगा निफ्टी, Goldman Sachs का दावा</div>
+                        <div class="yt-card-sub">BIZ Tak ✓ • 6.2k views • 2 hr ago</div>
+                      </div>
+                      <div style="font-size:16px; opacity:0.7">⋮</div>
+                    </div>
+                  </div>
+
+                  <!-- Competitor 4 -->
+                  <div class="yt-card">
+                    <div class="yt-thumb-box">
+                      <div class="yt-mock-thumb" style="background:linear-gradient(135deg, #2A1508, #0B0502)">
+                        <div style="position:absolute; top:12px; left:8px; font-style:italic; font-family:serif; font-size:13px; color:#FFF">Listen to this Story</div>
+                        <div style="position:absolute; bottom:8px; left:8px; font-weight:900; font-size:10px; color:#FFF">Atleast <span style="background:#FBBF24; color:#000; padding:1px 3px; border-radius:2px">ONCE</span> in Life!</div>
+                        <div class="yt-mock-time">8:38</div>
+                      </div>
+                    </div>
+                    <div class="yt-card-meta">
+                      <div class="yt-avatar" style="background:#B45309">L</div>
+                      <div style="flex:1">
+                        <div class="yt-card-title">Ped Aur Bachcha | Full Story | Main Tenu Phir Milangi</div>
+                        <div class="yt-card-sub">Laksh maheshwari ✓ • 180k views • 2 wk ago</div>
+                      </div>
+                      <div style="font-size:16px; opacity:0.7">⋮</div>
+                    </div>
+                  </div>
+
+                  <!-- Competitor 5 -->
+                  <div class="yt-card">
+                    <div class="yt-thumb-box">
+                      <div class="yt-mock-thumb" style="background:linear-gradient(135deg, #7F1D1D, #0B0B0F)">
+                        <div style="position:absolute; top:6px; left:6px; background:#DC2626; padding:1px 4px; font-weight:900; font-size:8px; color:#FFF">PC MAG</div>
+                        <div style="position:absolute; bottom:6px; left:8px; font-weight:900; font-size:11px; color:#FFF">Ignite Keynote in 14 Min</div>
+                        <div class="yt-mock-time">13:47</div>
+                      </div>
+                    </div>
+                    <div class="yt-card-meta">
+                      <div class="yt-avatar" style="background:#DC2626">P</div>
+                      <div style="flex:1">
+                        <div class="yt-card-title">Microsoft's Ignite Keynote Address in 14 Minutes</div>
+                        <div class="yt-card-sub">PCMag ✓ • 4.3k views • 20 hr ago</div>
+                      </div>
+                      <div style="font-size:16px; opacity:0.7">⋮</div>
+                    </div>
+                  </div>
+
+                  <!-- Competitor 6 -->
+                  <div class="yt-card">
+                    <div class="yt-thumb-box">
+                    <div class="yt-mock-thumb" style="background:linear-gradient(135deg, #F8FAFC, #E2E8F0); color:#0F172A">
+                      <div style="position:absolute; top:10px; left:8px; font-weight:900; font-size:13px; color:#0F172A">Second Brain <span style="font-size:10px; color:#D97706">with N+✦</span></div>
+                      <div class="yt-mock-time" style="background:#000; color:#FFF">10:05</div>
+                    </div>
+                  </div>
+                  <div class="yt-card-meta">
+                    <div class="yt-avatar" style="background:#9333EA">T</div>
+                    <div style="flex:1">
+                      <div class="yt-card-title">I Built a FREE AI Second Brain That Organizes Everything!</div>
+                      <div class="yt-card-sub">The Tech Girl ✓ • 38k views • 8 days ago</div>
+                    </div>
+                    <div style="font-size:16px; opacity:0.7">⋮</div>
+                  </div>
+                </div>
+
+              </div><!-- /yt-feed-grid -->
+            </div><!-- /ytSimViewHome -->
+
+            <!-- VIEW 2: Mobile App Feed View -->
+            <div id="ytSimViewMobile" style="display:none; max-width:380px; margin:0 auto">
+              <!-- Mobile App Header -->
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 4px; border-bottom:1px solid rgba(255,255,255,0.1); margin-bottom:12px">
+                <div style="display:flex; align-items:center; gap:4px">
+                  <span style="color:#FF0000; font-size:16px">▶</span>
+                  <span style="font-weight:800; font-size:13px">YouTube</span>
+                </div>
+                <div style="display:flex; gap:12px; font-size:14px">
+                  <span>📺</span>
+                  <span>🔔</span>
+                  <span>🔍</span>
+                  <div class="yt-avatar" style="background:#0284C7; width:20px; height:20px; font-size:10px">J</div>
+                </div>
+              </div>
+
+              <!-- Active Mobile Card (Your Thumbnail) -->
+              <div class="yt-card yt-active-card" style="margin-bottom:16px">
+                <div class="yt-thumb-box" style="border-radius:0">
+                  <img id="ytMobileThumbImg" class="yt-real-thumb" alt="Your YouTube Thumbnail">
+                  <div class="yt-mock-time" id="ytMobileBadgeTime">14:01</div>
+                  <div class="yt-your-badge">⭐ MOBILE FEED PREVIEW</div>
+                </div>
+                <div class="yt-card-meta" style="padding:8px 4px">
+                  <div class="yt-avatar" style="background:#7C6EFA; width:34px; height:34px; font-size:13px">Y</div>
+                  <div style="flex:1">
+                    <div class="yt-card-title" id="ytMobileTitle" style="font-size:13px; font-weight:700">everything done by 10AM</div>
+                    <div class="yt-card-sub" id="ytMobileChannel" style="font-size:11px">CreatorKit Studios ✓ • 165k views • 2 days ago</div>
+                  </div>
+                  <div style="font-size:16px; opacity:0.7">⋮</div>
+                </div>
+              </div>
+            </div><!-- /ytSimViewMobile -->
+
+            <!-- VIEW 3: YouTube Search Results View (Horizontal Wide Card) -->
+            <div id="ytSimViewSearch" style="display:none">
+              <div style="font-size:12px; font-weight:700; margin-bottom:12px; color:var(--mut)">SEARCH: "manage your time / productivity system"</div>
+              <!-- Active Horizontal Search Card -->
+              <div class="yt-card yt-active-card" style="display:flex; flex-direction:row; gap:16px; align-items:flex-start; margin-bottom:14px">
+                <div class="yt-thumb-box" style="width:280px; flex-shrink:0">
+                  <img id="ytSearchThumbImg" class="yt-real-thumb" alt="Your YouTube Thumbnail">
+                  <div class="yt-mock-time" id="ytSearchBadgeTime">14:01</div>
+                  <div class="yt-your-badge">⭐ SEARCH RESULT</div>
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column; gap:6px">
+                  <div class="yt-card-title" id="ytSearchTitle" style="font-size:14px; font-weight:700">everything done by 10AM</div>
+                  <div class="yt-card-sub" style="font-size:11px">165k views • 2 days ago</div>
+                  <div style="display:flex; align-items:center; gap:6px; margin-top:2px">
+                    <div class="yt-avatar" style="background:#7C6EFA; width:22px; height:22px; font-size:10px">Y</div>
+                    <span id="ytSearchChannel" style="font-size:11.5px; font-weight:600">CreatorKit Studios ✓</span>
+                  </div>
+                  <div style="font-size:11px; color:#999; line-height:1.4; margin-top:4px">
+                    Stop wasting hours on endless to-do lists. In this video, I break down the exact time-blocking blueprint to get everything done by 10AM...
+                  </div>
+                </div>
+              </div>
+            </div><!-- /ytSimViewSearch -->
+
+            <!-- VIEW 4: Watch Next / Sidebar View -->
+            <div id="ytSimViewSidebar" style="display:none">
+              <div style="font-size:12px; font-weight:700; margin-bottom:12px; color:var(--mut)">WATCH NEXT (SIDEBAR RECOMMENDATIONS)</div>
+              <!-- Active Compact Sidebar Card -->
+              <div class="yt-card yt-active-card" style="display:flex; flex-direction:row; gap:10px; align-items:flex-start; margin-bottom:10px; padding:6px">
+                <div class="yt-thumb-box" style="width:168px; flex-shrink:0; aspect-ratio:16/9">
+                  <img id="ytSidebarThumbImg" class="yt-real-thumb" alt="Your YouTube Thumbnail">
+                  <div class="yt-mock-time" id="ytSidebarBadgeTime" style="font-size:9px; padding:1px 3px">14:01</div>
+                  <div class="yt-your-badge" style="font-size:7px; padding:1px 4px">⭐ UP NEXT</div>
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column; gap:2px">
+                  <div class="yt-card-title" id="ytSidebarTitle" style="font-size:12px; font-weight:700; line-height:1.3">everything done by 10AM</div>
+                  <div class="yt-card-sub" id="ytSidebarChannel" style="font-size:10px">CreatorKit Studios ✓</div>
+                  <div class="yt-card-sub" style="font-size:10px">165k views • 2 days ago</div>
+                </div>
+              </div>
+
+              <!-- Competitor in Sidebar -->
+              <div class="yt-card" style="display:flex; flex-direction:row; gap:10px; align-items:flex-start; padding:6px">
+                <div class="yt-thumb-box" style="width:168px; flex-shrink:0; aspect-ratio:16/9">
+                  <div class="yt-mock-thumb" style="background:linear-gradient(135deg, #0369A1, #0F172A)">
+                    <div style="font-size:9px; font-weight:800; color:#FDE047; padding:4px">BIZ ADDA</div>
+                    <div class="yt-mock-time" style="font-size:9px; padding:1px 3px">10:43</div>
+                  </div>
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column; gap:2px">
+                  <div class="yt-card-title" style="font-size:12px; font-weight:600; line-height:1.3">BIZ Adda : नया रिकॉर्ड हाई बनाएगा निफ्टी</div>
+                  <div class="yt-card-sub" style="font-size:10px">BIZ Tak ✓</div>
+                  <div class="yt-card-sub" style="font-size:10px">6.2k views • 2 hr ago</div>
+                </div>
+              </div>
+            </div><!-- /ytSimViewSidebar -->
+
+          </div><!-- /yt-feed-sim -->
+        </div><!-- /ytFeedSimulatorWrap -->
+
+          <!-- Quick Action Buttons Below Preview -->
+          <div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; width:100%">
+            <button class="btn btn-primary" onclick="downloadThumbnailPNG()">↓ Download PNG (HD)</button>
+            <button class="btn btn-ghost" onclick="downloadThumbnailJPEG()">🖼 Download JPEG (&lt;2MB YouTube Limit)</button>
+            <button class="btn btn-ghost" onclick="copyThumbnailToClipboard()">📋 Copy to Clipboard</button>
+          </div>
+
+          <div style="font-size:11.5px; color:var(--mut); text-align:center; max-width:480px; line-height:1.5">
+            💡 <b>High-CTR Guaranteed</b>: Optimized for maximum contrast on mobile and desktop YouTube feeds. The JPEG export is compressed to stay well under YouTube's strict 2MB limit.
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /preview-col -->
+
+  </div>
+</main>
+
 <!-- ====== STICKY DOWNLOAD BAR ====== -->
 <div class="dl-bar" id="dlBar">
   <div class="dl-bar-inner">
@@ -1429,6 +2304,12 @@
       <button class="btn btn-ghost" onclick="printBarcodeA4Sheet()">📑 Print Sheet</button>
       <button class="btn btn-ghost" onclick="copyBarcodeToClipboard()">📋 Copy</button>
       <button class="btn btn-primary" onclick="downloadBarcodePNG()">↓ Download PNG</button>
+    </div>
+    <!-- Thumbnail bar controls (hidden initially) -->
+    <div id="thumbnailDlControls" class="hidden" style="display:flex; align-items:center; gap:8px">
+      <button class="btn btn-ghost" onclick="copyThumbnailToClipboard()">📋 Copy</button>
+      <button class="btn btn-ghost" onclick="downloadThumbnailJPEG()">🖼 JPEG (&lt;2MB)</button>
+      <button class="btn btn-primary" onclick="downloadThumbnailPNG()">↓ Download PNG</button>
     </div>
 
   </div>
@@ -1588,6 +2469,7 @@
 <script src="resizer.js"></script>
 <script src="invoice.js"></script>
 <script src="barcode.js"></script>
+<script src="thumbnail.js"></script>
 
 </body>
 </html>

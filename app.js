@@ -97,6 +97,7 @@ function switchMode(mode) {
   if ($('infographicMode')) $('infographicMode').classList.toggle('hidden', mode !== 'infographic');
   if ($('invoiceMode')) $('invoiceMode').classList.toggle('hidden', mode !== 'invoice');
   if ($('barcodeMode')) $('barcodeMode').classList.toggle('hidden', mode !== 'barcode');
+  if ($('thumbnailMode')) $('thumbnailMode').classList.toggle('hidden', mode !== 'thumbnail');
   // Download bar
   $('posterDlControls').classList.toggle('hidden', mode !== 'poster');
   $('carouselDlControls').classList.toggle('hidden', mode !== 'carousel');
@@ -105,7 +106,8 @@ function switchMode(mode) {
   if ($('infographicDlControls')) $('infographicDlControls').classList.toggle('hidden', mode !== 'infographic');
   if ($('invoiceDlControls')) $('invoiceDlControls').classList.toggle('hidden', mode !== 'invoice');
   if ($('barcodeDlControls')) $('barcodeDlControls').classList.toggle('hidden', mode !== 'barcode');
-  $('dlBarKey').textContent = mode === 'poster' ? 'Poster' : mode === 'carousel' ? 'Carousel' : mode === 'appstore' ? 'Store Posters' : mode === 'infographic' ? 'Infographic' : mode === 'invoice' ? 'Invoice Studio' : mode === 'barcode' ? 'Barcode Studio' : 'BG Remover';
+  if ($('thumbnailDlControls')) $('thumbnailDlControls').classList.toggle('hidden', mode !== 'thumbnail');
+  $('dlBarKey').textContent = mode === 'poster' ? 'Poster' : mode === 'carousel' ? 'Carousel' : mode === 'appstore' ? 'Store Posters' : mode === 'infographic' ? 'Infographic' : mode === 'invoice' ? 'Invoice Studio' : mode === 'barcode' ? 'Barcode Studio' : mode === 'thumbnail' ? 'YouTube Thumbnail' : 'BG Remover';
   
   // Trigger active mode render
   if (mode === 'poster' && typeof posterChanged === 'function') {
@@ -118,6 +120,8 @@ function switchMode(mode) {
     renderAppStorePreviews();
   } else if (mode === 'barcode' && typeof renderBarcode === 'function') {
     renderBarcode();
+  } else if (mode === 'thumbnail' && typeof renderThumbnail === 'function') {
+    renderThumbnail();
   }
   
   // Update bar label
@@ -160,6 +164,12 @@ function updateBarLabel() {
       $('dlBarVal').textContent = title + ' • ' + type + ' • ' + dims.w + '×' + dims.h + ' mm';
     } else {
       $('dlBarVal').textContent = 'Barcode & QR Code Studio';
+    }
+  } else if (APP.mode === 'thumbnail') {
+    if (typeof THUMBNAIL_STATE !== 'undefined') {
+      $('dlBarVal').textContent = (THUMBNAIL_STATE.headline || 'YouTube Thumbnail') + ' • 1280×720 (16:9)';
+    } else {
+      $('dlBarVal').textContent = 'YouTube Thumbnail Studio';
     }
   } else if (APP.mode === 'bgremover') {
     if (typeof BG_STATE !== 'undefined' && BG_STATE.processedImage) {
@@ -438,5 +448,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typeof initInfographics === 'function') initInfographics();
   if (typeof initInvoiceStudio === 'function') initInvoiceStudio();
   if (typeof initBarcodeStudio === 'function') initBarcodeStudio();
+  if (typeof initThumbnailStudio === 'function') initThumbnailStudio();
   switchMode('poster');
 });

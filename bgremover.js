@@ -116,6 +116,7 @@ function handleBgFileInput(file) {
       $('bgDownloadBtn').disabled = true;
       $('bgUseInPosterBtn').disabled = true;
       $('bgUseInCarouselBtn').disabled = true;
+      if ($('bgUseInThumbBtn')) $('bgUseInThumbBtn').disabled = true;
       if ($('bgToggleOrigBtn')) $('bgToggleOrigBtn').style.display = 'none';
       renderBgCanvas();
       showToast('Image loaded. Click "Remove Background" to process!');
@@ -141,6 +142,7 @@ function loadBgImageFromUrl(url, name) {
     $('bgDownloadBtn').disabled = true;
     $('bgUseInPosterBtn').disabled = true;
     $('bgUseInCarouselBtn').disabled = true;
+    if ($('bgUseInThumbBtn')) $('bgUseInThumbBtn').disabled = true;
     if ($('bgToggleOrigBtn')) $('bgToggleOrigBtn').style.display = 'none';
     renderBgCanvas();
     showToast('Sample loaded. Click "Remove Background" to process!');
@@ -196,6 +198,7 @@ async function processBgRemoval() {
         $('bgDownloadBtn').disabled = false;
         $('bgUseInPosterBtn').disabled = false;
         $('bgUseInCarouselBtn').disabled = false;
+        if ($('bgUseInThumbBtn')) $('bgUseInThumbBtn').disabled = false;
         if ($('bgToggleOrigBtn')) $('bgToggleOrigBtn').style.display = 'inline-flex';
         renderBgCanvas();
         showToast('✨ Background removed cleanly!');
@@ -221,6 +224,7 @@ async function processBgRemoval() {
       $('bgDownloadBtn').disabled = false;
       $('bgUseInPosterBtn').disabled = false;
       $('bgUseInCarouselBtn').disabled = false;
+      if ($('bgUseInThumbBtn')) $('bgUseInThumbBtn').disabled = false;
       if ($('bgToggleOrigBtn')) $('bgToggleOrigBtn').style.display = 'inline-flex';
       renderBgCanvas();
       showToast('✨ Background removed cleanly!');

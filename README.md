@@ -12,14 +12,14 @@
 CreatorKit brings Canva-grade creation tools together in a lightweight, responsive, and privacy-focused web application.
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                                       CreatorKit                                                        │
-├──────────────┬──────────────────┬──────────────────┬───────────────────┬───────────────────┬───────────────┬────────────┤
-│  🖼 Poster   │   📑 Carousel    │   📱 App Store   │   ✂️ BG Remover   │  📊 Infographics  │  🧾 Invoices  │ 🏷️ Barcode │
-│  Designers   │  Social Decks    │  Store Posters   │   AI Cutouts      │  Comparisons/Stats│  & Quotations │  & Labels  │
-├──────────────┴──────────────────┴──────────────────┴───────────────────┴───────────────────┴───────────────┴────────────┤
-│   🎨 Global 1-Click Brand Kit                                  📐 Multi-Platform Social Auto-Resizer (ZIP)              │
-└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                CreatorKit                                                                │
+├──────────────┬──────────────────┬──────────────────┬───────────────────┬───────────────────┬───────────────┬────────────┬────────────────┤
+│  🖼 Poster   │   📑 Carousel    │   📱 App Store   │   ✂️ BG Remover   │  📊 Infographics  │  🧾 Invoices  │ 🏷️ Barcode │  🎬 Thumbnail  │
+│  Designers   │  Social Decks    │  Store Posters   │   AI Cutouts      │  Comparisons/Stats│  & Quotations │  & Labels  │  YouTube HighCTR│
+├──────────────┴──────────────────┴──────────────────┴───────────────────┴───────────────────┴───────────────┴────────────┴────────────────┤
+│   🎨 Global 1-Click Brand Kit                                           📐 Multi-Platform Social Auto-Resizer (ZIP)                       │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -197,6 +197,84 @@ CreatorKit brings Canva-grade creation tools together in a lightweight, responsi
   * 📄 **Download PDF**: Vector-crisp PDF document.
   * ⚡ **Download SVG**: Pure vector graphic for vinyl cutters and graphic design.
   * 📋 **Copy to Clipboard**: 1-click clipboard image copy.
+
+---
+
+### 8. 🎬 High-CTR YouTube Thumbnail Studio
+* **Official YouTube Standards**:
+  * Default 16:9 HD (`1280 × 720 px`) and Full HD (`1920 × 1080 px`).
+  * Live YouTube timestamp overlay badge preview (`14:01`, `10:05`, `14:28`) so text is never hidden by the YouTube player UI.
+* **12 High-CTR Real-Feed Presets (Ready-to-Edit Samples)**:
+  * ⏰ **Productivity Calendar** (Inspired by Sarthak Virmani: Creator left + Google Calendar schedule mockup right + "everything done by 10AM").
+  * 🧠 **Second Brain with Notion** (Inspired by The Tech Girl: Creator right pointing + Laptop/Notion workspace mockup left + Notion/ChatGPT tool badges).
+  * 📰 **BIZ News & Market** (Inspired by BIZ Tak: Channel corner logo badge top-left + bilingual bold text left + creator right).
+  * ⚡ **Tech Keynote & Supercut** (Inspired by PCMag: Red corner badge + speaker right + screen slide mockup left).
+  * 🎙️ **Story & Cinematic Drama** (Inspired by Laksh Maheshwari: Mixed cursive/serif accents + dramatic amber studio lighting).
+  * 💻 **Claude Code FREE** (Inspired by Ishan Sharma: Tech creator center + Teaser Subtitle bar + neon green highlight).
+  * 💥 **MrBeast Viral Impact** (Heavy stroke outline, bold tilt, and neon yellow highlight).
+  * 💰 **Finance & Passive Income** (Bebas Neue font, emerald green profit chart, and "$10,000" highlight pill).
+  * 🍎 **Tech Review & MKBHD Style** (Clean Montserrat bold, vibrant red warning pill, and honest review badge).
+  * 🚀 **Coding & SaaS in 24h** (Space Grotesk monospace, code editor screen, and cyan neon glow).
+  * 🎮 **Gaming 100 vs 1 Challenge** (Anton condensed font, neon purple glow, and $50k challenge badge).
+  * 🎙️ **Deep Podcast Interview** (Playfair Display serif, amber studio lighting, and longform episode badge).
+* **High-Performance Typography Engine**:
+  * **9 Viral YouTube Fonts**: Bebas Neue, Anton, Montserrat, Archivo Black, Space Grotesk, Bricolage Grotesque, Playfair Display, Inter Tight, Caveat.
+  * **Asynchronous Font Pre-warming**: Synchronized with `document.fonts.ready` so canvas automatically re-renders with sharp web fonts as soon as they load.
+  * **Smooth Round Stroke Joins**: `ctx.lineJoin = 'round'` and `ctx.lineCap = 'round'` eliminates spiky miter artifacts on thick outlines.
+  * **Dynamic Bounding Box**: Text automatically calculates safe margins avoiding collision with creator cutouts and proof mockup cards.
+  * **🔤 ALL CAPS Toggle**: 1-click uppercase conversion for maximum click-through rate.
+  * **Line Height Slider**: Tighten (0.80) or loosen (1.35) vertical line spacing for compact poster stacking.
+  * **Text Alignment**: Left, Center, or Right alignment.
+  * **Exact Token Highlighting**: Smart punctuation-safe word isolation with vertically centered pill background.
+  * **💬 Viral Teaser Subtitles Bar**: High-contrast CC spoken teaser bar for video auto-play hooks.
+* **Secondary Graphic / Screenshot Mockup Card**:
+  * Upload custom screenshot or app screen (e.g. calendar, code, dashboard, slides, trading chart).
+  * Built-in procedural mockups: **Google Calendar (Time Blocking)**, **Notion Workspace (Second Brain)**, **VS Code Editor**, and **Stock Trading Chart**.
+  * Frame styles: Floating Card with drop-shadow, Laptop Screen Mockup, or Flat Borderless Inset.
+  * 3D tilt slider (-15° to +15°) and card scale slider (60% to 120%).
+* **Channel Corner Logo Badge & Tool Badges**:
+  * Channel logo badge in top-left or top-right (e.g. `BIZ ADDA`, `PC MAG`, or custom channel initials) in Circle, Square, or Pill format.
+  * Tool/app sticker badges (e.g. `with [Notion] + [ChatGPT]`).
+* **🎥 Video Keyframe Extractor (Wayin.ai-Style Video-First Workflow)**:
+  * **Zero Server Uploads**: Drop any raw `.mp4`, `.mov`, or `.webm` video file — processed 100% locally in-browser with zero wait times.
+  * **Interactive Video Timeline Scrubber**: Scrub through footage at full HD resolution with precision frame-nudging buttons (`-1s`, `-0.1s`, `+0.1s`, `+1s`) to catch the exact open-eye reaction or peak moment.
+  * **3 Instant Capture Pipelines**:
+    * 📸 *Use Frame as Backdrop*: Captures full-resolution background photo.
+    * ✂️ *Extract Face / Person (AI Cutout)*: Runs in-browser neural background removal on the frame, automatically adding glowing neon outline borders.
+    * 🃏 *Use Frame as Proof Card*: Places video still inside the floating secondary mockup card.
+  * **Built-in Sample Clip Generator**: Instant offline test clip to test frame scrubbing and extraction without uploading a large video file.
+* **⚡ 1-Click A/B Test Variations Generator (Promptless)**:
+  * Generates 4 instant high-CTR design directions in 1 click (Viral Impact, Split Proof, Cinematic Drama, Reaction Zoom).
+  * 1-click apply to canvas for rapid testing.
+* **🌐 Real-Time YouTube Multi-View Simulator**:
+  * **4 Real-World Display Modes**:
+    * 🏠 *Home Feed Grid*: Standard desktop 3-card grid alongside competing trending videos.
+    * 📱 *Mobile App Feed*: Smartphone vertical feed with edge-to-edge thumbnail and channel metadata.
+    * 🔍 *Search Results View*: Horizontal desktop card layout with video description snippet.
+    * ▶️ *Watch Next / Sidebar*: Compact 168×94px sidebar recommendation alongside video player.
+  * **☀️ Light / 🌙 Dark Mode Switcher**: Verify thumbnail contrast against both YouTube theme modes before publishing.
+* **Punchy Typography Engine**:
+  * **Word Highlighter**: Pick any specific word in the headline to pop with neon contrast.
+  * **Heavy Outline Stroke & Drop Shadow Glow**: Deep contrasting borders for feed legibility on mobile.
+  * **Dynamic Tilt Angle Slider**: -15° to +15° rotational slant.
+  * **Attention Badge**: Pill badge with icons (e.g. `⏰ TIME SYSTEM`, `⚠️ WARNING`, `⚡ SUPERCUT`).
+* **Creator Cutout, Dual-Tone Rim & Facial Clarity Engine**:
+  * Upload custom creator cutout portrait or reaction photo.
+  * **1-Click Transfer from BG Remover**: Seamless cutout pipeline directly into Thumbnail Studio.
+  * **Directional Dual-Tone Rim Lighting (3-Point Studio Simulation)**: Replaces flat neon strokes with directional warm key (`#F59E0B`) + cool fill (`#38BDF8`) light passes for true 3D separation from backdrops.
+  * **Facial Clarity & Pixar Eye Pop**: Contrast and brightness boost with dual micro-specular catchlights injected into pupils for high-CTR expression sparkle.
+  * **Customizable Cutout Glow**: Configurable glow radius (0–30px) and neon outline color.
+  * **Smart Positioning**: Left, right, or center placement.
+* **Studio-Grade Shaders & Atmospheric Depth**:
+  * **Head Halo / Backdrop Spotlight**: Auto-positioned radial spotlight behind subject's head preventing dark hair from blending into obsidian/podcast backdrops.
+  * **Atmospheric Depth FX**: Midground volumetric fog mist & out-of-focus optical bokeh discs; foreground floating ember sparks and dust specks.
+  * **3D Proof Card Specular Sheen**: Double-pass contact & ambient occlusion shadows with diagonal specular glass reflection sheen across mockup cards.
+  * 10 Curated Palettes (Clean White, Soft Studio Grey, Blue Studio, Red Keynote, Radial Cyber, Linear Tech, etc.).
+  * Upload custom backdrop image with dark vignette overlay slider (0–80%).
+* **YouTube-Optimized Exports**:
+  * 🖼 **Download PNG (HD)**: Uncompressed master image.
+  * ⚡ **Download JPEG (<2MB)**: Optimized to strictly guarantee compliance with YouTube's 2MB thumbnail upload limit.
+  * 📋 **Copy to Clipboard**: Instant pasting into messaging apps or social posts.
 
 ---
 
