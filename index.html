@@ -109,7 +109,45 @@
       </div>
       <span class="brand-name">PrivaDesign</span>
     </div>
-  </header>
+    <nav class="mode-tabs" role="tablist" aria-label="App mode">
+      <button class="tab-btn active" id="tabPoster" role="tab" aria-selected="true" data-mode="poster" onclick="switchMode('poster')">
+        <span class="tab-icon">🖼</span> Poster
+      </button>
+      <button class="tab-btn" id="tabCarousel" role="tab" aria-selected="false" data-mode="carousel" onclick="switchMode('carousel')">
+        <span class="tab-icon">📑</span> Carousel
+      </button>
+      <button class="tab-btn" id="tabAppStore" role="tab" aria-selected="false" data-mode="appstore" onclick="switchMode('appstore')">
+        <span class="tab-icon">📱</span> App Store
+      </button>
+      <button class="tab-btn" id="tabBgRemover" role="tab" aria-selected="false" data-mode="bgremover" onclick="switchMode('bgremover')">
+        <span class="tab-icon">✂️</span> BG Remover
+      </button>
+      <button class="tab-btn" id="tabInfographic" role="tab" aria-selected="false" data-mode="infographic" onclick="switchMode('infographic')">
+        <span class="tab-icon">📊</span> Infographic
+      </button>
+      <button class="tab-btn" id="tabInvoice" role="tab" aria-selected="false" data-mode="invoice" onclick="switchMode('invoice')">
+        <span class="tab-icon">🧾</span> Invoice
+      </button>
+      <button class="tab-btn" id="tabBarcode" role="tab" aria-selected="false" data-mode="barcode" onclick="switchMode('barcode')">
+        <span class="tab-icon">🏷️</span> Barcode & Label
+      </button>
+      <button class="tab-btn" id="tabThumbnail" role="tab" aria-selected="false" data-mode="thumbnail" onclick="switchMode('thumbnail')">
+        <span class="tab-icon">🎬</span> Thumbnail
+      </button>
+    </nav>
+    <div style="display:flex; align-items:center; gap:8px">
+      <button class="btn btn-ghost btn-sm" id="pwaInstallBtn" onclick="triggerPwaInstall()" title="Install PrivaDesign as a Native App" style="display:none; font-size:12.5px; padding:6px 12px; border-color:var(--acc); color:var(--acc); font-weight:700">
+        <span>📲</span> <span class="install-btn-label">Install App</span>
+      </button>
+      <button class="btn btn-ghost btn-sm" id="brandKitHeaderBtn" onclick="openBrandKitModal()" title="Open Brand Kit" style="font-size:12.5px; padding:6px 12px">
+        <span>🎨</span> <span class="brand-kit-btn-label">Brand Kit</span>
+      </button>
+      <button class="theme-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" title="Toggle theme">
+        <span id="themeIcon">☀️</span>
+      </button>
+    </div>
+  </div>
+</header>
 
   <!-- ====== POSTER MODE ====== -->
   <main id="posterMode" class="mode-panel wrap" role="tabpanel" aria-labelledby="tabPoster">
