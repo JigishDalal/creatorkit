@@ -43,10 +43,10 @@ var THUMBNAIL_PRESETS = {
     toolBadgesText: 'with Google Calendar',
     timestampText: '14:01',
     videoTitle: "I'm Begging You to Manage Your Time (Before It's Too Late)",
-    channelName: 'Sarthak Virmani'
+    channelName: 'Focus Studio'
   },
   secondbrain: {
-    name: 'Second Brain with Notion',
+    name: 'Second Brain & Knowledge',
     headline: 'Second Brain',
     highlightWord: 'Brain',
     subtitle: 'with Notion + ChatGPT',
@@ -81,10 +81,10 @@ var THUMBNAIL_PRESETS = {
     toolBadgesText: 'with Notion + ChatGPT',
     timestampText: '10:05',
     videoTitle: 'I Built a FREE AI Second Brain That Organizes Everything for Me!',
-    channelName: 'The Tech Girl'
+    channelName: 'Productive Mind'
   },
   marketnews: {
-    name: 'BIZ News & Market',
+    name: 'Market & Financial News',
     headline: 'नया रिकॉर्ड हाई बनाएगा निफ्टी',
     highlightWord: 'रिकॉर्ड',
     subtitle: 'Goldman Sachs का बड़ा दावा!',
@@ -112,18 +112,18 @@ var THUMBNAIL_PRESETS = {
     graphicScale: 90,
     graphicTilt: 0,
     showChannelBadge: true,
-    channelBadgeText: 'BIZ ADDA',
+    channelBadgeText: 'MARKET',
     channelBadgeShape: 'circle',
     channelBadgeColor: '#0284C7',
     showToolBadges: false,
     toolBadgesText: '',
     timestampText: '10:43',
-    videoTitle: 'BIZ Adda : नया रिकॉर्ड हाई बनाएगा निफ्टी, Goldman Sachs का बड़ा दावा!',
-    channelName: 'BIZ Tak'
+    videoTitle: 'Market News : नया रिकॉर्ड हाई बनाएगा निफ्टी, Analysts का बड़ा दावा!',
+    channelName: 'Market Pulse'
   },
   techkeynote: {
-    name: 'Keynote & Supercut',
-    headline: 'Ignite Keynote in 14 Minutes',
+    name: 'Tech Keynote & Supercut',
+    headline: 'Tech Keynote in 14 Minutes',
     highlightWord: '14 Minutes',
     subtitle: 'Everything Announced in One Video',
     badgeText: '⚡ SUPERCUT',
@@ -150,17 +150,17 @@ var THUMBNAIL_PRESETS = {
     graphicScale: 90,
     graphicTilt: -3,
     showChannelBadge: true,
-    channelBadgeText: 'PC MAG',
+    channelBadgeText: 'TECH',
     channelBadgeShape: 'square',
     channelBadgeColor: '#DC2626',
     showToolBadges: false,
     toolBadgesText: '',
     timestampText: '13:47',
-    videoTitle: "Microsoft's Ignite Keynote Address in 14 Minutes",
-    channelName: 'PCMag'
+    videoTitle: "Major Tech Keynote Address in 14 Minutes",
+    channelName: 'Tech Wire'
   },
   storydrama: {
-    name: 'Story & Cinematic Drama',
+    name: 'Story & Narrative Drama',
     headline: 'Listen to this Story',
     highlightWord: 'Story',
     subtitle: 'Atleast ONCE in Life!',
@@ -194,11 +194,11 @@ var THUMBNAIL_PRESETS = {
     showToolBadges: false,
     toolBadgesText: '',
     timestampText: '8:38',
-    videoTitle: 'Ped Aur Bachcha | Full Story | Main Tenu Phir Milangi',
-    channelName: 'Laksh maheshwari'
+    videoTitle: 'The Inspiring Tale | Full Story | Cinematic Narrative',
+    channelName: 'The Storyteller'
   },
   mrbeast: {
-    name: 'MrBeast Viral Impact',
+    name: 'High-Impact Viral Challenge',
     headline: "DON'T DO THIS!",
     highlightWord: "DON'T",
     subtitle: 'Worst Mistake Ever Made',
@@ -233,11 +233,11 @@ var THUMBNAIL_PRESETS = {
     toolBadgesText: '',
     timestampText: '14:28',
     videoTitle: 'I Spent 50 Hours In The Most Extreme Place On Earth',
-    channelName: 'MrBeast'
+    channelName: 'Challenge Arena'
   },
   claudecode: {
-    name: 'Claude Code (Tech Tutorial)',
-    headline: 'Stop Paying for Claude Code',
+    name: 'AI Coding & Tech Tutorial',
+    headline: 'Stop Paying for AI Tools',
     highlightWord: 'FREE!',
     subtitle: '(Use it for FREE!)',
     badgeText: '⚡ 100% FREE AI',
@@ -270,10 +270,10 @@ var THUMBNAIL_PRESETS = {
     showToolBadges: false,
     toolBadgesText: '',
     showTeaserCaption: true,
-    teaserCaptionText: "without using the internet. Hi everyone, I'm Ishan Sharma and today I'll show you",
+    teaserCaptionText: "without spending a single dollar. In this video, I will show you the exact workflow",
     timestampText: '10:40',
-    videoTitle: 'Stop Paying for Claude Code(Use it for FREE!)',
-    channelName: 'Ishan Sharma'
+    videoTitle: 'Stop Paying for AI Coding (Use It for FREE!)',
+    channelName: 'Code Studio'
   },
   financewealth: {
     name: 'Finance & Passive Income',
@@ -317,7 +317,7 @@ var THUMBNAIL_PRESETS = {
     channelName: 'Wealth Blueprint'
   },
   techreview: {
-    name: 'Tech Review & MKBHD Style',
+    name: 'Minimalist Tech Review',
     headline: 'DO NOT BUY THIS PHONE!',
     highlightWord: 'DO NOT BUY',
     subtitle: '2 Weeks Later Real Truth',
@@ -536,7 +536,7 @@ var THUMBNAIL_STATE = {
   graphicImage: null, // HTMLImageElement (uploaded)
   graphicPerspective: true,
   
-  // Channel Corner Logo Badge (e.g. BIZ ADDA, PC MAG)
+  // Channel Corner Logo Badge (e.g. MARKET, TECH)
   showChannelBadge: false,
   channelBadgeText: 'CREATOR',
   channelBadgeShape: 'pill', // 'pill' | 'circle' | 'square'
@@ -546,9 +546,9 @@ var THUMBNAIL_STATE = {
   showToolBadges: false,
   toolBadgesText: 'with Notion + ChatGPT',
   
-  // Teaser Subtitles / Caption Overlay (Ishan Sharma viral spoken hook)
+  // Teaser Subtitles / Caption Overlay (Viral spoken hook)
   showTeaserCaption: false,
-  teaserCaptionText: "without using the internet. Hi everyone, I'm Ishan Sharma and today I'll show you",
+  teaserCaptionText: "without spending a single dollar. In this video, I will show you the exact workflow",
 
   // YouTube UI Timestamp preview overlay
   showYtTimestamp: true,
@@ -556,7 +556,7 @@ var THUMBNAIL_STATE = {
   
   // YouTube Feed Simulator metadata
   videoTitle: "I'm Begging You to Manage Your Time (Before It's Too Late)",
-  channelName: 'Sarthak Virmani',
+  channelName: 'Focus Studio',
   currentView: 'canvas', // 'canvas' | 'feed'
   simSubView: 'home', // 'home' | 'mobile' | 'search' | 'sidebar'
   simTheme: 'dark', // 'dark' | 'light'
@@ -1208,7 +1208,7 @@ async function extractCutoutFromDataUrl(dataUrl, callback) {
 var VARIATION_RECIPES = [
   {
     name: '💥 Viral Impact',
-    badge: 'MrBeast Contrast',
+    badge: 'Ultra High Contrast',
     fontFamily: 'Anton',
     fontSize: 90,
     tiltAngle: -4,
@@ -1578,12 +1578,12 @@ function renderThumbnail() {
   // 7. Draw Typography, Attention Pill & Tool Badges
   drawThumbnailTypography(ctx, W, H, scaleFactor);
 
-  // 8. Draw Channel Corner Logo Badge (BIZ ADDA, PC MAG, etc.)
+  // 8. Draw Channel Corner Logo Badge (MARKET, TECH, etc.)
   if (THUMBNAIL_STATE.showChannelBadge && THUMBNAIL_STATE.channelBadgeText) {
     drawThumbnailChannelBadge(ctx, W, H, scaleFactor);
   }
 
-  // 9. Draw Teaser Caption Bar (Ishan Sharma viral spoken hook)
+  // 9. Draw Teaser Caption Bar (Viral spoken hook)
   if (THUMBNAIL_STATE.showTeaserCaption && THUMBNAIL_STATE.teaserCaptionText) {
     drawThumbnailTeaserCaption(ctx, W, H, scaleFactor);
   }
@@ -1779,7 +1779,7 @@ function drawThumbnailGraphicCard(ctx, W, H, scaleFactor) {
   ctx.restore();
 }
 
-/* Procedural Google Calendar UI Mockup (Matching #1 Sarthak Virmani Thumbnail) */
+/* Procedural Google Calendar UI Mockup (Time-Blocking Blueprint) */
 function renderCalendarMockup(ctx, W, H, scaleFactor) {
   ctx.fillStyle = '#FFFFFF';
   ctx.fillRect(0, 0, W, H);
@@ -2508,7 +2508,7 @@ function drawThumbnailChannelBadge(ctx, W, H, scaleFactor) {
   ctx.restore();
 }
 
-/* Viral Teaser Subtitles / Caption Overlay (e.g. Ishan Sharma CC style hook) */
+/* Viral Teaser Subtitles / Caption Overlay (Spoken hook banner) */
 function drawThumbnailTeaserCaption(ctx, W, H, scaleFactor) {
   var text = THUMBNAIL_STATE.teaserCaptionText;
   if (!text) return;

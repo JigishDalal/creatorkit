@@ -850,7 +850,8 @@ input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50%; }
   .tab-btn { padding: 6px 12px; font-size: 12.5px; }
   .tab-icon { font-size: 14px; }
   .theme-btn { width: 34px; height: 34px; font-size: 15px; }
-  .brand-kit-btn-label { display: none; }
+  .brand-kit-btn-label,
+  .install-btn-label { display: none; }
 
   .wrap { padding: 12px 10px 105px; }
   .card { margin-bottom: 10px; border-radius: var(--radius-sm); }

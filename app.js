@@ -124,6 +124,11 @@ function switchMode(mode) {
     renderThumbnail();
   }
   
+  // Sync URL hash for PWA deep linking & shortcuts
+  if (history.replaceState) {
+    history.replaceState(null, '', '#' + mode);
+  }
+
   // Update bar label
   updateBarLabel();
 }
@@ -439,6 +444,94 @@ function triggerDownload(url, filename) {
   }, 500);
 }
 
+/* =============================================
+   PWA ENGINE: Service Worker & App Installation
+   ============================================= */
+var deferredPwaPrompt = null;
+
+function initPwaEngine() {
+  // 1. Register Service Worker for offline capability
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('sw.js')
+        .then(function(reg) {
+          console.log('[PWA] Service Worker registered with scope:', reg.scope);
+
+          // Listen for background updates
+          reg.onupdatefound = function() {
+            var installingWorker = reg.installing;
+            if (!installingWorker) return;
+            installingWorker.onstatechange = function() {
+              if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                showToast('🚀 CreatorKit updated! Reload to use the latest version.');
+              }
+            };
+          };
+        })
+        .catch(function(err) {
+          console.warn('[PWA] Service Worker registration failed:', err);
+        });
+    });
+  }
+
+  // 2. Capture native install prompt (Chrome, Edge, Android)
+  window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPwaPrompt = e;
+    var installBtn = $('pwaInstallBtn');
+    if (installBtn) {
+      installBtn.style.display = 'inline-flex';
+    }
+  });
+
+  // 3. Handle successful install
+  window.addEventListener('appinstalled', function() {
+    deferredPwaPrompt = null;
+    var installBtn = $('pwaInstallBtn');
+    if (installBtn) installBtn.style.display = 'none';
+    showToast('✓ CreatorKit successfully installed as an app!');
+  });
+
+  // 4. Online / Offline status notification
+  window.addEventListener('offline', function() {
+    showToast('⚡ Offline mode: All tools run 100% locally!');
+  });
+  window.addEventListener('online', function() {
+    showToast('🌐 Reconnected to internet');
+  });
+}
+
+function triggerPwaInstall() {
+  if (!deferredPwaPrompt) {
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if (isIOS) {
+      showToast('📱 On iOS: Tap Share (□↑) and select "Add to Home Screen"');
+    } else {
+      showToast('To install: click your browser menu (⋮) → "Install CreatorKit"');
+    }
+    return;
+  }
+  deferredPwaPrompt.prompt();
+  deferredPwaPrompt.userChoice.then(function(choice) {
+    if (choice.outcome === 'accepted') {
+      showToast('✓ Installing CreatorKit...');
+    }
+    deferredPwaPrompt = null;
+    var installBtn = $('pwaInstallBtn');
+    if (installBtn) installBtn.style.display = 'none';
+  });
+}
+
+/* Helper to get mode from current URL hash */
+function getModeFromHash() {
+  if (window.location.hash) {
+    var h = window.location.hash.replace('#', '').toLowerCase();
+    var validModes = ['poster', 'carousel', 'appstore', 'bgremover', 'infographic', 'invoice', 'barcode', 'thumbnail'];
+    if (validModes.indexOf(h) !== -1) return h;
+  }
+  return null;
+}
+
 /* -------- Init -------- */
 document.addEventListener('DOMContentLoaded', function() {
   updateColorLabels();
@@ -449,5 +542,19 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typeof initInvoiceStudio === 'function') initInvoiceStudio();
   if (typeof initBarcodeStudio === 'function') initBarcodeStudio();
   if (typeof initThumbnailStudio === 'function') initThumbnailStudio();
-  switchMode('poster');
+
+  // Support direct PWA deep links / shortcuts (#thumbnail, #barcode, etc.)
+  var startMode = getModeFromHash() || 'poster';
+  switchMode(startMode);
+
+  // Initialize PWA Service Worker & Install flow
+  initPwaEngine();
+});
+
+// Handle browser back/forward or hash changes
+window.addEventListener('hashchange', function() {
+  var mode = getModeFromHash();
+  if (mode && mode !== APP.mode) {
+    switchMode(mode);
+  }
 });

@@ -1,0 +1,89 @@
+{
+  "id": "/",
+  "name": "CreatorKit — Graphic & Content Studio",
+  "short_name": "CreatorKit",
+  "description": "100% client-side, privacy-first graphic design suite for YouTube thumbnails, posters, carousel decks, invoices, barcodes, and mockups.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0F0F13",
+  "theme_color": "#7C6EFA",
+  "categories": [
+    "graphics",
+    "photo",
+    "productivity",
+    "utilities",
+    "design"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "YouTube Thumbnail Studio",
+      "short_name": "Thumbnail",
+      "description": "Create High-CTR YouTube Thumbnails",
+      "url": "./#thumbnail",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Poster Designer",
+      "short_name": "Posters",
+      "description": "Design editorial and event posters",
+      "url": "./#poster",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Barcode & Label Studio",
+      "short_name": "Barcode",
+      "description": "Generate retail barcodes & thermal labels",
+      "url": "./#barcode",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Invoice & Quotations",
+      "short_name": "Invoice",
+      "description": "Create branded GST & international invoices",
+      "url": "./#invoice",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

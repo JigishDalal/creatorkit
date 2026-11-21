@@ -9,6 +9,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter+Tight:wght@400;500;600;700;800;900&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Montserrat:wght@700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Press+Start+2P&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="index.css">
+
+  <!-- Progressive Web App (PWA) Manifest & Capabilities -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#7C6EFA">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CreatorKit">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body>
 
@@ -46,8 +56,11 @@
       </button>
     </nav>
     <div style="display:flex; align-items:center; gap:8px">
+      <button class="btn btn-ghost btn-sm" id="pwaInstallBtn" onclick="triggerPwaInstall()" title="Install CreatorKit as a Native App" style="display:none; font-size:12.5px; padding:6px 12px; border-color:var(--acc); color:var(--acc); font-weight:700">
+        <span>📲</span> <span class="install-btn-label">Install App</span>
+      </button>
       <button class="btn btn-ghost btn-sm" id="brandKitHeaderBtn" onclick="openBrandKitModal()" title="Open Brand Kit" style="font-size:12.5px; padding:6px 12px">
-        <span>🎨</span> Brand Kit
+        <span>🎨</span> <span class="brand-kit-btn-label">Brand Kit</span>
       </button>
       <button class="theme-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" title="Toggle theme">
         <span id="themeIcon">☀️</span>
@@ -1436,14 +1449,14 @@
             <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('claudecode')">
               <span style="font-size:18px">💻</span>
               <div>
-                <div style="font-weight:700; font-size:13px">Claude Code FREE</div>
-                <div style="font-size:10px; opacity:0.8">Ishan Sharma / AI Hook</div>
+                <div style="font-weight:700; font-size:13px">AI Tools Free</div>
+                <div style="font-size:10px; opacity:0.8">AI Workflow & Hook</div>
               </div>
             </button>
             <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('mrbeast')">
               <span style="font-size:18px">💥</span>
               <div>
-                <div style="font-weight:700; font-size:13px">MrBeast Viral</div>
+                <div style="font-weight:700; font-size:13px">Viral Challenge</div>
                 <div style="font-size:10px; opacity:0.8">Heavy Contrast & Tilt</div>
               </div>
             </button>
@@ -1458,7 +1471,7 @@
               <span style="font-size:18px">🍎</span>
               <div>
                 <div style="font-weight:700; font-size:13px">Tech Review</div>
-                <div style="font-size:10px; opacity:0.8">MKBHD Style Warning</div>
+                <div style="font-size:10px; opacity:0.8">Minimalist Warning</div>
               </div>
             </button>
             <button type="button" class="bc-type-btn" onclick="loadThumbnailPreset('codingapp')">
@@ -1585,9 +1598,9 @@
           <div class="field" style="background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:6px; padding:10px">
             <label for="ytShowTeaser" style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:700; font-size:12px; margin-bottom:6px">
               <input type="checkbox" id="ytShowTeaser" onchange="onThumbnailFieldChanged()">
-              <span>💬 Teaser Subtitle Bar <span class="label-norm">— Ishan Sharma style viral hook</span></span>
+              <span>💬 Teaser Subtitle Bar <span class="label-norm">— Spoken hook line banner</span></span>
             </label>
-            <input type="text" id="ytTeaserText" value="without using the internet. Hi everyone, I'm Ishan Sharma and today I'll show you" placeholder="Teaser spoken hook line..." oninput="onThumbnailFieldChanged()" style="font-size:11.5px">
+            <input type="text" id="ytTeaserText" value="without spending a single dollar. In this video, I will show you the exact workflow" placeholder="Teaser spoken hook line..." oninput="onThumbnailFieldChanged()" style="font-size:11.5px">
           </div>
 
           <div class="row2">
@@ -1816,8 +1829,8 @@
 
           <div class="row2">
             <div class="field">
-              <label for="ytChannelBadgeText">Badge Text <span class="label-norm">(e.g. BIZ ADDA / PC MAG)</span></label>
-              <input type="text" id="ytChannelBadgeText" value="BIZ ADDA" placeholder="Channel initials or logo text" oninput="onThumbnailFieldChanged()">
+              <label for="ytChannelBadgeText">Badge Text <span class="label-norm">(e.g. MARKET / TECH)</span></label>
+              <input type="text" id="ytChannelBadgeText" value="MARKET" placeholder="Channel initials or logo text" oninput="onThumbnailFieldChanged()">
             </div>
             <div class="field">
               <label for="ytChannelBadgeShape">Badge Shape</label>
@@ -1937,7 +1950,7 @@
             </div>
             <div class="field" style="margin-top:8px">
               <label for="ytChannelNameInput">Channel Name</label>
-              <input type="text" id="ytChannelNameInput" value="Sarthak Virmani" placeholder="Your channel name" oninput="onThumbnailFieldChanged()">
+              <input type="text" id="ytChannelNameInput" value="Focus Studio" placeholder="Your channel name" oninput="onThumbnailFieldChanged()">
             </div>
           </div>
         </div>
@@ -2034,10 +2047,10 @@
                       </div>
                     </div>
                     <div class="yt-card-meta">
-                      <div class="yt-avatar" style="background:#475569">S</div>
+                      <div class="yt-avatar" style="background:#475569">F</div>
                       <div style="flex:1">
                         <div class="yt-card-title">I'm Begging You to Manage Your Time (Before It's Too Late)</div>
-                        <div class="yt-card-sub">Sarthak Virmani ✓ • 289k views • 4 days ago</div>
+                        <div class="yt-card-sub">Focus Studio ✓ • 289k views • 4 days ago</div>
                       </div>
                       <div style="font-size:16px; opacity:0.7">⋮</div>
                     </div>
@@ -2068,16 +2081,16 @@
                   <div class="yt-card">
                     <div class="yt-thumb-box">
                       <div class="yt-mock-thumb" style="background:linear-gradient(135deg, #0369A1, #0F172A)">
-                        <div style="position:absolute; top:6px; left:6px; background:#0284C7; border:1px solid #FFF; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:7px; font-weight:900">BIZ</div>
+                        <div style="position:absolute; top:6px; left:6px; background:#0284C7; border:1px solid #FFF; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:7px; font-weight:900">MKT</div>
                         <div style="position:absolute; bottom:6px; left:8px; font-weight:800; font-size:11px; color:#FDE047">नया रिकॉर्ड हाई बनाएगा निफ्टी</div>
                         <div class="yt-mock-time">10:43</div>
                       </div>
                     </div>
                     <div class="yt-card-meta">
-                      <div class="yt-avatar" style="background:#0284C7">B</div>
+                      <div class="yt-avatar" style="background:#0284C7">M</div>
                       <div style="flex:1">
-                        <div class="yt-card-title">BIZ Adda : नया रिकॉर्ड हाई बनाएगा निफ्टी, Goldman Sachs का दावा</div>
-                        <div class="yt-card-sub">BIZ Tak ✓ • 6.2k views • 2 hr ago</div>
+                        <div class="yt-card-title">Market Pulse : नया रिकॉर्ड हाई बनाएगा निफ्टी, Analysts का दावा</div>
+                        <div class="yt-card-sub">Market Pulse ✓ • 6.2k views • 2 hr ago</div>
                       </div>
                       <div style="font-size:16px; opacity:0.7">⋮</div>
                     </div>
@@ -2093,10 +2106,10 @@
                       </div>
                     </div>
                     <div class="yt-card-meta">
-                      <div class="yt-avatar" style="background:#B45309">L</div>
+                      <div class="yt-avatar" style="background:#B45309">S</div>
                       <div style="flex:1">
-                        <div class="yt-card-title">Ped Aur Bachcha | Full Story | Main Tenu Phir Milangi</div>
-                        <div class="yt-card-sub">Laksh maheshwari ✓ • 180k views • 2 wk ago</div>
+                        <div class="yt-card-title">The Inspiring Tale | Full Story | Cinematic Narrative</div>
+                        <div class="yt-card-sub">The Storyteller ✓ • 180k views • 2 wk ago</div>
                       </div>
                       <div style="font-size:16px; opacity:0.7">⋮</div>
                     </div>
@@ -2106,16 +2119,16 @@
                   <div class="yt-card">
                     <div class="yt-thumb-box">
                       <div class="yt-mock-thumb" style="background:linear-gradient(135deg, #7F1D1D, #0B0B0F)">
-                        <div style="position:absolute; top:6px; left:6px; background:#DC2626; padding:1px 4px; font-weight:900; font-size:8px; color:#FFF">PC MAG</div>
-                        <div style="position:absolute; bottom:6px; left:8px; font-weight:900; font-size:11px; color:#FFF">Ignite Keynote in 14 Min</div>
+                        <div style="position:absolute; top:6px; left:6px; background:#DC2626; padding:1px 4px; font-weight:900; font-size:8px; color:#FFF">TECH</div>
+                        <div style="position:absolute; bottom:6px; left:8px; font-weight:900; font-size:11px; color:#FFF">Tech Keynote in 14 Min</div>
                         <div class="yt-mock-time">13:47</div>
                       </div>
                     </div>
                     <div class="yt-card-meta">
-                      <div class="yt-avatar" style="background:#DC2626">P</div>
+                      <div class="yt-avatar" style="background:#DC2626">T</div>
                       <div style="flex:1">
-                        <div class="yt-card-title">Microsoft's Ignite Keynote Address in 14 Minutes</div>
-                        <div class="yt-card-sub">PCMag ✓ • 4.3k views • 20 hr ago</div>
+                        <div class="yt-card-title">Major Tech Keynote Address in 14 Minutes</div>
+                        <div class="yt-card-sub">Tech Wire ✓ • 4.3k views • 20 hr ago</div>
                       </div>
                       <div style="font-size:16px; opacity:0.7">⋮</div>
                     </div>
@@ -2221,13 +2234,13 @@
               <div class="yt-card" style="display:flex; flex-direction:row; gap:10px; align-items:flex-start; padding:6px">
                 <div class="yt-thumb-box" style="width:168px; flex-shrink:0; aspect-ratio:16/9">
                   <div class="yt-mock-thumb" style="background:linear-gradient(135deg, #0369A1, #0F172A)">
-                    <div style="font-size:9px; font-weight:800; color:#FDE047; padding:4px">BIZ ADDA</div>
+                    <div style="font-size:9px; font-weight:800; color:#FDE047; padding:4px">MARKET</div>
                     <div class="yt-mock-time" style="font-size:9px; padding:1px 3px">10:43</div>
                   </div>
                 </div>
                 <div style="flex:1; display:flex; flex-direction:column; gap:2px">
-                  <div class="yt-card-title" style="font-size:12px; font-weight:600; line-height:1.3">BIZ Adda : नया रिकॉर्ड हाई बनाएगा निफ्टी</div>
-                  <div class="yt-card-sub" style="font-size:10px">BIZ Tak ✓</div>
+                  <div class="yt-card-title" style="font-size:12px; font-weight:600; line-height:1.3">Market Pulse : नया रिकॉर्ड हाई बनाएगा निफ्टी</div>
+                  <div class="yt-card-sub" style="font-size:10px">Market Pulse ✓</div>
                   <div class="yt-card-sub" style="font-size:10px">6.2k views • 2 hr ago</div>
                 </div>
               </div>

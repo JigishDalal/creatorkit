@@ -7,6 +7,48 @@
 
 ---
 
+## ⚡ Quick Start: How to Run the Project
+
+CreatorKit is 100% client-side with **zero build steps** and **no npm installations** required. You can run it immediately using any of the following methods:
+
+### Option 1: Python 3 (Fastest & Zero Setup)
+```bash
+# 1. Open your terminal and navigate to the project directory:
+cd createpost
+
+# 2. Start the local server:
+python3 -m http.server 3456
+```
+👉 Open your browser to: **[http://localhost:3456/](http://localhost:3456/)**
+
+---
+
+### Option 2: Node.js (NPX)
+```bash
+# Using serve:
+npx serve . -l 3456
+
+# Or using http-server:
+npx http-server -p 3456
+```
+👉 Open your browser to: **[http://localhost:3456/](http://localhost:3456/)**
+
+---
+
+### Option 3: VS Code Live Server
+1. Open the project folder in **VS Code**.
+2. Install the **Live Server** extension (if not already installed).
+3. Right-click on `index.html` and select **"Open with Live Server"**.
+
+---
+
+### 📲 Running Offline as an Installed Native App (PWA)
+1. Open **`http://localhost:3456/`** in Chrome, Edge, or Brave.
+2. Click the **`📲 Install App`** button in the header (or click the install icon in the URL bar).
+3. CreatorKit installs directly into your Applications / Dock and works **100% offline with zero internet connection**.
+
+---
+
 ## 🌟 Features Overview
 
 CreatorKit brings Canva-grade creation tools together in a lightweight, responsive, and privacy-focused web application.
@@ -205,15 +247,15 @@ CreatorKit brings Canva-grade creation tools together in a lightweight, responsi
   * Default 16:9 HD (`1280 × 720 px`) and Full HD (`1920 × 1080 px`).
   * Live YouTube timestamp overlay badge preview (`14:01`, `10:05`, `14:28`) so text is never hidden by the YouTube player UI.
 * **12 High-CTR Real-Feed Presets (Ready-to-Edit Samples)**:
-  * ⏰ **Productivity Calendar** (Inspired by Sarthak Virmani: Creator left + Google Calendar schedule mockup right + "everything done by 10AM").
-  * 🧠 **Second Brain with Notion** (Inspired by The Tech Girl: Creator right pointing + Laptop/Notion workspace mockup left + Notion/ChatGPT tool badges).
-  * 📰 **BIZ News & Market** (Inspired by BIZ Tak: Channel corner logo badge top-left + bilingual bold text left + creator right).
-  * ⚡ **Tech Keynote & Supercut** (Inspired by PCMag: Red corner badge + speaker right + screen slide mockup left).
-  * 🎙️ **Story & Cinematic Drama** (Inspired by Laksh Maheshwari: Mixed cursive/serif accents + dramatic amber studio lighting).
-  * 💻 **Claude Code FREE** (Inspired by Ishan Sharma: Tech creator center + Teaser Subtitle bar + neon green highlight).
-  * 💥 **MrBeast Viral Impact** (Heavy stroke outline, bold tilt, and neon yellow highlight).
+  * ⏰ **Productivity Calendar** (Creator left + Google Calendar schedule mockup right + "everything done by 10AM").
+  * 🧠 **Second Brain & Knowledge** (Creator right pointing + Laptop workspace mockup left + tool badges).
+  * 📰 **Market & Financial News** (Channel corner logo badge top-left + bilingual bold text left + creator right).
+  * ⚡ **Tech Keynote & Supercut** (Red corner badge + speaker right + screen slide mockup left).
+  * 🎙️ **Story & Narrative Drama** (Mixed cursive/serif accents + dramatic amber studio lighting).
+  * 💻 **AI Tools & Workflow** (Tech creator center + Teaser Subtitle bar + neon green highlight).
+  * 💥 **High-Impact Viral Challenge** (Heavy stroke outline, bold tilt, and neon yellow highlight).
   * 💰 **Finance & Passive Income** (Bebas Neue font, emerald green profit chart, and "$10,000" highlight pill).
-  * 🍎 **Tech Review & MKBHD Style** (Clean Montserrat bold, vibrant red warning pill, and honest review badge).
+  * 🍎 **Minimalist Tech Review** (Clean Montserrat bold, vibrant red warning pill, and honest review badge).
   * 🚀 **Coding & SaaS in 24h** (Space Grotesk monospace, code editor screen, and cyan neon glow).
   * 🎮 **Gaming 100 vs 1 Challenge** (Anton condensed font, neon purple glow, and $50k challenge badge).
   * 🎙️ **Deep Podcast Interview** (Playfair Display serif, amber studio lighting, and longform episode badge).
@@ -233,7 +275,7 @@ CreatorKit brings Canva-grade creation tools together in a lightweight, responsi
   * Frame styles: Floating Card with drop-shadow, Laptop Screen Mockup, or Flat Borderless Inset.
   * 3D tilt slider (-15° to +15°) and card scale slider (60% to 120%).
 * **Channel Corner Logo Badge & Tool Badges**:
-  * Channel logo badge in top-left or top-right (e.g. `BIZ ADDA`, `PC MAG`, or custom channel initials) in Circle, Square, or Pill format.
+  * Channel logo badge in top-left or top-right (e.g. `MARKET`, `TECH`, or custom channel initials) in Circle, Square, or Pill format.
   * Tool/app sticker badges (e.g. `with [Notion] + [ChatGPT]`).
 * **🎥 Video Keyframe Extractor (Wayin.ai-Style Video-First Workflow)**:
   * **Zero Server Uploads**: Drop any raw `.mp4`, `.mov`, or `.webm` video file — processed 100% locally in-browser with zero wait times.
@@ -278,9 +320,22 @@ CreatorKit brings Canva-grade creation tools together in a lightweight, responsi
 
 ---
 
+### 9. 📲 Progressive Web App (PWA) & Offline Studio
+* **Native Desktop & Mobile Install**: Install CreatorKit as a standalone application on macOS, Windows, ChromeOS, Android, and iOS (Safari "Add to Home Screen").
+* **100% Offline Capability (`sw.js`)**: Service Worker caches the local application shell, stylesheets, scripts, and fonts. Launch and create posters or thumbnails with zero internet connection (airplane, subway, travel).
+* **Deep Link Shortcuts**: Native app dock/home screen shortcuts launch straight into:
+  * 🎬 YouTube Thumbnail Studio (`#thumbnail`)
+  * 🖼 Poster Designer (`#poster`)
+  * 🏷️ Barcode & Label Studio (`#barcode`)
+  * 🧾 Invoice Studio (`#invoice`)
+* **Auto-Update Engine**: Detects new releases in the background and presents a 1-click update toast.
+
+---
+
 ## 🛠 Tech Stack
 
-* **Frontend**: Vanilla JavaScript (ES6+), HTML5 Canvas API
+* **Frontend**: Vanilla JavaScript (ES6+), HTML5 Canvas 2D API
+* **PWA & Offline**: Web App Manifest (`manifest.webmanifest`), Service Worker API (`sw.js`), Cache API
 * **Styling**: Vanilla CSS3 Design System with custom tokens, responsive breakpoints, and dark/light theme switching
 * **Libraries**:
   * [JSZip](https://stuk.github.io/jszip/) — Client-side ZIP archive creation
