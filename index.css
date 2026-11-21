@@ -128,6 +128,13 @@ body {
   border-radius: 999px;
   padding: 4px;
   margin: 0 auto;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.mode-tabs::-webkit-scrollbar {
+  display: none;
 }
 .tab-btn {
   font-family: var(--font-ui);
@@ -843,6 +850,7 @@ input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50%; }
   .tab-btn { padding: 6px 12px; font-size: 12.5px; }
   .tab-icon { font-size: 14px; }
   .theme-btn { width: 34px; height: 34px; font-size: 15px; }
+  .brand-kit-btn-label { display: none; }
 
   .wrap { padding: 12px 10px 105px; }
   .card { margin-bottom: 10px; border-radius: var(--radius-sm); }
@@ -869,6 +877,8 @@ input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50%; }
 
   #posterBig,
   #bgRemoverCanvas { max-height: 44vh; }
+  #ytSimViewSearch .yt-card { flex-direction: column !important; }
+  #ytSimViewSearch .yt-thumb-box { width: 100% !important; }
 }
 
 /* Very Small Mobile (< 420px) */
